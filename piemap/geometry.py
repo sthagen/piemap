@@ -237,7 +237,7 @@ def transform_angle_map_icw_ncw(segment_angle_map_icw):
         angle_start = math.fmod(angle_start + signed_shift_degrees + norm, norm)
         angle_stop = math.fmod(angle_stop + signed_shift_degrees + norm, norm)
         if angle_stop < angle_start and angle_stop == closure_guard:
-            angle_stop = norm;
+            angle_stop = norm
 
         angle_mid = (angle_stop + angle_start ) / 2.0
         if angle_stop < angle_start:
