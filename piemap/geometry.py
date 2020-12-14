@@ -33,14 +33,14 @@ def left_bottom_of_center(angle):
     """
     True, if angle leads to point left bottom of center
     """
-    return True if angle > 90 and angle < 180 else False
+    return True if 90 < angle < 180 else False
 
 
 def left_top_of_center(angle):
     """
     True, if angle leads to point left top of center
     """
-    return True if angle >= 180 and angle < 270 else False
+    return True if 180 <= angle < 270 else False
 
 
 def octant_of_angle(angle):
@@ -127,7 +127,7 @@ def axis_name_circle_adjust(angle, font_size_pts, text_angle, font_name, axis_na
     return dx_pixel, dy_pixel
 
 
-def xy_point_from_radius_angle(radius, angle, c_x = 0, c_y = 0):
+def xy_point_from_radius_angle(radius, angle, c_x=0, c_y=0):
     """
     return point as tuple in (x,y) = (radius,angle/[deg]) possibly shifted (c_x, c_y)
     """
