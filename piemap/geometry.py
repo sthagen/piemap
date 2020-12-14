@@ -198,17 +198,51 @@ def transform_angle_map_ncw_icw(segment_angle_map_ncw):
         segment_angle_map_icw[0] = (270 + my_eps, 270 - my_eps, 270)
         return segment_angle_map_icw  # early exit for cornercase
 
-    for i, data in segment_angle_map_ncw.items():
+    for data in segment_angle_map_ncw:
         angle_start, angle_stop, angle_mid = data
         angle_start = math.fmod(angle_start + signed_shift_degrees + norm, norm)
         angle_stop = math.fmod(angle_stop + signed_shift_degrees + norm, norm)
         if angle_stop < angle_start and angle_stop == closure_guard:
             angle_stop = norm
 
+        angle_mid = (angle_stop + angle_start) / 2.0
+        if angle_stop < angle_start:
+            angle_mid = (angle_stop + norm + angle_start) / 2.0
+
+        segment_angle_map_icw.append((angle_start, angle_stop, angle_mid))
+
+    return segment_angle_map_icw  
+
+
+def transform_angle_map_icw_ncw(segment_angle_map_icw):
+    """
+    return map of canonicalized angles for nativeClockWise from imagefilledarcCW
+    from imagefilledarc: 0 degrees is located at the three-oclock position,
+    ... and the arc is drawn clockwise.
+    but we want one $angleMid allways point to 12 oclock, the rest
+    ... determined by $neededNumberOfAxis
+    so transform maps 360 deg and 0 deg to 270 deg and 90 deg to 0 deg,
+    ... i.e. d=-90 modulo 360
+    """
+    segment_angle_map_ncw = []
+    closure_guard, norm = 0, 360
+    signed_shift_degrees = +90
+    # TODO(sthagen) remove after test: my_eps = 0.0000001
+    if len(segment_angle_map_icw) == 1:
+        segment_angle_map_ncw[0] = (closure_guard, norm, norm)    
+        return segment_angle_map_ncw  # early exit for cornercase
+
+    for data in segment_angle_map_icw:
+        angle_start, angle_stop, angle_mid = data
+        angle_start = math.fmod(angle_start + signed_shift_degrees + norm, norm)
+        angle_stop = math.fmod(angle_stop + signed_shift_degrees + norm, norm)
+        if angle_stop < angle_start and angle_stop == closure_guard:
+            angle_stop = norm;
+
         angle_mid = (angle_stop + angle_start ) / 2.0
         if angle_stop < angle_start:
             angle_mid = (angle_stop + norm + angle_start ) / 2.0
 
-        segment_angle_map_icw[i] = (angle_start, angle_stop, angle_mid)
+        segment_angle_map_ncw.append((angle_start, angle_stop, angle_mid))
 
-    return segment_angle_map_icw  
+    return segment_angle_map_ncw    
