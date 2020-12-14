@@ -80,7 +80,7 @@ def axis_name_circle_adjust(angle, font_size_pts, text_angle, font_name, axis_na
              0,         1,         2,          3,          4,          5,          6,         7
              lo_left_x, lo_left_y, lo_right_x, lo_right_y, hi_right_x, hi_right_y, hi_left_x, hi_left_y
         """
-        return (100, 200, 300, None, None, None, None, 400)  # TODO(sthagen) implement real functionality
+        return 100, 200, 300, None, None, None, None, 400  # TODO(sthagen) implement real functionality
 
     axis_name_space_sep = True if axis_name_space_sep is None else axis_name_space_sep
     
@@ -124,7 +124,7 @@ def axis_name_circle_adjust(angle, font_size_pts, text_angle, font_name, axis_na
         dy_pixel = +text_height / 2 + 0
 
     # Note: Unmatched octant returns (0,0)
-    return (dx_pixel, dy_pixel)
+    return dx_pixel, dy_pixel
 
 
 def xy_point_from_radius_angle(radius, angle, c_x = 0, c_y = 0):
@@ -137,6 +137,6 @@ def xy_point_from_radius_angle(radius, angle, c_x = 0, c_y = 0):
         return deg * math.pi / 180.0
 
     angle_in_rad = deg2rad(angle)
-    x = c_x + math.cos(angle_in_rad) * radius; 
-    y = c_y + math.sin(angle_in_rad) * radius;
-    return (x, y)
+    x = c_x + math.cos(angle_in_rad) * radius
+    y = c_y + math.sin(angle_in_rad) * radius
+    return x, y
