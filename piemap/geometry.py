@@ -65,7 +65,7 @@ def octant_of_angle(angle):
     return 'X'
 
 
-def axis_name_circle_adjust(angle, font_size_pts, text_angle, font_name, axis_name, axis_name_space_sep = None):
+def axis_name_circle_adjust(angle, font_size_pts, text_angle, font_name, axis_name, axis_name_space_sep=None):
     """
     calculate axis name placements from bounding box and angle
     """
@@ -156,10 +156,10 @@ def segment_angle_map(needed_number_of_axis):
     """
     closure_guard, norm = 0, 360
 
-    segment_angle_map =[]
+    the_map = []
     if needed_number_of_axis == 1:
-        segment_angle_map[0] = (closure_guard, norm, norm)
-        return segment_angle_map  # early exit for cornercase
+        the_map[0] = (closure_guard, norm, norm)
+        return the_map  # early exit for cornercase
 
     angle_per_sect = norm / needed_number_of_axis
     signed_correct_axis_shift = -angle_per_sect / 2
@@ -168,13 +168,13 @@ def segment_angle_map(needed_number_of_axis):
         angle_stop = math.fmod(angle_start + angle_per_sect + norm, norm)
         angle_mid = (angle_stop + angle_start) / 2.0
 
-        if angle_stop < angle_start and angle_stop == closureGuard:
+        if angle_stop < angle_start and angle_stop == closure_guard:
             angle_stop = norm
 
         if angle_stop < angle_start:
             angle_mid = (angle_stop + norm + angle_start) / 2.0
 
-        segment_angle_map[i] = (angle_start, angle_stop, angle_mid)
+        the_map[i] = (angle_start, angle_stop, angle_mid)
 
-    return segment_angle_map
+    return the_map
 
