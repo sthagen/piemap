@@ -22,3 +22,11 @@ def min_folded_from_limit_max(limit, maximum):
     a ---- b -- c ------- e and bc/ce = 3/8 => 8c - 8b = 3e - 3c => a = (11c - 8b)/3
     """
     return (11.0 * maximum - 8.0 * limit) / 3.0; 
+
+
+def value_folded_from_limit_max(value, maximum):
+    """
+    Testdata: (-6, -1, 2, 5, 10) or (0, 5, 8, 11, 16)  # FIXME COPY
+    yield 2 * 2 - (-1) = 5 or 2 * 8 - 5 = 11  # FIXME COPY
+    """
+    return 2.0 * maximum - value;  # explicit maximum - ( value - maximum )
