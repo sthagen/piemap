@@ -18,3 +18,9 @@ def right_bottom_of_center(angle):
     """
     return True if angle < 90 else False
 }
+
+def right_top_of_center(angle):
+    """
+    True, if angle leads to point right top of center
+    """
+    return True if angle > 270 else False
