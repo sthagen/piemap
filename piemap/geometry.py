@@ -197,7 +197,7 @@ def transform_angle_map_ncw_icw(segment_angle_map_ncw):
     if len(segment_angle_map_ncw) == 1:
         segment_angle_map_icw[0] = (270 + my_eps, 270 - my_eps, 270)
         return segment_angle_map_icw  # early exit for cornercase
-    }
+
     for i, data in segment_angle_map_ncw.items():
         angle_start, angle_stop, angle_mid = data
         angle_start = math.fmod(angle_start + signed_shift_degrees + norm, norm)
@@ -209,6 +209,6 @@ def transform_angle_map_ncw_icw(segment_angle_map_ncw):
         if angle_stop < angle_start:
             angle_mid = (angle_stop + norm + angle_start ) / 2.0
 
-        segment_angle_map_icw[i] = array(angle_start, angle_stop, angle_mid)
+        segment_angle_map_icw[i] = (angle_start, angle_stop, angle_mid)
 
     return segment_angle_map_icw  
