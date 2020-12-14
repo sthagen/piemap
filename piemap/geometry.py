@@ -140,3 +140,41 @@ def xy_point_from_radius_angle(radius, angle, c_x=0, c_y=0):
     x = c_x + math.cos(angle_in_rad) * radius
     y = c_y + math.sin(angle_in_rad) * radius
     return x, y
+
+
+def segment_angle_map(needed_number_of_axis):
+    """
+    return map of clockwise allocated angles for the needed axis segments
+    from imagefilledarc: 0 degrees is located at the three-oclock position,
+    ... and the arc is drawn clockwise.
+    but we want one $angleMid allways point to 12 oclock, the rest
+    ... determined by $neededNumberOfAxis
+    and remember, we want the axis to point at 12 oclock, not start-stop
+    so n = 1 gives (0,360,360) in theory 180 full circle to 180
+       n = 2 gives [(270,90,360), (90,270,180)]
+       n = 3 gives [(300,60,360), (60,180,120), (180,300,240)]
+    """
+    closure_guard, norm = 0, 360
+
+    segment_angle_map =[]
+    if needed_number_of_axis == 1:
+        segment_angle_map[0] = (closure_guard, norm, norm)
+        return segment_angle_map  # early exit for cornercase
+
+    angle_per_sect = norm / needed_number_of_axis
+    signed_correct_axis_shift = -angle_per_sect / 2
+    for i in range(0, needed_number_of_axis - 1):
+        angle_start = math.fmod(i * angle_per_sect + signed_correct_axis_shift + norm, norm)
+        angle_stop = math.fmod(angle_start + angle_per_sect + norm, norm)
+        angle_mid = (angle_stop + angle_start) / 2.0
+
+        if angle_stop < angle_start and angle_stop == closureGuard:
+            angle_stop = norm
+
+        if angle_stop < angle_start:
+            angle_mid = (angle_stop + norm + angle_start) / 2.0
+
+        segment_angle_map[i] = (angle_start, angle_stop, angle_mid)
+
+    return segment_angle_map
+
