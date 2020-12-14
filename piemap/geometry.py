@@ -1,3 +1,6 @@
+import math
+
+
 def exact_top_of_center(angle):
     """
     True, if angle leads to point exactly top of center
@@ -61,3 +64,26 @@ def octant_of_angle(angle):
 
     error_log(f'geometry.octant_of_angle_X_angle == {angle}')
     return 'X'
+
+
+def axis_name_circle_adjust(angle, font_size_pts, text_angle, font_name, axis_name, axis_name_space_sep = None):
+    """
+    calculate axis name placements from bounding box and angle
+    """
+    axis_name_space_sep = True if axis_name_space_sep is None else axis_name_space_sep
+    return NotImplemented
+
+
+def xy_point_from_radius_angle(radius, angle, c_x = 0, c_y = 0):
+    """
+    return point as tuple in (x,y) = (radius,angle/[deg]) possibly shifted (c_x, c_y)
+    """
+    
+    def deg2rad(deg):
+        """TODO(sthagen) refactor later."""
+        return deg * math.pi / 180.0
+
+    angle_in_rad = deg2rad(angle)
+    x = c_x + math.cos(angle_in_rad) * radius; 
+    y = c_y + math.sin(angle_in_rad) * radius;
+    return (x, y)
