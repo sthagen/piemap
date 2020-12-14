@@ -20,7 +20,6 @@ def right_bottom_of_center(angle):
     True, if angle leads to point right bottom of center
     """
     return True if angle < 90 else False
-}
 
 
 def right_top_of_center(angle):
@@ -86,8 +85,8 @@ def axis_name_circle_adjust(angle, font_size_pts, text_angle, font_name, axis_na
     axis_name_space_sep = True if axis_name_space_sep is None else axis_name_space_sep
     
     bbox = bounding_box_from_font(font_size_pts, text_angle, font_name, axis_name)
-    text_width = math.abs(bbox[2] - bbox[0])
-    text_height = math.abs(bbox[7] - bbox[1])
+    text_width = abs(bbox[2] - bbox[0])
+    text_height = abs(bbox[7] - bbox[1])
 
     sep_x = 0
     sep_y = 0
