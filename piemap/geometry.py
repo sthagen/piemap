@@ -229,7 +229,7 @@ def transform_angle_map_icw_ncw(segment_angle_map_icw):
     signed_shift_degrees = +90
     # TODO(sthagen) remove after test: my_eps = 0.0000001
     if len(segment_angle_map_icw) == 1:
-        segment_angle_map_ncw[0] = (closure_guard, norm, norm)    
+        segment_angle_map_ncw.append((closure_guard, norm, norm))  
         return segment_angle_map_ncw  # early exit for cornercase
 
     for data in segment_angle_map_icw:
