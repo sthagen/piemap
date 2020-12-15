@@ -466,3 +466,7 @@ def test_transform_angle_map_ncw_icw_six_rotate_thrice_ok():
 
 def test_transform_angle_map_icw_ncw_minimal_ok():
     assert geom.transform_angle_map_icw_ncw([(270, 270, 270)]) == [(0, 360, 360)]
+
+
+def test_transform_angle_map_icw_ncw_minimal_not_really_idempotent_ok():
+    assert geom.transform_angle_map_icw_ncw([(270, 270, 270)]) == [(0, 360, 360)]
