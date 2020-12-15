@@ -420,3 +420,9 @@ def test_transform_angle_map_ncw_icw_five_ok():
     ingoing = [(324, 36, 360), (36, 108, 72), (108, 180, 144), (180, 252, 216), (252, 324, 288)]
     outgoing = [(234, 306, 270), (306, 18, 342), (18, 90, 54), (90, 162, 126), (162, 234, 198)]
     assert geom.transform_angle_map_ncw_icw(ingoing) == outgoing
+
+
+def test_transform_angle_map_ncw_icw_five_rotate_once_ok():
+    ingoing = [(234, 306, 270), (306, 18, 342), (18, 90, 54), (90, 162, 126), (162, 234, 198)]
+    outgoing = [(144, 216, 180), (216, 288, 252), (288, 360, 324), (0, 72, 36), (72, 144, 108)]
+    assert geom.transform_angle_map_ncw_icw(ingoing) == outgoing
