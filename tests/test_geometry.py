@@ -198,3 +198,14 @@ def test_segment_angle_map_six_ok():
         (150, 210, 180),
         (210, 270, 240),
         (270, 330, 300)] 
+
+
+def test_segment_angle_map_seven_ok():
+    assert geom.segment_angle_map(7) == [
+        (pytest.approx(334.2857), pytest.approx(25.7143), 360),
+        (pytest.approx(25.7143), pytest.approx(77.1429), pytest.approx(51.4286)),
+        (pytest.approx(77.1429), pytest.approx(128.5714), pytest.approx(102.8571)),
+        (pytest.approx(128.5714), 180, pytest.approx(154.2857)),
+        (180, pytest.approx(231.4286), pytest.approx(205.7143)),
+        (pytest.approx(231.4286), pytest.approx(282.8571), pytest.approx(257.1429)),
+        (pytest.approx(282.8571), pytest.approx(334.2857), pytest.approx(308.5714))]
