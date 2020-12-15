@@ -77,3 +77,7 @@ def test_left_top_of_center_bad_argument_nok():
 
 def test_octant_of_angle_for_n_ok():
     assert geom.octant_of_angle(270) == 'N'
+
+
+def test_octant_of_angle_for_s_ok():
+    assert geom.octant_of_angle(90) == 'S'
