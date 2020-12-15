@@ -158,12 +158,12 @@ def segment_angle_map(needed_number_of_axis):
 
     the_map = []
     if needed_number_of_axis == 1:
-        the_map[0] = (closure_guard, norm, norm)
+        the_map.append((closure_guard, norm, norm))
         return the_map  # early exit for cornercase
 
     angle_per_sect = norm / needed_number_of_axis
     signed_correct_axis_shift = -angle_per_sect / 2
-    for i in range(0, needed_number_of_axis - 1):
+    for i in range(0, needed_number_of_axis):
         angle_start = math.fmod(i * angle_per_sect + signed_correct_axis_shift + norm, norm)
         angle_stop = math.fmod(angle_start + angle_per_sect + norm, norm)
         angle_mid = (angle_stop + angle_start) / 2.0
@@ -174,7 +174,7 @@ def segment_angle_map(needed_number_of_axis):
         if angle_stop < angle_start:
             angle_mid = (angle_stop + norm + angle_start) / 2.0
 
-        the_map[i] = (angle_start, angle_stop, angle_mid)
+        the_map.append((angle_start, angle_stop, angle_mid))
 
     return the_map
 
