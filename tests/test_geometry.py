@@ -153,3 +153,9 @@ def test_xy_point_from_angle_negative_and_zero_radius_ok():
     r, a, dx, dy = 0, -1, 2, 3
     x, y = 2, 3
     assert geom.xy_point_from_radius_angle(r, a, dx, dy) == (x, y)
+
+
+def test_xy_point_from_angle_negative_ok():
+    r, a, dx, dy = 1000, -360, 25, 14
+    x, y = 1025, pytest.approx(14, abs=1e-11)
+    assert geom.xy_point_from_radius_angle(r, a, dx, dy) == (x, y)
