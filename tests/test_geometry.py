@@ -47,3 +47,7 @@ def test_left_bottom_of_center_false_ok():
 
 def test_left_bottom_of_center_true_other_ok():
     assert geom.left_bottom_of_center(180 - 1) is True
+
+
+def test_left_bottom_of_center_false_other_ok():
+    assert geom.left_bottom_of_center(180) is False
