@@ -111,3 +111,9 @@ def test_xy_point_from_radius_angle_minimal_ok():
     r, a, dx, dy = 1, 0, 0, 0
     x, y = 1, 0
     assert geom.xy_point_from_radius_angle(r, a, dx, dy) == (x, y)
+
+
+def test_xy_point_from_radius_angle_minimal_shift_x_ok():
+    r, a, dx, dy = 1, 0, 1, 0
+    x, y = 2, 0
+    assert geom.xy_point_from_radius_angle(r, a, dx, dy) == (x, y)
