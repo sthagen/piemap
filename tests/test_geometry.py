@@ -101,3 +101,7 @@ def test_octant_of_angle_for_nw_ok():
 
 def test_octant_of_angle_for_sw_ok():
     assert geom.octant_of_angle(90 + 1) == 'SW'
+
+
+def test_octant_of_angle_for_ne_ok():
+    assert geom.octant_of_angle(270 + 1) == 'NE'
