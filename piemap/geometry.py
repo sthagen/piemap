@@ -195,7 +195,7 @@ def transform_angle_map_ncw_icw(segment_angle_map_ncw):
 
     segment_angle_map_icw = []
     if len(segment_angle_map_ncw) == 1:
-        segment_angle_map_icw[0] = (270 + my_eps, 270 - my_eps, 270)
+        segment_angle_map_icw.append((270 + my_eps, 270 - my_eps, 270))
         return segment_angle_map_icw  # early exit for cornercase
 
     for data in segment_angle_map_ncw:
