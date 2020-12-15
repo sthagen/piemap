@@ -15,3 +15,7 @@ def test_exact_top_of_center_false_ok():
 
 def test_exact_bottom_of_center_true_ok():
     assert geom.exact_bottom_of_center(90) is True
+
+
+def test_exact_bottom_of_center_false_ok():
+    assert geom.exact_bottom_of_center(90 + 1) is False
