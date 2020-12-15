@@ -209,3 +209,15 @@ def test_segment_angle_map_seven_ok():
         (180, pytest.approx(231.4286), pytest.approx(205.7143)),
         (pytest.approx(231.4286), pytest.approx(282.8571), pytest.approx(257.1429)),
         (pytest.approx(282.8571), pytest.approx(334.2857), pytest.approx(308.5714))]
+
+
+def test_segment_angle_map_eight_ok():
+    assert geom.segment_angle_map(8) == [
+        (337.5, 22.5, 360),
+        (22.5, 67.5, 45),
+        (67.5, 112.5, 90),
+        (112.5, 157.5, 135),
+        (157.5, 202.5, 180),
+        (202.5, 247.5, 225),
+        (247.5, 292.5, 270),
+        (292.5, 337.5, 315)]
