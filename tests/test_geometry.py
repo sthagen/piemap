@@ -354,3 +354,7 @@ def test_segment_angle_map_sixteen_ok():
         (281.25, 303.75, 292.5),
         (303.75, 326.25, 315),
         (326.25, 348.75, 337.5)]
+
+
+def test_transform_angle_map_ncw_icw_minimal_ok():
+    assert geom.transform_angle_map_ncw_icw([(0, 360, 360)]) == [(270, 270, 270)]
