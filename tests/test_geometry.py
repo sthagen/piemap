@@ -159,3 +159,7 @@ def test_xy_point_from_angle_negative_ok():
     r, a, dx, dy = 1000, -360, 25, 14
     x, y = 1025, pytest.approx(14, abs=1e-11)
     assert geom.xy_point_from_radius_angle(r, a, dx, dy) == (x, y)
+
+
+def test_segment_angle_map_one_ok():
+    assert geom.segment_angle_map(1) == [(0, 360, 360)]
