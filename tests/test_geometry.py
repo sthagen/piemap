@@ -378,3 +378,7 @@ def test_transform_angle_map_ncw_icw_two_rotate_twice_ok():
 
 def test_transform_angle_map_ncw_icw_two_rotate_thrice_ok():
     assert geom.transform_angle_map_ncw_icw([(0, 180, 90), (180, 360, 270)]) == [(270, 90, 360), (90, 270, 180)]
+
+
+def test_transform_angle_map_ncw_icw_three_ok():
+    assert geom.transform_angle_map_ncw_icw([(300, 60, 360), (60, 180, 120), (180, 300, 240)]) == [(210, 330, 270), (330, 90, 390), (90, 210, 150)]
