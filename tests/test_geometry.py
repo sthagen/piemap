@@ -470,3 +470,7 @@ def test_transform_angle_map_icw_ncw_minimal_ok():
 
 def test_transform_angle_map_icw_ncw_minimal_not_really_idempotent_ok():
     assert geom.transform_angle_map_icw_ncw([(270, 270, 270)]) == [(0, 360, 360)]
+
+
+def test_transform_angle_map_icw_ncw_two_ok():
+    assert geom.transform_angle_map_icw_ncw([(180, 360, 270), (0, 180, 90)]) == [(270, 90, 360), (90, 270, 180)]
