@@ -163,3 +163,7 @@ def test_xy_point_from_angle_negative_ok():
 
 def test_segment_angle_map_one_ok():
     assert geom.segment_angle_map(1) == [(0, 360, 360)]
+
+
+def test_segment_angle_map_two_ok():
+    assert geom.segment_angle_map(2) == [(270, 90, 360), (90, 270, 180)]
