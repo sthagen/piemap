@@ -85,3 +85,7 @@ def test_octant_of_angle_for_s_ok():
 
 def test_octant_of_angle_for_e_ok():
     assert geom.octant_of_angle(0) == 'E'
+
+
+def test_octant_of_angle_for_se_ok():
+    assert geom.octant_of_angle(90 - 1) == 'SE'
