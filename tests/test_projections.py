@@ -19,3 +19,7 @@ def test_limit_folded_from_limit_max_sample_one_ok():
 
 def test_limit_folded_from_limit_max_sample_two_ok():
     assert pr.limit_folded_from_limit_max(5, 8) == 11
+
+
+def test_min_folded_from_limit_max_sample_one_ok():
+    assert pr.min_folded_from_limit_max(-1, 2) == 10
