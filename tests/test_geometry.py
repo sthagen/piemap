@@ -31,3 +31,7 @@ def test_right_bottom_of_center_false_ok():
 
 def test_right_top_of_center_true_ok():
     assert geom.right_top_of_center(270 + 1) is True
+
+
+def test_right_top_of_center_false_ok():
+    assert geom.right_top_of_center(270) is False
