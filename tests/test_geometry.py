@@ -462,3 +462,7 @@ def test_transform_angle_map_ncw_icw_six_rotate_thrice_ok():
     ingoing = [(60, 120, 90), (120, 180, 150), (180, 240, 210), (240, 300, 270), (300, 360, 330), (0, 60, 30)]
     outgoing = [(330, 30, 360), (30, 90, 60), (90, 150, 120), (150, 210, 180), (210, 270, 240), (270, 330, 300)]
     assert geom.transform_angle_map_ncw_icw(ingoing) == outgoing
+
+
+def test_transform_angle_map_icw_ncw_minimal_ok():
+    assert geom.transform_angle_map_icw_ncw([(270, 270, 270)]) == [(0, 360, 360)]
