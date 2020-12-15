@@ -15,3 +15,7 @@ def test_min_from_limit_max_sample_two_ok():
 
 def test_limit_folded_from_limit_max_sample_one_ok():
     assert pr.limit_folded_from_limit_max(-1, 2) == 5
+
+
+def test_limit_folded_from_limit_max_sample_two_ok():
+    assert pr.limit_folded_from_limit_max(5, 8) == 11
