@@ -59,3 +59,7 @@ def test_left_top_of_center_true_ok():
 
 def test_left_top_of_center_false_ok():
     assert geom.left_top_of_center(180 - 1) is False
+
+
+def test_left_top_of_center_true_other_ok():
+    assert geom.left_top_of_center(270 - 1) is True
