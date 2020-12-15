@@ -167,3 +167,7 @@ def test_segment_angle_map_one_ok():
 
 def test_segment_angle_map_two_ok():
     assert geom.segment_angle_map(2) == [(270, 90, 360), (90, 270, 180)]
+
+
+def test_segment_angle_map_three_ok():
+    assert geom.segment_angle_map(3) == [(300, 60, 360), (60, 180, 120), (180, 300, 240)]
