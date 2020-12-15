@@ -73,3 +73,7 @@ def test_left_top_of_center_bad_argument_nok():
     message = r"'<=' not supported between instances of 'int' and 'object'"
     with pytest.raises(TypeError, match=message):
         geom.left_top_of_center(object())
+
+
+def test_octant_of_angle_for_n_ok():
+    assert geom.octant_of_angle(270) == 'N'
