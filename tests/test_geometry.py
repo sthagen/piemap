@@ -279,3 +279,21 @@ def test_segment_angle_map_twelve_ok():
         (255, 285, 270),
         (285, 315, 300),
         (315, 345, 330)]
+
+
+def test_segment_angle_map_thirteen_ok():
+    tol = 5e-3
+    assert geom.segment_angle_map(13) == [
+        (pytest.approx(346.1538, abs=tol), pytest.approx(13.8462, abs=tol), 360),
+        (pytest.approx(13.8462, abs=tol), pytest.approx(41.5385, abs=tol), pytest.approx(27.6923, abs=tol)),
+        (pytest.approx(41.5385, abs=tol), pytest.approx(69.2308, abs=tol), pytest.approx(55.3846, abs=tol)),
+        (pytest.approx(69.2308, abs=tol), pytest.approx(96.9239, abs=tol), pytest.approx(83.0769, abs=tol)),
+        (pytest.approx(96.9239, abs=tol), pytest.approx(124.6154, abs=tol), pytest.approx(110.7692, abs=tol)),
+        (pytest.approx(124.6154, abs=tol), pytest.approx(152.3077, abs=tol), pytest.approx(138.4615, abs=tol)),
+        (pytest.approx(152.3077, abs=tol), 180, pytest.approx(166.1538, abs=tol)),
+        (180, pytest.approx(207.6923, abs=tol), pytest.approx(193.8462, abs=tol)),
+        (pytest.approx(207.6923, abs=tol), pytest.approx(235.3846, abs=tol), pytest.approx(221.5385, abs=tol)),
+        (pytest.approx(235.3846, abs=tol), pytest.approx(263.0769, abs=tol), pytest.approx(249.2308, abs=tol)),
+        (pytest.approx(263.0769, abs=tol), pytest.approx(290.7692, abs=tol), pytest.approx(276.9231, abs=tol)),
+        (pytest.approx(290.7692, abs=tol), pytest.approx(318.4615, abs=tol), pytest.approx(304.6154, abs=tol)),
+        (pytest.approx(318.4615, abs=tol), pytest.approx(346.1538, abs=tol), pytest.approx(332.3077, abs=tol))]
