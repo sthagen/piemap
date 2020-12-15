@@ -67,3 +67,9 @@ def test_left_top_of_center_true_other_ok():
 
 def test_left_top_of_center_false_other_ok():
     assert geom.left_top_of_center(270) is False
+
+
+def test_left_top_of_center_bad_argument_nok():
+    message = r"'<=' not supported between instances of 'int' and 'object'"
+    with pytest.raises(TypeError, match=message):
+        geom.left_top_of_center(object())
