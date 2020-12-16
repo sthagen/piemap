@@ -79,7 +79,7 @@ def unsafe(text):
 def is_numeric(text):
     """Migration artifact."""
     try:
-        v = float(text)
+        _ = float(text)
         return True
     except TypeError:
         return False
