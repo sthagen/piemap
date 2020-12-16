@@ -82,7 +82,7 @@ def is_numeric(text):
     try:
         _ = float(text)
         return True
-    except TypeError:
+    except (TypeError, ValueError):
         return False
 
 
