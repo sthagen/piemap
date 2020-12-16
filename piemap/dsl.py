@@ -227,4 +227,4 @@ def parse(text):
     echo '</body>'."\n";
     echo '</html>'."\n";
     """
-    return True
+    return some_axis_maps, info_queue
