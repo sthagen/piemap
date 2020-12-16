@@ -245,3 +245,11 @@ def derive_stop(angle_start, closure_guard, delta, norm):
     if angle < angle_start and angle == closure_guard:
         angle = norm
     return angle
+
+
+def derive_mid(angle_start, angle_stop, norm):
+    """Derive mid angle respectng closure via norm."""
+    angle = (angle_stop + angle_start) / 2.0
+    if angle_stop < angle_start:
+        angle = (angle_stop + norm + angle_start) / 2.0
+    return angle
