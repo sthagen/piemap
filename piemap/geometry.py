@@ -165,12 +165,12 @@ def segment_angle_map(needed_number_of_axis):
     signed_correct_axis_shift = -angle_per_sect / 2
     for i in range(0, needed_number_of_axis):
         angle_start = math.fmod(i * angle_per_sect + signed_correct_axis_shift + norm, norm)
-        angle_stop = math.fmod(angle_start + angle_per_sect + norm, norm)
-        angle_mid = (angle_stop + angle_start) / 2.0
 
+        angle_stop = math.fmod(angle_start + angle_per_sect + norm, norm)
         if angle_stop < angle_start and angle_stop == closure_guard:
             angle_stop = norm
 
+        angle_mid = (angle_stop + angle_start) / 2.0
         if angle_stop < angle_start:
             angle_mid = (angle_stop + norm + angle_start) / 2.0
 
@@ -223,7 +223,9 @@ def rotate(closure_guard, norm, segment_angle_map_icw, signed_shift_degrees):
     segment_angle_remapping = []
     for data in segment_angle_map_icw:
         angle_start, angle_stop, angle_mid = data
+
         angle_start = math.fmod(angle_start + signed_shift_degrees + norm, norm)
+
         angle_stop = math.fmod(angle_stop + signed_shift_degrees + norm, norm)
         if angle_stop < angle_start and angle_stop == closure_guard:
             angle_stop = norm
