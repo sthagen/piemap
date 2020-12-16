@@ -5,5 +5,9 @@ import pytest  # type: ignore
 import piemap.dsl as dsl
 
 
-def test_dump_stub_ok():
-    assert dsl.dump({}) is NotImplemented
+def test_dumps_stub_ok():
+    assert dsl.dumps({}) is NotImplemented
+
+
+def test_loads_stub_ok():
+    assert dsl.loads("") is NotImplemented
