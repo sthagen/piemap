@@ -1,7 +1,7 @@
 import collections
 import json
 
-import projections as pr
+import piemap.projections as pr
 
 
 NEEDED_NUMBER_OF_AXIS_MAX = 16
