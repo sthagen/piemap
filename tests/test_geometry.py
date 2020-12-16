@@ -482,3 +482,11 @@ def test_axis_name_circle_adjust_n_ok():
     args = (angle, font_size_pts, text_angle, font_name, axis_name, axis_name_space_sep)
     assert geom.octant_of_angle(angle) == 'N'
     assert geom.axis_name_circle_adjust(*args) == (-100, -10)
+
+
+def test_axis_name_circle_adjust_s_ok():
+    angle, font_size_pts, text_angle = 90, 1, 0
+    font_name, axis_name, axis_name_space_sep = "Invisible", "Look", None
+    args = (angle, font_size_pts, text_angle, font_name, axis_name, axis_name_space_sep)
+    assert geom.octant_of_angle(angle) == 'S'
+    assert geom.axis_name_circle_adjust(*args) == (-100, 210)
