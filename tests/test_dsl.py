@@ -4,13 +4,15 @@ import pytest  # type: ignore
 
 import piemap.dsl as dsl
 
-DEFAULT_TEXT = """\
+"""
 SHOW_TITLE;A title for the plot
 SHOW_VALUE;1
 SHOW_MIN;0
+"""
+DEFAULT_TEXT = """\
 0;D1F;FOLDED;;12;15;6;dB
-2;D3F;FOLDED;;12;15;NULL;1
-1;D2F;FOLDED;;12;15;12;V
+1;D3F;FOLDED;;12;15;NULL;1
+2;D2F;FOLDED;;12;15;12;V
 ;D4F;FOLDED;;12;15;16;dB
 ;D5F;FOLDED;;12;15;18;dB
 ;D6F;FOLDED;;12;15;22;dB
@@ -20,6 +22,10 @@ SHOW_MIN;0
 ;D10L;;;1;2;0.25;ms
 ;D11L;;;2;1;0.8;kbit/s
 ;D12L;;;0.8;1;NULL;s
+;D13L;;;0.8;1;NULL;s
+;D14L;;;0.8;1;NULL;s
+;D15L;;;0.8;1;NULL;s
+;D16L;;;0.8;1;NULL;s
 """
 
 DEFAULT_PARSED = [
@@ -201,8 +207,8 @@ DEFAULT_PARSED = [
         'AXIS_VALUE': 'NULL'}
 ]
 
+#     '19 dimensions requested, but only 16 accepted. Maximum is 16',
 DEFAULT_DIAGNOSTICS = [
-    '19 dimensions requested, but only 16 accepted. Maximum is 16',
     'Conflicting index rules. Failing IndexCand is 0, reason is DC_INTEGER',
     'Conflicting index rules. Failing IndexCand is 1, reason is DC_INTEGER',
     'Conflicting index rules. Failing IndexCand is 2, reason is DC_INTEGER',
