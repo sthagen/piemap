@@ -24,7 +24,7 @@ SHOW_MIN;0
 
 
 def test_dumps_stub_ok():
-    assert dsl.dumps({}) is NotImplemented
+    assert dsl.dumps({}) == "{}"
 
 
 def test_loads_stub_ok():
