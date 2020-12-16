@@ -1,0 +1,24 @@
+SHOW_TITLE;Testcase Ordered 1 (ignore axis 17 and 18)
+SHOW_VALUE;1
+ORDER_1;dummy;2c;2b;2a;1
+;O 1i;ORDER_1;;2b;1;dummy;
+;O 1ii;ORDER_1;;2b;1;2c;
+;O 1iii;ORDER_1;;2b;1;2b;
+;O 1iv;ORDER_1;;2b;1;2a;
+;O 1v;ORDER_1;;2b;1;1;
+;O 1vi;ORDER_1;;2b;1;;
+ORDER_2;ORIGIN;not ok;LIMIT_VALUE;ok
+;O 2i;ORDER_2;;LIMIT_VALUE;ok;not ok;
+;O 2ii;ORDER_2;;LIMIT_VALUE;ok;ok;
+;O 2iii;ORDER_2;;LIMIT_VALUE;ok;;
+ORDER_3;ORIGIN;bad;poor;acceptable;good;excellent
+;O 3i;ORDER_3;;acceptable;excellent;bad;
+;O 3ii;ORDER_3;;acceptable;excellent;poor;
+;O 3iii;ORDER_3;;acceptable;excellent;acceptable;
+;O 3iv;ORDER_3;;acceptable;excellent;good;
+;O 3v;ORDER_3;;acceptable;excellent;excellent;
+;O 3vi;ORDER_3;;acceptable;excellent;;
+ORDER_4;NOK;LIMIT_VALUE;OK;x
+;O 4i;ORDER_4;;LIMIT_VALUE;x;OK;
+;O 4ii;ORDER_4;;LIMIT_VALUE;x;NOK;
+;O 4iii;ORDER_4;;LIMIT_VALUE;x;;
