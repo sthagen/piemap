@@ -530,3 +530,11 @@ def test_axis_name_circle_adjust_sw_ok():
     args = (angle, font_size_pts, text_angle, font_name, axis_name, axis_name_space_sep)
     assert geom.octant_of_angle(angle) == 'SW'
     assert geom.axis_name_circle_adjust(*args) == (-205, 205)
+
+
+def test_axis_name_circle_adjust_nw_ok():
+    angle, font_size_pts, text_angle = 270 - 1, 1, 0
+    font_name, axis_name, axis_name_space_sep = "Invisible", "Look", None
+    args = (angle, font_size_pts, text_angle, font_name, axis_name, axis_name_space_sep)
+    assert geom.octant_of_angle(angle) == 'NW'
+    assert geom.axis_name_circle_adjust(*args) == (-205, -5)
