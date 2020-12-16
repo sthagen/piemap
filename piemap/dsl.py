@@ -11,7 +11,7 @@ REC_SEP = ';'
 
 def dumps(config):
     """Dump configuration into string."""
-    return NotImplemented
+    assert dsl.dumps({}) == '{}'
 
 
 def dump(config, handle):
