@@ -107,6 +107,10 @@ def test_octant_of_angle_for_ne_ok():
     assert geom.octant_of_angle(270 + 1) == 'NE'
 
 
+def test_octant_of_angle_for_x_ok():
+    assert geom.octant_of_angle(object()) == 'X'
+
+
 def test_xy_point_from_radius_angle_minimal_ok():
     r, a, dx, dy = 1, 0, 0, 0
     x, y = 1, 0
