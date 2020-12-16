@@ -1,0 +1,14 @@
+SHOW_TITLE;A.5 - Quality impairments during double talk and during test call
+SHOW_VALUE;0
+ORDER_DT;3;2c;2b;2a;1
+ORDER_LC;ORIGIN;not ok;LIMIT_VALUE;ok
+;D value;;;0;20;3;
+;SLR;FOLDED;;4;8;9;
+;MOS SND;;;3.2;5.5;3.3;
+;MOS RCV;;;2.5;4;3;
+;RLR;FOLDED;;-2;2;1;
+;TCLw;;;46;80;50;
+;DT Type;ORDER_DT;;2b;1;2c;
+;"Live Call";ORDER_LC;;LIMIT_VALUE;ok;not ok;
+;BGNT (far);;;-10;0;8; 
+;BGNT (near);;;-10;0;3; 
