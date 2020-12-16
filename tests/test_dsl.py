@@ -236,5 +236,39 @@ def test_loads_stub_ok():
     assert dsl.loads("") is NotImplemented
 
 
+def test_parse_empty():
+    assert dsl.parse('') == ([{'AXIS_INDEX': 0,
+                               'AXIS_LIMIT': 0.8,
+                               'AXIS_LIMIT_FOLDED': False,
+                               'AXIS_MAX': 1.0,
+                               'AXIS_MIN': 0.0,
+                               'AXIS_MIN_FOLDED': False,
+                               'AXIS_NAME': 'Dimension',
+                               'AXIS_TYPE': 'LINEAR',
+                               'AXIS_UNIT': '1',
+                               'AXIS_VALUE': 'NULL'},
+                              {'AXIS_INDEX': 1,
+                               'AXIS_LIMIT': 0.8,
+                               'AXIS_LIMIT_FOLDED': False,
+                               'AXIS_MAX': 1.0,
+                               'AXIS_MIN': 0.0,
+                               'AXIS_MIN_FOLDED': False,
+                               'AXIS_NAME': 'Dimension2',
+                               'AXIS_TYPE': 'LINEAR',
+                               'AXIS_UNIT': '1',
+                               'AXIS_VALUE': 'NULL'},
+                              {'AXIS_INDEX': 2,
+                               'AXIS_LIMIT': 0.8,
+                               'AXIS_LIMIT_FOLDED': False,
+                               'AXIS_MAX': 1.0,
+                               'AXIS_MIN': 0.0,
+                               'AXIS_MIN_FOLDED': False,
+                               'AXIS_NAME': 'DimensionFolded',
+                               'AXIS_TYPE': 'FOLDED',
+                               'AXIS_UNIT': 'dB',
+                               'AXIS_VALUE': 'NULL'}],
+                             ['Default used, since no input given.'])
+
+
 def test_parse_default():
     assert dsl.parse(DEFAULT_TEXT) == (DEFAULT_PARSED, DEFAULT_DIAGNOSTICS)
