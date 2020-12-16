@@ -148,12 +148,12 @@ def parse(text):
         collect_index_cand_list = []
         for x, data in enumerate(some_axis_maps):
             index_cand = data['AXIS_INDEX']
-            iCFC = str(int(index_cand))
-            collect_index_cand_list.append(iCFC)
-            if not is_numeric(index_cand) or iCFC != index_cand or index_cand < 0 or index_cand >= n_axis_rows:
+            i_cfc = str(int(index_cand))
+            collect_index_cand_list.append(i_cfc)
+            if not is_numeric(index_cand) or i_cfc != index_cand or index_cand < 0 or index_cand >= n_axis_rows:
                 has_index_collision = True
                 conflict_reason = 'NO_INTEGER'
-                if iCFC != index_cand:
+                if i_cfc != index_cand:
                     conflict_reason = 'DC_INTEGER'
 
                 if index_cand < 0:
