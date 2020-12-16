@@ -189,29 +189,14 @@ def transform_angle_map_ncw_icw(segment_angle_map_ncw):
     so transform maps 360 deg and 0 deg to 270 deg and 90 deg to 0 deg,
     ... i.e. d=-90 modulo 360
     """
-    closure_guard, norm = 0, 360
-    signed_shift_degrees = -90
     my_eps = 0.0  # 0.0000000000001 -  one zero more and 12+03 oclock for n=1
 
-    segment_angle_remapping = []
     if len(segment_angle_map_ncw) == 1:
-        segment_angle_remapping.append((270 + my_eps, 270 - my_eps, 270))
-        return segment_angle_remapping  # early exit for cornercase
+        return [(270 + my_eps, 270 - my_eps, 270)]  # early exit for cornercase
 
-    for data in segment_angle_map_ncw:
-        angle_start, angle_stop, angle_mid = data
-        angle_start = math.fmod(angle_start + signed_shift_degrees + norm, norm)
-        angle_stop = math.fmod(angle_stop + signed_shift_degrees + norm, norm)
-        if angle_stop < angle_start and angle_stop == closure_guard:
-            angle_stop = norm
-
-        angle_mid = (angle_stop + angle_start) / 2.0
-        if angle_stop < angle_start:
-            angle_mid = (angle_stop + norm + angle_start) / 2.0
-
-        segment_angle_remapping.append((angle_start, angle_stop, angle_mid))
-
-    return segment_angle_remapping  
+    closure_guard, norm = 0, 360
+    signed_shift_degrees = -90
+    return rotate(closure_guard, norm, segment_angle_map_ncw, signed_shift_degrees)
 
 
 def transform_angle_map_icw_ncw(segment_angle_map_icw):
