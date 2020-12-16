@@ -47,7 +47,10 @@ def octant_of_angle(angle):
     """
     derive octant in (N,NW,W,SW,S,SE,E,NE) counterclockwise from angle
     """
-    error_log = print
+    try:
+        angle = int(angle)
+    except TypeError:
+        return 'X'
     if exact_top_of_center(angle):
         return 'N'
     elif exact_bottom_of_center(angle):
@@ -60,9 +63,6 @@ def octant_of_angle(angle):
         return 'SW'        
     elif right_top_of_center(angle):
         return 'NE'
-
-    error_log(f'geometry.octant_of_angle_X_angle == {angle}')
-    return 'X'
 
 
 def axis_name_circle_adjust(angle, font_size_pts, text_angle, font_name, axis_name, axis_name_space_sep=None):
