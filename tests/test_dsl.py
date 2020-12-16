@@ -67,6 +67,39 @@ DEFAULT_PARSED_1 = [
 
 DEFAULT_DIAGNOSTICS_1 = []
 
+DEFAULT_TEXT_2 = """\
+;L 0;;;1;2;NULL;
+;L 1;;;1;2;-0.1;
+"""
+
+DEFAULT_PARSED_2 = [
+    {'AXIS_INDEX': 0,
+     'AXIS_LIMIT': 0.8,
+     'AXIS_LIMIT_FOLDED': False,
+     'AXIS_MAX': 1.0,
+     'AXIS_MIN': 0.4666666666666668,
+     'AXIS_MIN_FOLDED': False,
+     'AXIS_NAME': 'Dimension',
+     'AXIS_TYPE': 'LINEAR',
+     'AXIS_UNIT': '1',
+     'AXIS_VALUE': 'NULL',
+     },
+    {
+        'AXIS_INDEX': 1,
+        'AXIS_LIMIT': 0.8,
+        'AXIS_LIMIT_FOLDED': False,
+        'AXIS_MAX': 1.0,
+        'AXIS_MIN': 0.4666666666666668,
+        'AXIS_MIN_FOLDED': False,
+        'AXIS_NAME': 'Dimension',
+        'AXIS_TYPE': 'LINEAR',
+        'AXIS_UNIT': '1',
+        'AXIS_VALUE': 'NULL',
+    },
+]
+
+DEFAULT_DIAGNOSTICS_2 = []
+
 
 def test_dumps_stub_ok():
     assert dsl.dumps({}) == "{}"
@@ -80,5 +113,9 @@ def test_parse_empty():
     assert dsl.parse(DEFAULT_TEXT_0) == (DEFAULT_GENERATED_0, DEFAULT_DIAGNOSTICS_0)
 
 
-def test_parse_default():
+def test_parse_dim_one():
     assert dsl.parse(DEFAULT_TEXT_1) == (DEFAULT_PARSED_1, DEFAULT_DIAGNOSTICS_1)
+
+
+def test_parse_dim_two():
+    assert dsl.parse(DEFAULT_TEXT_2) == (DEFAULT_PARSED_2, DEFAULT_DIAGNOSTICS_2)
