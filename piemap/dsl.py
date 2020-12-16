@@ -146,7 +146,7 @@ def parse(text):
 
         best_effort_re_order_map = {}
         collect_index_cand_list = []
-        for x, data in some_axis_maps:
+        for x, data in enumerate(some_axis_maps):
             index_cand = data['AXIS_INDEX']
             iCFC = str(int(index_cand))
             collect_index_cand_list.append(iCFC)
