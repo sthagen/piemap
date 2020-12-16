@@ -193,10 +193,10 @@ def transform_angle_map_ncw_icw(segment_angle_map_ncw):
     signed_shift_degrees = -90
     my_eps = 0.0  # 0.0000000000001 -  one zero more and 12+03 oclock for n=1
 
-    segment_angle_map_icw = []
+    segment_angle_remapping = []
     if len(segment_angle_map_ncw) == 1:
-        segment_angle_map_icw.append((270 + my_eps, 270 - my_eps, 270))
-        return segment_angle_map_icw  # early exit for cornercase
+        segment_angle_remapping.append((270 + my_eps, 270 - my_eps, 270))
+        return segment_angle_remapping  # early exit for cornercase
 
     for data in segment_angle_map_ncw:
         angle_start, angle_stop, angle_mid = data
@@ -209,9 +209,9 @@ def transform_angle_map_ncw_icw(segment_angle_map_ncw):
         if angle_stop < angle_start:
             angle_mid = (angle_stop + norm + angle_start) / 2.0
 
-        segment_angle_map_icw.append((angle_start, angle_stop, angle_mid))
+        segment_angle_remapping.append((angle_start, angle_stop, angle_mid))
 
-    return segment_angle_map_icw  
+    return segment_angle_remapping  
 
 
 def transform_angle_map_icw_ncw(segment_angle_map_icw):
@@ -224,13 +224,14 @@ def transform_angle_map_icw_ncw(segment_angle_map_icw):
     so transform maps 360 deg and 0 deg to 270 deg and 90 deg to 0 deg,
     ... i.e. d=-90 modulo 360
     """
-    segment_angle_map_ncw = []
     closure_guard, norm = 0, 360
     signed_shift_degrees = +90
     # TODO(sthagen) remove after test: my_eps = 0.0000001
+
+    segment_angle_remapping = []
     if len(segment_angle_map_icw) == 1:
-        segment_angle_map_ncw.append((closure_guard, norm, norm))  
-        return segment_angle_map_ncw  # early exit for cornercase
+        segment_angle_remapping.append((closure_guard, norm, norm))  
+        return segment_angle_remapping  # early exit for cornercase
 
     for data in segment_angle_map_icw:
         angle_start, angle_stop, angle_mid = data
@@ -243,6 +244,6 @@ def transform_angle_map_icw_ncw(segment_angle_map_icw):
         if angle_stop < angle_start:
             angle_mid = (angle_stop + norm + angle_start ) / 2.0
 
-        segment_angle_map_ncw.append((angle_start, angle_stop, angle_mid))
+        segment_angle_remapping.append((angle_start, angle_stop, angle_mid))
 
-    return segment_angle_map_ncw    
+    return segment_angle_remapping    
