@@ -7,6 +7,7 @@ import piemap.projections as pr
 NEEDED_NUMBER_OF_AXIS_MAX = 16
 NULL_STR_REP = 'NULL'
 REC_SEP = ';'
+ROW_SEP = '\n'
 
 
 def dumps(config):
