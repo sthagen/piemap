@@ -474,3 +474,11 @@ def test_transform_angle_map_icw_ncw_minimal_not_really_idempotent_ok():
 
 def test_transform_angle_map_icw_ncw_two_ok():
     assert geom.transform_angle_map_icw_ncw([(180, 360, 270), (0, 180, 90)]) == [(270, 90, 360), (90, 270, 180)]
+
+
+def test_axis_name_circle_adjust_n_ok():
+    angle, font_size_pts, text_angle = 270, 1, 0
+    font_name, axis_name, axis_name_space_sep = "Invisible", "Look", None
+    args = (angle, font_size_pts, text_angle, font_name, axis_name, axis_name_space_sep)
+    assert geom.octant_of_angle(angle) == 'N'
+    assert geom.axis_name_circle_adjust(*args) == (-100, -10)
