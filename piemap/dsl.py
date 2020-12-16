@@ -11,12 +11,12 @@ REC_SEP = ';'
 
 def dumps(config):
     """Dump configuration into string."""
-    json.dumps(config)
+    return json.dumps(config)
 
 
 def dump(config, handle):
     """Dump configuration into JSON file via handle."""
-    json.dump(config, handle)
+    return json.dump(config, handle)
 
 
 def loads(text):
