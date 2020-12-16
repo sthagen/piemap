@@ -1,0 +1,7 @@
+SHOW_TITLE;Testcase Dimension Count 5
+SHOW_VALUE;1
+;L 0;;;1;2;0.8;
+;L 1;;;1;2;-0.1;
+;L 2;;;1;2;1;
+;L 3;;;1;2;0.375;
+;L 4;;;1;2;0.75;
