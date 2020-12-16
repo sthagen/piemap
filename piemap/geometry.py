@@ -237,3 +237,11 @@ def rotate(closure_guard, norm, segment_angle_map_icw, signed_shift_degrees):
         segment_angle_remapping.append((angle_start, angle_stop, angle_mid))
 
     return segment_angle_remapping
+
+
+def derive_stop(angle_start, closure_guard, delta, norm):
+    """Derive stop angle respecting closure via norm."""
+    angle = math.fmod(delta + norm, norm)
+    if angle < angle_start and angle == closure_guard:
+        angle = norm
+    return angle
