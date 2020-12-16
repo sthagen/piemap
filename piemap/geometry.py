@@ -70,7 +70,7 @@ def axis_name_circle_adjust(angle, font_size_pts, text_angle, font_name, axis_na
     calculate axis name placements from bounding box and angle
     """
 
-    def bounding_box_from_font(font_size_pts, text_angle, font_name, axis_name):
+    def bounding_box_from_font(fnt_size_pts, txt_angle, fnt_name, axs_name):
         """
         TODO(sthagen): PHP::imagettfbbox(font_size_pts, text_angle, font_name, axis_name)
         6,7	upper left corners X,Y-Pos and 4,5	upper right corners X,Y-Pos
