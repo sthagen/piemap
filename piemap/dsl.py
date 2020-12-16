@@ -112,7 +112,7 @@ def parse(text):
             axis_values = default_values()
             axis_values_cand = row_string.split(REC_SEP)
             if len(axis_values) == len(axis_values_cand):
-                for i, v in axis_values_cand:
+                for i, v in enumerate(axis_values_cand):
                     if v != '':
                         axis_values[i] = v
 
