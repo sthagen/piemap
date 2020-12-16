@@ -156,27 +156,22 @@ def segment_angle_map(needed_number_of_axis):
     """
     closure_guard, norm = 0, 360
 
-    the_map = []
     if needed_number_of_axis == 1:
-        the_map.append((closure_guard, norm, norm))
-        return the_map  # early exit for cornercase
+        return [(closure_guard, norm, norm)]  # early exit for cornercase
 
     angle_per_sect = norm / needed_number_of_axis
     signed_correct_axis_shift = -angle_per_sect / 2
+    triplets = []
     for i in range(0, needed_number_of_axis):
         angle_start = math.fmod(i * angle_per_sect + signed_correct_axis_shift + norm, norm)
+        delta = angle_start + angle_per_sect
 
-        angle_stop = math.fmod(angle_start + angle_per_sect + norm, norm)
-        if angle_stop < angle_start and angle_stop == closure_guard:
-            angle_stop = norm
+        angle_stop = derive_stop(angle_start, closure_guard, delta, norm)
+        angle_mid = derive_mid(angle_start, angle_stop, norm)
 
-        angle_mid = (angle_stop + angle_start) / 2.0
-        if angle_stop < angle_start:
-            angle_mid = (angle_stop + norm + angle_start) / 2.0
+        triplets.append((angle_start, angle_stop, angle_mid))
 
-        the_map.append((angle_start, angle_stop, angle_mid))
-
-    return the_map
+    return triplets
 
 
 def transform_angle_map_ncw_icw(segment_angle_map_ncw):
