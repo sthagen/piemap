@@ -156,6 +156,14 @@ def test_loads_stub_ok():
     assert dsl.loads("") is NotImplemented
 
 
+def test_is_numeric_true_ok():
+    assert dsl.is_numeric('42') is True
+
+
+def test_is_numeric_false_ok():
+    assert dsl.is_numeric('fourtytwo') is False
+
+
 def test_parse_empty():
     assert dsl.parse(DEFAULT_TEXT_0) == (DEFAULT_GENERATED_0, DEFAULT_DIAGNOSTICS_0)
 
