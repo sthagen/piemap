@@ -51,3 +51,9 @@ def test_value_folded_from_limit_max_sample_two_ok():
 def test_min_from_limit_max_int_int(limit, maximum):
     minimum = pr.min_from_limit_max(limit, maximum)
     assert isinstance(minimum, (float, int))
+
+
+@given(limit=st.floats(), maximum=st.integers())
+def test_min_from_limit_max_float_int(limit, maximum):
+    minimum = pr.min_from_limit_max(limit, maximum)
+    assert isinstance(minimum, (float, int))
