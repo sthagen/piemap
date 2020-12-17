@@ -583,3 +583,13 @@ def test_transform_angle_map_ncw_icw_floats_stat(x, y, z):
     assert isinstance(start, (float, int))
     assert isinstance(mid, (float, int))
     assert isinstance(stop, (float, int))
+
+
+@given(r=st.floats(), a=st.floats(), dx=st.floats(), dy=st.floats())
+def test_xy_point_from_radius_angle_floats_stat(r, a, dx, dy):
+    assume(all((not math.isnan(r), not math.isnan(a), not math.isnan(dx), not math.isnan(dy))))
+    assume(all((not math.isinf(r), not math.isinf(a), not math.isinf(dx), not math.isinf(dy))))
+    assume(0 <= a <= 360)
+    x, y = geom.xy_point_from_radius_angle(r, a, dx, dy)
+    assert isinstance(x, (float, int))
+    assert isinstance(y, (float, int))
