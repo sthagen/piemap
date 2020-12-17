@@ -271,9 +271,9 @@ def test_parse_dim_two_linear_collision():
     default_diagnostics_2_collision = [
         ' OK index (333) requested, accepted as (333)',
         ' OK index (333) requested, accepted as (333)',
-        'Conflicting index rules. Failing IndexCand is 333, reason is GT_NROW',
+        'Conflicting index rules. Failing candidate is (333), reason is GT_NROW',
         'Index positions not ordered. Misplaced IndexCand is 333, found at 0',
-        'Conflicting index rules. Failing IndexCand is 333, reason is GT_NROW',
+        'Conflicting index rules. Failing candidate is (333), reason is GT_NROW',
         'Index positions not ordered. Misplaced IndexCand is 333, found at 1',
         'Conflicting index positions. Failing IndexCand/s is/are [333], reason is NONUNIQUE_INDEX',
     ]
