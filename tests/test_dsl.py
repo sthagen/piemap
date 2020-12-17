@@ -317,3 +317,7 @@ def test_parse_dim_two_linear_unordered():
 
 def test_parse_dim_two_linear_collision():
     assert dsl.parse(DEFAULT_TEXT_2_COLLISION) == (DEFAULT_PARSED_2_COLLISION, DEFAULT_DIAGNOSTICS_2_COLLISION)
+
+
+def test_parse_d1f_ok():
+    assert dsl.parse(D1F_TEXT) == (D1F_AST, D1F_DIAG)
