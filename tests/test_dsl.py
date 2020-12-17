@@ -26,28 +26,6 @@ D1F_AST = [
 
 D1F_DIAG = [' OK index (0) requested, accepted as (0)']
 
-DEFAULT_TEXT_1 = """\
-0;D1F;FOLDED;;12;15;6;dB
-"""
-
-DEFAULT_PARSED_1 = [
-    {
-        'AXIS_INDEX': 0,
-        'AXIS_LIMIT': 12,
-        'AXIS_LIMIT_FOLDED': 18,
-        'AXIS_MAX': 15,
-        'AXIS_META': '',
-        'AXIS_MIN': 7,
-        'AXIS_MIN_FOLDED': 23,
-        'AXIS_NAME': 'D1F',
-        'AXIS_TYPE': 'FOLDED',
-        'AXIS_UNIT': 'dB',
-        'AXIS_VALUE': 'NULL',
-    },
-]
-
-DEFAULT_DIAGNOSTICS_1 = [' OK index (0) requested, accepted as (0)']
-
 DEFAULT_TEXT_2 = """\
 ;L 0;;;1;2;;;NULL;
 ;L 1;;;1;2;;;-0.1;
@@ -300,7 +278,29 @@ def test_parse_empty():
 
 
 def test_parse_dim_one_linear():
-    assert dsl.parse(DEFAULT_TEXT_1) == (DEFAULT_PARSED_1, DEFAULT_DIAGNOSTICS_1)
+    default_text_1 = """\
+    0;D1F;FOLDED;;12;15;6;dB
+    """
+
+    default_parsed_1 = [
+        {
+            'AXIS_INDEX': 0,
+            'AXIS_LIMIT': 12,
+            'AXIS_LIMIT_FOLDED': 18,
+            'AXIS_MAX': 15,
+            'AXIS_META': '',
+            'AXIS_MIN': 7,
+            'AXIS_MIN_FOLDED': 23,
+            'AXIS_NAME': 'D1F',
+            'AXIS_TYPE': 'FOLDED',
+            'AXIS_UNIT': 'dB',
+            'AXIS_VALUE': 'NULL',
+        },
+    ]
+
+    default_diagnostics_1 = [' OK index (0) requested, accepted as (0)']
+
+    assert dsl.parse(default_text_1) == (default_parsed_1, default_diagnostics_1)
 
 
 def test_parse_dim_two_linear():
