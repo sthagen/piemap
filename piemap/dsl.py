@@ -93,6 +93,32 @@ def is_numeric(text):
         return False
 
 
+def maybe_int(value):
+    """Rococo."""
+    if float(value) == float(int(float(value))):
+        return int(value)
+
+    return value
+
+
+def compact_value(text):
+    """HACK A DID ACK ..."""
+    if not is_numeric(text):
+        return text
+
+    try:
+        as_int = int(text)
+        return as_int
+    except (TypeError, ValueError):
+        pass
+
+    try:
+        as_float = float(text)
+        return as_float
+    except (TypeError, ValueError):
+        return text
+
+
 def parse(text):
     """Parse the DSL contained in text."""
     axis_values_rows_req_string = ''
