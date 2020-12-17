@@ -136,9 +136,13 @@ def xy_point_from_radius_angle(radius, angle, c_x=0, c_y=0):
         """TODO(sthagen) refactor later."""
         return deg * math.pi / 180.0
 
-    angle_in_rad = deg2rad(angle)
-    x = c_x + math.cos(angle_in_rad) * radius
-    y = c_y + math.sin(angle_in_rad) * radius
+    if math.isfinite(angle):
+        angle_in_rad = deg2rad(math.fmod(angle + 360, 360))
+        x = c_x + math.cos(angle_in_rad) * radius
+        y = c_y + math.sin(angle_in_rad) * radius
+        return x, y
+    else:
+        return math.nan, math.nan
     return x, y
 
 
