@@ -81,3 +81,9 @@ def test_limit_folded_from_limit_max_int_int(limit, maximum):
 def test_limit_folded_from_limit_max_float_int(limit, maximum):
     limit_folded = pr.limit_folded_from_limit_max(limit, maximum)
     assert isinstance(limit_folded, (float, int))
+
+
+@given(limit=st.integers(), maximum=st.floats())
+def test_limit_folded_from_limit_max_int_float(limit, maximum):
+    limit_folded = pr.limit_folded_from_limit_max(limit, maximum)
+    assert isinstance(limit_folded, (float, int))
