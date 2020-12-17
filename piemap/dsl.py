@@ -110,13 +110,7 @@ def compact_value(text):
         as_int = int(text)
         return as_int
     except (TypeError, ValueError):
-        pass
-
-    try:
-        as_float = float(text)
-        return as_float
-    except (TypeError, ValueError):
-        return text
+        return float(text)
 
 
 def parse(text):
