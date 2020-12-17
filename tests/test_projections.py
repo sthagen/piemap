@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=missing-docstring,unused-import,reimported
+from hypothesis import given
+import hypothesis.strategies as st
 import pytest  # type: ignore
 
 import piemap.projections as pr
@@ -43,3 +45,9 @@ def test_value_folded_from_limit_max_sample_one_ok():
 
 def test_value_folded_from_limit_max_sample_two_ok():
     assert pr.value_folded_from_limit_max(5, 8) == 11
+
+
+@given(limit=st.integers(), maximum=st.integers())
+def test_min_from_limit_max_int_int(limit, maximum):
+    minimum = pr.min_from_limit_max(limit, maximum)
+    assert isinstance(minimum, (float, int))
