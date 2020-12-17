@@ -26,42 +26,6 @@ D1F_AST = [
 
 D1F_DIAG = [' OK index (0) requested, accepted as (0)']
 
-DEFAULT_TEXT_2 = """\
-;L 0;;;1;2;;;NULL;
-;L 1;;;1;2;;;-0.1;
-"""
-
-DEFAULT_PARSED_2 = [
-    {
-        'AXIS_INDEX': 0,
-        'AXIS_LIMIT': 1,
-        'AXIS_LIMIT_FOLDED': False,
-        'AXIS_MAX': 2,
-        'AXIS_META': '',
-        'AXIS_MIN': -0.6666666666666666,
-        'AXIS_MIN_FOLDED': False,
-        'AXIS_NAME': 'L 0',
-        'AXIS_TYPE': 'LINEAR',
-        'AXIS_UNIT': '1',
-        'AXIS_VALUE': 'NULL',
-    },
-    {
-        'AXIS_INDEX': 1,
-        'AXIS_LIMIT': 1,
-        'AXIS_LIMIT_FOLDED': False,
-        'AXIS_MAX': 2,
-        'AXIS_META': '',
-        'AXIS_MIN': -0.6666666666666666,
-        'AXIS_MIN_FOLDED': False,
-        'AXIS_NAME': 'L 1',
-        'AXIS_TYPE': 'LINEAR',
-        'AXIS_UNIT': '1',
-        'AXIS_VALUE': -0.1,
-    },
-]
-
-DEFAULT_DIAGNOSTICS_2 = []
-
 DEFAULT_TEXT_2_UNORDERED = """\
 1;L 0;;;1;2;;;NULL;
 0;L 1;;;1;2;;;-0.1;
@@ -304,7 +268,43 @@ def test_parse_dim_one_linear():
 
 
 def test_parse_dim_two_linear():
-    assert dsl.parse(DEFAULT_TEXT_2) == (DEFAULT_PARSED_2, DEFAULT_DIAGNOSTICS_2)
+    default_text_2 = """\
+    ;L 0;;;1;2;;;NULL;
+    ;L 1;;;1;2;;;-0.1;
+    """
+
+    default_parsed_2 = [
+        {
+            'AXIS_INDEX': 0,
+            'AXIS_LIMIT': 1,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 2,
+            'AXIS_META': '',
+            'AXIS_MIN': -0.6666666666666666,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'L 0',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': 'NULL',
+        },
+        {
+            'AXIS_INDEX': 1,
+            'AXIS_LIMIT': 1,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 2,
+            'AXIS_META': '',
+            'AXIS_MIN': -0.6666666666666666,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'L 1',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': -0.1,
+        },
+    ]
+
+    default_diagnostics_2 = []
+
+    assert dsl.parse(default_text_2) == (default_parsed_2, default_diagnostics_2)
 
 
 def test_parse_dim_three_folded():
