@@ -217,7 +217,10 @@ def parse(text):
         collect_index_cand_list = []
         for x, data in enumerate(some_axis_maps):
             index_cand = data['AXIS_INDEX']
-            i_cfc = int(index_cand)
+            if is_numeric(index_cand):
+                i_cfc = int(index_cand)
+            else:
+                i_cfc = x
             collect_index_cand_list.append(i_cfc)
             if not is_numeric(index_cand) or i_cfc != index_cand or index_cand < 0 or index_cand >= n_axis_rows:
                 has_index_collision = True
