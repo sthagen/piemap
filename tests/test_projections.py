@@ -105,3 +105,9 @@ def test_min_folded_from_limit_max_int_int(limit, maximum):
 def test_min_folded_from_limit_max_float_int(limit, maximum):
     minimum_folded = pr.min_folded_from_limit_max(limit, maximum)
     assert isinstance(minimum_folded, (float, int))
+
+
+@given(limit=st.integers(), maximum=st.floats())
+def test_min_folded_from_limit_max_int_float(limit, maximum):
+    minimum_folded = pr.min_folded_from_limit_max(limit, maximum)
+    assert isinstance(minimum_folded, (float, int))
