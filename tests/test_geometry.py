@@ -577,8 +577,6 @@ def test_transform_angle_map_icw_ncw_floats_stat(start, mid, stop):
 
 @given(x=st.floats(), y=st.floats(), z=st.floats())
 def test_transform_angle_map_ncw_icw_floats_stat(x, y, z):
-    assume(all((not math.isnan(x), not math.isnan(y), not math.isnan(z))))
-    assume(all((not math.isinf(x), not math.isinf(y), not math.isinf(z))))
     [(start, mid, stop)] = geom.transform_angle_map_ncw_icw([(x, y, z)])
     assert isinstance(start, (float, int))
     assert isinstance(mid, (float, int))
