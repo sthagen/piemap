@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=missing-docstring,unused-import,reimported
+import math
+from hypothesis import assume, given
+import hypothesis.strategies as st
 import pytest  # type: ignore
 
 import piemap.dsl as dsl
@@ -331,3 +334,29 @@ def test_parse_d7b_ok():
     d7b_diag = []
 
     assert dsl.parse(d7b_text) == (d7b_ast, d7b_diag)
+
+
+@given(a_mi=st.floats(), a_li=st.floats(), a_ma=st.floats(), a_va=st.floats())
+def test_parse_bimonotone_floats_stat(a_mi, a_li, a_ma, a_va):
+    assume(all((not math.isnan(a_mi), not math.isnan(a_li), not math.isnan(a_ma), not math.isnan(a_va))))
+    assume(all((not math.isinf(a_mi), not math.isinf(a_li), not math.isinf(a_ma), not math.isinf(a_va))))
+    assume(all(()))
+    dxl_text = f"""\
+    ;DXL;BIMONOTONE;{a_mi};{a_li};{a_ma};;;{a_va};%;SHOW_MIN
+    """
+
+    dxl_diag = []
+
+    ([axis], diagnoses) = dsl.parse(dxl_text)
+    assert axis['AXIS_INDEX'] == 0
+    assert isinstance(axis['AXIS_LIMIT'], (float, int))
+    assert axis['AXIS_LIMIT_FOLDED'] is False
+    assert isinstance(axis['AXIS_MAX'], (float, int))
+    assert axis['AXIS_META'] == 'SHOW_MIN'
+    assert isinstance(axis['AXIS_MIN'], (float, int))
+    assert axis['AXIS_MIN_FOLDED'] is False
+    assert axis['AXIS_NAME'] == 'DXL'
+    assert axis['AXIS_TYPE'] == 'BIMONOTONE'
+    assert axis['AXIS_UNIT'] == '%'
+    assert isinstance(axis['AXIS_VALUE'], (float, int))
+    assert diagnoses == dxl_diag
