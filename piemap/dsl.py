@@ -139,7 +139,7 @@ def parse(text):
         info_queue.append('Default used, since no input given.')
     else:
         axis_values_rows_req_string = unsafe(text)
-        axis_values_rows_req = [row for row in axis_values_rows_req_string.split(ROW_SEP) if row.strip()]
+        axis_values_rows_req = [row.strip() for row in axis_values_rows_req_string.split(ROW_SEP) if row.strip()]
         n_axis_rows_req = len(axis_values_rows_req)
         for n, row_string in enumerate(axis_values_rows_req[:NEEDED_NUMBER_OF_AXIS_MAX]):  # Was: array_slice(axis_values_rows_req, 0, NEEDED_NUMBER_OF_AXIS_MAX)
 
