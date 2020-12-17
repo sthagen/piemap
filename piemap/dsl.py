@@ -228,7 +228,7 @@ def parse(text):
                 if i_cfc != index_cand:
                     conflict_reason = 'DC_INTEGER'
 
-                if index_cand < 0:
+                if is_numeric(index_cand) and index_cand < 0:
                     conflict_reason = 'LT_ZERO'
 
                 elif index_cand >= n_axis_rows:
