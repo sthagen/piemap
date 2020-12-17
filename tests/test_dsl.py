@@ -26,46 +26,6 @@ D1F_AST = [
 
 D1F_DIAG = [' OK index (0) requested, accepted as (0)']
 
-DEFAULT_TEXT_2_UNORDERED = """\
-1;L 0;;;1;2;;;NULL;
-0;L 1;;;1;2;;;-0.1;
-"""
-
-DEFAULT_PARSED_2_UNORDERED = [
-    {
-        'AXIS_INDEX': 0,
-        'AXIS_LIMIT': 1,
-        'AXIS_LIMIT_FOLDED': False,
-        'AXIS_MAX': 2,
-        'AXIS_META': '',
-        'AXIS_MIN': -0.6666666666666666,
-        'AXIS_MIN_FOLDED': False,
-        'AXIS_NAME': 'L 1',
-        'AXIS_TYPE': 'LINEAR',
-        'AXIS_UNIT': '1',
-        'AXIS_VALUE': -0.1,
-    },
-    {'AXIS_INDEX': 1,
-     'AXIS_LIMIT': 1,
-     'AXIS_LIMIT_FOLDED': False,
-     'AXIS_MAX': 2,
-     'AXIS_META': '',
-     'AXIS_MIN': -0.6666666666666666,
-     'AXIS_MIN_FOLDED': False,
-     'AXIS_NAME': 'L 0',
-     'AXIS_TYPE': 'LINEAR',
-     'AXIS_UNIT': '1',
-     'AXIS_VALUE': 'NULL',
-     },
-]
-
-DEFAULT_DIAGNOSTICS_2_UNORDERED = [
-    ' OK index (1) requested, accepted as (1)',
-    ' OK index (0) requested, accepted as (0)',
-    'Index positions not ordered. Misplaced IndexCand is 1, found at 0',
-    'Index positions not ordered. Misplaced IndexCand is 0, found at 1',
-]
-
 DEFAULT_TEXT_2_COLLISION = """\
 333;L 0;;;1;2;;;NULL;
 333;L 1;;;1;2;;;-0.1;;
@@ -314,7 +274,47 @@ def test_parse_dim_three_folded():
 
 
 def test_parse_dim_two_linear_unordered():
-    assert dsl.parse(DEFAULT_TEXT_2_UNORDERED) == (DEFAULT_PARSED_2_UNORDERED, DEFAULT_DIAGNOSTICS_2_UNORDERED)
+    default_text_2_unordered = """\
+    1;L 0;;;1;2;;;NULL;
+    0;L 1;;;1;2;;;-0.1;
+    """
+
+    default_parsed_2_unordered = [
+        {
+            'AXIS_INDEX': 0,
+            'AXIS_LIMIT': 1,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 2,
+            'AXIS_META': '',
+            'AXIS_MIN': -0.6666666666666666,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'L 1',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': -0.1,
+        },
+        {'AXIS_INDEX': 1,
+         'AXIS_LIMIT': 1,
+         'AXIS_LIMIT_FOLDED': False,
+         'AXIS_MAX': 2,
+         'AXIS_META': '',
+         'AXIS_MIN': -0.6666666666666666,
+         'AXIS_MIN_FOLDED': False,
+         'AXIS_NAME': 'L 0',
+         'AXIS_TYPE': 'LINEAR',
+         'AXIS_UNIT': '1',
+         'AXIS_VALUE': 'NULL',
+         },
+    ]
+
+    default_diagnostics_2_unordered = [
+        ' OK index (1) requested, accepted as (1)',
+        ' OK index (0) requested, accepted as (0)',
+        'Index positions not ordered. Misplaced IndexCand is 1, found at 0',
+        'Index positions not ordered. Misplaced IndexCand is 0, found at 1',
+    ]
+
+    assert dsl.parse(default_text_2_unordered) == (default_parsed_2_unordered, default_diagnostics_2_unordered)
 
 
 def test_parse_dim_two_linear_collision():
