@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=missing-docstring,unused-import,reimported
+import math
+from hypothesis import assume, given
+import hypothesis.strategies as st
 import pytest  # type: ignore
 
 import piemap.geometry as geom
@@ -542,3 +545,10 @@ def test_axis_name_circle_adjust_nw_ok():
     args = (angle, font_size_pts, text_angle, font_name, axis_name, axis_name_space_sep)
     assert geom.octant_of_angle(angle) == 'NW'
     assert geom.axis_name_circle_adjust(*args) == (-205, -5)
+
+
+@given(angle=st.floats())
+def test_octant_of_angle_float_stat(angle):
+    assume(not math.isnan(angle))
+    assume(not math.isinf(angle))
+    assert geom.octant_of_angle(angle) in ('N', 'S', 'E', 'W', 'NE', 'NW', 'SE', 'SW')
