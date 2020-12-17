@@ -26,46 +26,6 @@ D1F_AST = [
 
 D1F_DIAG = [' OK index (0) requested, accepted as (0)']
 
-DEFAULT_TEXT_2_COLLISION = """\
-333;L 0;;;1;2;;;NULL;
-333;L 1;;;1;2;;;-0.1;;
-"""
-
-DEFAULT_PARSED_2_COLLISION = [
-    {
-        'AXIS_INDEX': 333,
-        'AXIS_LIMIT': 1,
-        'AXIS_LIMIT_FOLDED': False,
-        'AXIS_MAX': 2,
-        'AXIS_META': '',
-        'AXIS_MIN': -0.6666666666666666,
-        'AXIS_MIN_FOLDED': False,
-        'AXIS_NAME': 'L 0',
-        'AXIS_TYPE': 'LINEAR',
-        'AXIS_UNIT': '1',
-        'AXIS_VALUE': 'NULL',
-    },
-    {
-        'AXIS_INDEX': 1,
-        'AXIS_LIMIT': 0.8,
-        'AXIS_LIMIT_FOLDED': False,
-        'AXIS_MAX': 1.0,
-        'AXIS_META': '',
-        'AXIS_MIN': 0.4666666666666668,
-        'AXIS_MIN_FOLDED': False,
-        'AXIS_NAME': 'Dimension',
-        'AXIS_TYPE': 'LINEAR',
-        'AXIS_UNIT': '1',
-        'AXIS_VALUE': 'NULL',
-    },
-]
-
-DEFAULT_DIAGNOSTICS_2_COLLISION = [
-    ' OK index (333) requested, accepted as (333)',
-    'Conflicting index rules. Failing IndexCand is 333, reason is GT_NROW',
-    'Index positions not ordered. Misplaced IndexCand is 333, found at 0',
-]
-
 D7B_TEXT = """\
 ;D7B;BIMONOTONE;0;80;100;;;40;%;SHOW_MIN
 """
@@ -318,7 +278,51 @@ def test_parse_dim_two_linear_unordered():
 
 
 def test_parse_dim_two_linear_collision():
-    assert dsl.parse(DEFAULT_TEXT_2_COLLISION) == (DEFAULT_PARSED_2_COLLISION, DEFAULT_DIAGNOSTICS_2_COLLISION)
+    default_text_2_collision = """\
+    333;L 0C;;;1;2;;;NULL;
+    333;L 1C;;;1;2;;;-0.1;;
+    """
+
+    default_parsed_2_collision = [
+        {
+            'AXIS_INDEX': 0,
+            'AXIS_LIMIT': 1,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 2,
+            'AXIS_META': '',
+            'AXIS_MIN': -0.6666666666666666,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'L 0C',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': 'NULL',
+        },
+        {
+            'AXIS_INDEX': 1,
+            'AXIS_LIMIT': 1,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 2,
+            'AXIS_META': '',
+            'AXIS_MIN': -0.6666666666666666,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'L 1C',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': -0.1,
+        },
+    ]
+
+    default_diagnostics_2_collision = [
+        ' OK index (333) requested, accepted as (333)',
+        ' OK index (333) requested, accepted as (333)',
+        'Conflicting index rules. Failing IndexCand is 333, reason is GT_NROW',
+        'Index positions not ordered. Misplaced IndexCand is 333, found at 0',
+        'Conflicting index rules. Failing IndexCand is 333, reason is GT_NROW',
+        'Index positions not ordered. Misplaced IndexCand is 333, found at 1',
+        'Conflicting index positions. Failing IndexCand/s is/are [333], reason is NONUNIQUE_INDEX',
+    ]
+
+    assert dsl.parse(default_text_2_collision) == (default_parsed_2_collision, default_diagnostics_2_collision)
 
 
 def test_parse_d1f_ok():
