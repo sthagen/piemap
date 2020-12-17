@@ -368,9 +368,6 @@ def test_parse_d7b_wrong_index_type_ok():
 
 @given(a_mi=st.floats(), a_li=st.floats(), a_ma=st.floats(), a_va=st.floats())
 def test_parse_bimonotone_floats_stat(a_mi, a_li, a_ma, a_va):
-    assume(all((not math.isnan(a_mi), not math.isnan(a_li), not math.isnan(a_ma), not math.isnan(a_va))))
-    assume(all((not math.isinf(a_mi), not math.isinf(a_li), not math.isinf(a_ma), not math.isinf(a_va))))
-    assume(all(()))
     dxl_text = f"""\
     ;DXL;BIMONOTONE;{a_mi};{a_li};{a_ma};;;{a_va};%;SHOW_MIN
     """
