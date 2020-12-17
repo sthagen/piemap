@@ -106,53 +106,6 @@ DEFAULT_DIAGNOSTICS_2_COLLISION = [
     'Index positions not ordered. Misplaced IndexCand is 333, found at 0',
 ]
 
-DEFAULT_TEXT_3 = """\
-;F 1;FOLDED;;1;2;;;2;
-;F 2;FOLDED;;1;2;;;0;
-;F 3;FOLDED;;1;2;;;0.25;
-"""
-
-DEFAULT_PARSED_3 = [
-    {
-        'AXIS_INDEX': 0,
-        'AXIS_LIMIT': 1,
-        'AXIS_LIMIT_FOLDED': 3,
-        'AXIS_MAX': 2,
-        'AXIS_META': '',
-        'AXIS_MIN': -0.6666666666666666,
-        'AXIS_MIN_FOLDED': 4.666666666666667,
-        'AXIS_NAME': 'F 1',
-        'AXIS_TYPE': 'FOLDED',
-        'AXIS_UNIT': 'dB',
-        'AXIS_VALUE': 2,
-    },
-    {'AXIS_INDEX': 1,
-     'AXIS_LIMIT': 1,
-     'AXIS_LIMIT_FOLDED': 3,
-     'AXIS_MAX': 2,
-     'AXIS_META': '',
-     'AXIS_MIN': -0.6666666666666666,
-     'AXIS_MIN_FOLDED': 4.666666666666667,
-     'AXIS_NAME': 'F 2',
-     'AXIS_TYPE': 'FOLDED',
-     'AXIS_UNIT': 'dB',
-     'AXIS_VALUE': 0,
-     },
-    {'AXIS_INDEX': 2,
-     'AXIS_LIMIT': 1,
-     'AXIS_LIMIT_FOLDED': 3,
-     'AXIS_MAX': 2,
-     'AXIS_META': '',
-     'AXIS_MIN': -0.6666666666666666,
-     'AXIS_MIN_FOLDED': 4.666666666666667,
-     'AXIS_NAME': 'F 3',
-     'AXIS_TYPE': 'FOLDED',
-     'AXIS_UNIT': 'dB',
-     'AXIS_VALUE': 0.25,
-     }, ]
-
-DEFAULT_DIAGNOSTICS_3 = []
-
 D7B_TEXT = """\
 ;D7B;BIMONOTONE;0;80;100;;;40;%;SHOW_MIN
 """
@@ -308,7 +261,56 @@ def test_parse_dim_two_linear():
 
 
 def test_parse_dim_three_folded():
-    assert dsl.parse(DEFAULT_TEXT_3) == (DEFAULT_PARSED_3, DEFAULT_DIAGNOSTICS_3)
+    default_text_3 = """\
+    ;F 1;FOLDED;;1;2;;;2;
+    ;F 2;FOLDED;;1;2;;;0;
+    ;F 3;FOLDED;;1;2;;;0.25;
+    """
+
+    default_parsed_3 = [
+        {
+            'AXIS_INDEX': 0,
+            'AXIS_LIMIT': 1,
+            'AXIS_LIMIT_FOLDED': 3,
+            'AXIS_MAX': 2,
+            'AXIS_META': '',
+            'AXIS_MIN': -0.6666666666666666,
+            'AXIS_MIN_FOLDED': 4.666666666666667,
+            'AXIS_NAME': 'F 1',
+            'AXIS_TYPE': 'FOLDED',
+            'AXIS_UNIT': 'dB',
+            'AXIS_VALUE': 2,
+        },
+        {
+            'AXIS_INDEX': 1,
+            'AXIS_LIMIT': 1,
+            'AXIS_LIMIT_FOLDED': 3,
+            'AXIS_MAX': 2,
+            'AXIS_META': '',
+            'AXIS_MIN': -0.6666666666666666,
+            'AXIS_MIN_FOLDED': 4.666666666666667,
+            'AXIS_NAME': 'F 2',
+            'AXIS_TYPE': 'FOLDED',
+            'AXIS_UNIT': 'dB',
+            'AXIS_VALUE': 0,
+        },
+        {
+            'AXIS_INDEX': 2,
+            'AXIS_LIMIT': 1,
+            'AXIS_LIMIT_FOLDED': 3,
+            'AXIS_MAX': 2,
+            'AXIS_META': '',
+            'AXIS_MIN': -0.6666666666666666,
+            'AXIS_MIN_FOLDED': 4.666666666666667,
+            'AXIS_NAME': 'F 3',
+            'AXIS_TYPE': 'FOLDED',
+            'AXIS_UNIT': 'dB',
+            'AXIS_VALUE': 0.25,
+        }, ]
+
+    default_diagnostics_3 = []
+
+    assert dsl.parse(default_text_3) == (default_parsed_3, default_diagnostics_3)
 
 
 def test_parse_dim_two_linear_unordered():
