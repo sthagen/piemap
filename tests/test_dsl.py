@@ -26,51 +26,6 @@ D1F_AST = [
 
 D1F_DIAG = [' OK index (0) requested, accepted as (0)']
 
-DEFAULT_TEXT_0 = ''
-
-DEFAULT_GENERATED_0 = [
-    {'AXIS_INDEX': 0,
-     'AXIS_LIMIT': 0.8,
-     'AXIS_LIMIT_FOLDED': False,
-     'AXIS_MAX': 1,
-     'AXIS_META': '',
-     'AXIS_MIN': 0,
-     'AXIS_MIN_FOLDED': False,
-     'AXIS_NAME': 'Dimension',
-     'AXIS_TYPE': 'LINEAR',
-     'AXIS_UNIT': '1',
-     'AXIS_VALUE': 'NULL',
-     },
-    {
-        'AXIS_INDEX': 1,
-        'AXIS_LIMIT': 0.8,
-        'AXIS_LIMIT_FOLDED': False,
-        'AXIS_MAX': 1,
-        'AXIS_META': '',
-        'AXIS_MIN': 0,
-        'AXIS_MIN_FOLDED': False,
-        'AXIS_NAME': 'Dimension2',
-        'AXIS_TYPE': 'LINEAR',
-        'AXIS_UNIT': '1',
-        'AXIS_VALUE': 'NULL',
-    },
-    {
-        'AXIS_INDEX': 2,
-        'AXIS_LIMIT': 0.8,
-        'AXIS_LIMIT_FOLDED': False,
-        'AXIS_MAX': 1,
-        'AXIS_META': '',
-        'AXIS_MIN': 0,
-        'AXIS_MIN_FOLDED': False,
-        'AXIS_NAME': 'DimensionFolded',
-        'AXIS_TYPE': 'FOLDED',
-        'AXIS_UNIT': 'dB',
-        'AXIS_VALUE': 'NULL',
-    },
-]
-
-DEFAULT_DIAGNOSTICS_0 = ['Default used, since no input given.']
-
 DEFAULT_TEXT_1 = """\
 0;D1F;FOLDED;;12;15;6;dB
 """
@@ -296,7 +251,52 @@ def test_is_numeric_false_ok():
 
 
 def test_parse_empty():
-    assert dsl.parse(DEFAULT_TEXT_0) == (DEFAULT_GENERATED_0, DEFAULT_DIAGNOSTICS_0)
+    default_text_0 = ''
+
+    default_generated_0 = [
+        {'AXIS_INDEX': 0,
+         'AXIS_LIMIT': 0.8,
+         'AXIS_LIMIT_FOLDED': False,
+         'AXIS_MAX': 1,
+         'AXIS_META': '',
+         'AXIS_MIN': 0,
+         'AXIS_MIN_FOLDED': False,
+         'AXIS_NAME': 'Dimension',
+         'AXIS_TYPE': 'LINEAR',
+         'AXIS_UNIT': '1',
+         'AXIS_VALUE': 'NULL',
+         },
+        {
+            'AXIS_INDEX': 1,
+            'AXIS_LIMIT': 0.8,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'Dimension2',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': 'NULL',
+        },
+        {
+            'AXIS_INDEX': 2,
+            'AXIS_LIMIT': 0.8,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'DimensionFolded',
+            'AXIS_TYPE': 'FOLDED',
+            'AXIS_UNIT': 'dB',
+            'AXIS_VALUE': 'NULL',
+        },
+    ]
+
+    default_diagnostics_0 = ['Default used, since no input given.']
+
+    assert dsl.parse(default_text_0) == (default_generated_0, default_diagnostics_0)
 
 
 def test_parse_dim_one_linear():
