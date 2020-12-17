@@ -43,6 +43,7 @@ def default_linear():
         'AXIS_MIN_FOLDED': False,
         'AXIS_VALUE': NULL_STR_REP,
         'AXIS_UNIT': '1',
+        'AXIS_META': '',
     }
 
 
@@ -51,7 +52,7 @@ def default_keys():
     return list(default_linear().keys())
 
 
-def default_values():
+def default_linear_values():
     """DRY."""
     return list(default_linear().values())
 
@@ -69,7 +70,13 @@ def default_folded():
         'AXIS_MIN_FOLDED': False,
         'AXIS_VALUE': NULL_STR_REP,
         'AXIS_UNIT': 'dB',
+        'AXIS_META': '',
     }
+
+
+def default_folded_values():
+    """DRY."""
+    return list(default_folded().values())
 
 
 def unsafe(text):
