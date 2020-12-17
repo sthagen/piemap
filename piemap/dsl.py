@@ -231,10 +231,10 @@ def parse(text):
                 if is_numeric(index_cand) and index_cand < 0:
                     conflict_reason = 'LT_ZERO'
 
-                elif index_cand >= n_axis_rows:
+                elif is_numeric(index_cand) and index_cand >= n_axis_rows:
                     conflict_reason = 'GT_NROW'
 
-                info_queue.append(f'Conflicting index rules. Failing IndexCand is {index_cand}, reason is {conflict_reason}')
+                info_queue.append(f'Conflicting index rules. Failing candidate is ({index_cand}), reason is {conflict_reason}')
                 some_axis_maps[x]['AXIS_INDEX'] = x
 
             if index_cand != x:
