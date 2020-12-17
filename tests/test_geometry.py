@@ -567,8 +567,6 @@ def test_axis_name_circle_adjust_floats_stat(angle, font_size_pts, text_angle):
 
 @given(start=st.floats(), mid=st.floats(), stop=st.floats())
 def test_transform_angle_map_icw_ncw_floats_stat(start, mid, stop):
-    assume(all((not math.isnan(start), not math.isnan(mid), not math.isnan(stop))))
-    assume(all((not math.isinf(start), not math.isinf(mid), not math.isinf(stop))))
     [(x, y, z)] = geom.transform_angle_map_icw_ncw([(start, mid, stop)])
     assert isinstance(x, (float, int))
     assert isinstance(y, (float, int))
