@@ -321,3 +321,7 @@ def test_parse_dim_two_linear_collision():
 
 def test_parse_d1f_ok():
     assert dsl.parse(D1F_TEXT) == (D1F_AST, D1F_DIAG)
+
+
+def test_parse_d7b_ok():
+    assert dsl.parse(D7B_TEXT) == (D7B_AST, D7B_DIAG)
