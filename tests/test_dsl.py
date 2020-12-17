@@ -4,28 +4,6 @@ import pytest  # type: ignore
 
 import piemap.dsl as dsl
 
-D7B_TEXT = """\
-;D7B;BIMONOTONE;0;80;100;;;40;%;SHOW_MIN
-"""
-
-D7B_AST = [
-    {
-        'AXIS_INDEX': 0,
-        'AXIS_LIMIT': 80,
-        'AXIS_LIMIT_FOLDED': False,
-        'AXIS_MAX': 100,
-        'AXIS_META': 'SHOW_MIN',
-        'AXIS_MIN': 0,
-        'AXIS_MIN_FOLDED': False,
-        'AXIS_NAME': 'D7B',
-        'AXIS_TYPE': 'BIMONOTONE',
-        'AXIS_UNIT': '%',
-        'AXIS_VALUE': 40,
-    },
-]
-
-D7B_DIAG = []
-
 
 def test_dumps_stub_ok():
     assert dsl.dumps({}) == "{}"
@@ -330,4 +308,26 @@ def test_parse_d1f_ok():
 
 
 def test_parse_d7b_ok():
-    assert dsl.parse(D7B_TEXT) == (D7B_AST, D7B_DIAG)
+    d7b_text = """\
+    ;D7B;BIMONOTONE;0;80;100;;;40;%;SHOW_MIN
+    """
+
+    d7b_ast = [
+        {
+            'AXIS_INDEX': 0,
+            'AXIS_LIMIT': 80,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 100,
+            'AXIS_META': 'SHOW_MIN',
+            'AXIS_MIN': 0,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'D7B',
+            'AXIS_TYPE': 'BIMONOTONE',
+            'AXIS_UNIT': '%',
+            'AXIS_VALUE': 40,
+        },
+    ]
+
+    d7b_diag = []
+
+    assert dsl.parse(d7b_text) == (d7b_ast, d7b_diag)
