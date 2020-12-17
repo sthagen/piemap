@@ -313,3 +313,7 @@ def test_parse_dim_three_folded():
 
 def test_parse_dim_two_linear_unordered():
     assert dsl.parse(DEFAULT_TEXT_2_UNORDERED) == (DEFAULT_PARSED_2_UNORDERED, DEFAULT_DIAGNOSTICS_2_UNORDERED)
+
+
+def test_parse_dim_two_linear_collision():
+    assert dsl.parse(DEFAULT_TEXT_2_COLLISION) == (DEFAULT_PARSED_2_COLLISION, DEFAULT_DIAGNOSTICS_2_COLLISION)
