@@ -4,28 +4,6 @@ import pytest  # type: ignore
 
 import piemap.dsl as dsl
 
-D1F_TEXT = """\
-0;D1FX;FOLDED;;12;15;;;6;dB
-"""
-
-D1F_AST = [
-    {
-        'AXIS_INDEX': 0,
-        'AXIS_LIMIT': 12,
-        'AXIS_LIMIT_FOLDED': 18,
-        'AXIS_MAX': 15,
-        'AXIS_META': '',
-        'AXIS_MIN': 7,
-        'AXIS_MIN_FOLDED': 23,
-        'AXIS_NAME': 'D1FX',
-        'AXIS_TYPE': 'FOLDED',
-        'AXIS_UNIT': 'dB',
-        'AXIS_VALUE': 6,
-    },
-]
-
-D1F_DIAG = [' OK index (0) requested, accepted as (0)']
-
 D7B_TEXT = """\
 ;D7B;BIMONOTONE;0;80;100;;;40;%;SHOW_MIN
 """
@@ -326,7 +304,29 @@ def test_parse_dim_two_linear_collision():
 
 
 def test_parse_d1f_ok():
-    assert dsl.parse(D1F_TEXT) == (D1F_AST, D1F_DIAG)
+    d1f_text = """\
+    0;D1FX;FOLDED;;12;15;;;6;dB
+    """
+
+    d1f_ast = [
+        {
+            'AXIS_INDEX': 0,
+            'AXIS_LIMIT': 12,
+            'AXIS_LIMIT_FOLDED': 18,
+            'AXIS_MAX': 15,
+            'AXIS_META': '',
+            'AXIS_MIN': 7,
+            'AXIS_MIN_FOLDED': 23,
+            'AXIS_NAME': 'D1FX',
+            'AXIS_TYPE': 'FOLDED',
+            'AXIS_UNIT': 'dB',
+            'AXIS_VALUE': 6,
+        },
+    ]
+
+    d1f_diag = [' OK index (0) requested, accepted as (0)']
+
+    assert dsl.parse(d1f_text) == (d1f_ast, d1f_diag)
 
 
 def test_parse_d7b_ok():
