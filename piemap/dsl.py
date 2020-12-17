@@ -171,6 +171,7 @@ def parse(text):
                 print(f"has index idea({axis_map['AXIS_INDEX']}) is False?")
                 print(f"... axis map is ({axis_map})")
                 axis_map['AXIS_INDEX'] = n
+                i_cfc = axis_map['AXIS_INDEX']
             else:
                 print()
                 print(f"has index idea({axis_map['AXIS_INDEX']}) is True")
@@ -231,6 +232,7 @@ def parse(text):
                     conflict_reason = 'GT_NROW'
 
                 info_queue.append(f'Conflicting index rules. Failing IndexCand is {index_cand}, reason is {conflict_reason}')
+                some_axis_maps[x]['AXIS_INDEX'] = x
 
             if index_cand != x:
                 has_index_order_mismatch = True
