@@ -311,11 +311,11 @@ def test_parse_d1f_ok():
 
 
 def test_parse_d2f_ok():
-    d2f_text = """\
+    text = """\
     1;D2F;FOLDED;;12;15;;;12;V
     """
 
-    d2f_ast = [
+    ast = [
         {
             'AXIS_INDEX': 0,
             'AXIS_LIMIT': 12,
@@ -330,13 +330,13 @@ def test_parse_d2f_ok():
             'AXIS_VALUE': 12,
         }, ]
 
-    d2f_diag = [
+    diag = [
         ' OK index (1) requested, accepted as (1)',
         'Conflicting index rules. Failing candidate is (1), reason is GT_NROW',
         'Index positions not ordered. Misplaced IndexCand is 1, found at 0',
     ]
 
-    assert dsl.parse(d2f_text) == (d2f_ast, d2f_diag)
+    assert dsl.parse(text) == (ast, diag)
 
 
 def test_parse_d3f_ok():
