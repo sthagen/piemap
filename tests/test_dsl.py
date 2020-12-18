@@ -396,11 +396,11 @@ def test_parse_d4f_ok():
 
 
 def test_parse_d5f_ok():
-    d5f_text = """\
+    text = """\
     ;D5F;FOLDED;;12;15;18;dB
     """
 
-    d5f_ast = [
+    ast = [
         {
             'AXIS_INDEX': 0,
             'AXIS_LIMIT': 12,
@@ -416,9 +416,9 @@ def test_parse_d5f_ok():
         },
     ]
 
-    d5f_diag = []
+    diag = []
 
-    assert dsl.parse(d5f_text) == (d5f_ast, d5f_diag)
+    assert dsl.parse(text) == (ast, diag)
 
 
 def test_parse_d6f_ok():
