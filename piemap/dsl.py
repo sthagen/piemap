@@ -205,7 +205,6 @@ def parse(text: str):
                 else:
                     info_queue.append(f"NOK limit({axis_map['AXIS_LIMIT']}) and max({axis_map['AXIS_MAX']}) not both numeric, ignored folded axis at index ({i_cfc})")
 
-        axis_values = list(axis_map.keys())
         some_axis_maps.append(axis_map)
 
     n_axis_rows = len(some_axis_maps)
