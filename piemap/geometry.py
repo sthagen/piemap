@@ -143,7 +143,6 @@ def xy_point_from_radius_angle(radius, angle, c_x=0, c_y=0):
         return x, y
     else:
         return math.nan, math.nan
-    return x, y
 
 
 def segment_angle_map(needed_number_of_axis):
