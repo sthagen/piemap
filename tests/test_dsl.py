@@ -715,6 +715,34 @@ def test_parse_max_not_numeric_ok():
     assert dsl.parse(text) == (ast, diag)
 
 
+def test_parse_limit_and_max_not_numeric_ok():
+    text = """\
+    ;D12L;;;non_numeric_limit;non_numeric_max;;;NULL;s
+    """
+
+    ast = [
+        {
+            'AXIS_INDEX': 0,
+            'AXIS_LIMIT': 'non_numeric_limit',  # This is maybe not what we want ... TODO(sthagen)
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 'non_numeric_max',  # This is maybe not what we want ... TODO(sthagen)
+            'AXIS_META': '',
+            'AXIS_MIN': 0.0,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'D12L',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': 's',
+            'AXIS_VALUE': 'NULL',
+        },
+    ]
+
+    diag = [
+        'NOK limit(non_numeric_limit) and max(non_numeric_max) not both numeric, ignored linear axis at index (0)',
+    ]
+
+    assert dsl.parse(text) == (ast, diag)
+
+
 @given(a_mi=st.floats(), a_li=st.floats(), a_ma=st.floats(), a_va=st.floats())
 def test_parse_bimonotone_floats_stat(a_mi, a_li, a_ma, a_va):
     text = f"""\
