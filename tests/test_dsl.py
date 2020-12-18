@@ -229,8 +229,8 @@ def test_parse_dim_two_linear_unordered():
     default_diagnostics_2_unordered = [
         ' OK index (1) requested, accepted as (1)',
         ' OK index (0) requested, accepted as (0)',
-        'Index positions not ordered. Misplaced IndexCand is 1, found at 0',
-        'Index positions not ordered. Misplaced IndexCand is 0, found at 1',
+        'Index positions not ordered. Misplaced candidate is 1, found at 0',
+        'Index positions not ordered. Misplaced candidate is 0, found at 1',
     ]
 
     assert dsl.parse(default_text_2_unordered) == (default_parsed_2_unordered, default_diagnostics_2_unordered)
@@ -275,10 +275,10 @@ def test_parse_dim_two_linear_collision():
         ' OK index (333) requested, accepted as (333)',
         ' OK index (333) requested, accepted as (333)',
         'Conflicting index rules. Failing candidate is (333), reason is GT_NROW',
-        'Index positions not ordered. Misplaced IndexCand is 333, found at 0',
+        'Index positions not ordered. Misplaced candidate is 333, found at 0',
         'Conflicting index rules. Failing candidate is (333), reason is GT_NROW',
-        'Index positions not ordered. Misplaced IndexCand is 333, found at 1',
-        'Conflicting index positions. Failing IndexCand/s is/are [333], reason is NONUNIQUE_INDEX',
+        'Index positions not ordered. Misplaced candidate is 333, found at 1',
+        'Conflicting index positions. Failing candidate/s is/are [333], reason is NONUNIQUE_INDEX',
     ]
 
     assert dsl.parse(default_text_2_collision) == (default_parsed_2_collision, default_diagnostics_2_collision)
@@ -333,7 +333,7 @@ def test_parse_d2f_ok():
     diag = [
         ' OK index (1) requested, accepted as (1)',
         'Conflicting index rules. Failing candidate is (1), reason is GT_NROW',
-        'Index positions not ordered. Misplaced IndexCand is 1, found at 0',
+        'Index positions not ordered. Misplaced candidate is 1, found at 0',
     ]
 
     assert dsl.parse(text) == (ast, diag)
@@ -363,7 +363,7 @@ def test_parse_d3f_ok():
     diag = [
         ' OK index (2) requested, accepted as (2)',
         'Conflicting index rules. Failing candidate is (2), reason is GT_NROW',
-        'Index positions not ordered. Misplaced IndexCand is 2, found at 0',
+        'Index positions not ordered. Misplaced candidate is 2, found at 0',
     ]
 
     assert dsl.parse(text) == (ast, diag)
@@ -495,9 +495,9 @@ def test_parse_d7b_wrong_index_type_ok():
     ]
 
     wrong_index_type_diag = [
-        'NOK invalid index (WRONG) requested, accepted as (0)',
+        'NOK invalid index (WRONG) requested, accepted per parsing order as (0)',
         'Conflicting index rules. Failing candidate is (WRONG), reason is DC_INTEGER',
-        'Index positions not ordered. Misplaced IndexCand is WRONG, found at 0',
+        'Index positions not ordered. Misplaced candidate is WRONG, found at 0',
     ]
 
     assert dsl.parse(wrong_index_type_text) == (ast, wrong_index_type_diag)
@@ -738,6 +738,36 @@ def test_parse_limit_and_max_not_numeric_ok():
 
     diag = [
         'NOK limit(non_numeric_limit) and max(non_numeric_max) not both numeric, ignored linear axis at index (0)',
+    ]
+
+    assert dsl.parse(text) == (ast, diag)
+
+
+def test_parse_index_as_float_ok():
+    text = """\
+    0.333;D12L;;;0.8;1;;;NULL;s
+    """
+
+    ast = [
+        {
+            'AXIS_INDEX': 0,
+            'AXIS_LIMIT': 0.8,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0.4666666666666668,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'D12L',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': 's',
+            'AXIS_VALUE': 'NULL',
+        },
+    ]
+
+    diag = [
+        'NOK invalid index (0.333) requested, accepted per parsing order as (0)',
+        'Conflicting index rules. Failing candidate is (0.333), reason is DC_INTEGER',
+        'Index positions not ordered. Misplaced candidate is 0.333, found at 0',
     ]
 
     assert dsl.parse(text) == (ast, diag)
