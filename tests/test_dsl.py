@@ -801,6 +801,36 @@ def test_parse_index_negative_zero_ok():
     assert dsl.parse(text) == (ast, diag)
 
 
+def test_parse_index_negative_wun_ok():
+    text = """\
+    -1;D12L;;;0.8;1;;;NULL;s
+    """
+
+    ast = [
+        {
+            'AXIS_INDEX': 0,
+            'AXIS_LIMIT': 0.8,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0.4666666666666668,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'D12L',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': 's',
+            'AXIS_VALUE': 'NULL',
+        },
+    ]
+
+    diag = [
+        ' OK index (-1) requested, accepted as (-1)',  # Maybe unwanted behavior TODO(sthagen)
+        'Conflicting index rules. Failing candidate is (-1), reason is LT_ZERO',
+        'Index positions not ordered. Misplaced candidate is -1, found at 0',
+    ]
+
+    assert dsl.parse(text) == (ast, diag)
+
+
 @given(a_mi=st.floats(), a_li=st.floats(), a_ma=st.floats(), a_va=st.floats())
 def test_parse_bimonotone_floats_stat(a_mi, a_li, a_ma, a_va):
     text = f"""\
