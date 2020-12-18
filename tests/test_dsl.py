@@ -473,6 +473,32 @@ def test_parse_d7b_ok():
     assert dsl.parse(d7b_text) == (d7b_ast, d7b_diag)
 
 
+def test_parse_d8l_ok():
+    text = """\
+    ;D8L;;;1;2;;;0.5;#
+    """
+
+    ast = [
+        {
+            'AXIS_INDEX': 0,
+            'AXIS_LIMIT': 1,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 2,
+            'AXIS_META': '',
+            'AXIS_MIN': -0.6666666666666666,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'D8L',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '#',
+            'AXIS_VALUE': 0.5,
+        },
+    ]
+
+    diag = []
+
+    assert dsl.parse(text) == (ast, diag)
+
+
 def test_parse_d7b_wrong_index_type_ok():
     d7b_wrong_index_type_text = """\
     WRONG;D7B;BIMONOTONE;0;80;100;;;40;%;SHOW_MIN
