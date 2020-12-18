@@ -369,6 +369,32 @@ def test_parse_d3f_ok():
     assert dsl.parse(d3f_text) == (d3f_ast, d3f_diag)
 
 
+def test_parse_d4f_ok():
+    d4f_text = """\
+    ;D4F;FOLDED;;12;15;16;dB
+    """
+
+    d4f_ast = [
+        {
+            'AXIS_INDEX': 0,
+            'AXIS_LIMIT': 12,
+            'AXIS_LIMIT_FOLDED': 18,
+            'AXIS_MAX': 15,
+            'AXIS_META': '',
+            'AXIS_MIN': 7,
+            'AXIS_MIN_FOLDED': 23,
+            'AXIS_NAME': 'D4F',
+            'AXIS_TYPE': 'FOLDED',
+            'AXIS_UNIT': 'dB',
+            'AXIS_VALUE': 'NULL',
+        },
+    ]
+
+    d4f_diag = []
+
+    assert dsl.parse(d4f_text) == (d4f_ast, d4f_diag)
+
+
 def test_parse_d7b_ok():
     d7b_text = """\
     ;D7B;BIMONOTONE;0;80;100;;;40;%;SHOW_MIN
