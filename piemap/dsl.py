@@ -113,146 +113,151 @@ def compact_value(text):
         return float(text)
 
 
-def parse(text):
+def example_default():
+    """Maybe not wanted but matches reference behavior."""
+    some_axis_maps = [default_linear()]
+    some_axis_maps[0]['AXIS_INDEX'] = 0
+
+    some_axis_maps.append(default_linear())
+    some_axis_maps[1]['AXIS_INDEX'] = 1
+    some_axis_maps[1]['AXIS_NAME'] = 'Dimension2'
+
+    some_axis_maps.append(default_folded())
+    some_axis_maps[2]['AXIS_INDEX'] = 2
+
+    return some_axis_maps, ['Default used, since no input given.']
+
+
+def parse(text: str):
     """Parse the DSL contained in text."""
-    axis_values_rows_req_string = ''
+    if not text.strip():
+        return example_default()
+
     has_index_collision = False
     has_index_order_mismatch = False
 
     info_queue, some_axis_maps = [], []
-    if not text.strip():
-        some_axis_maps.append(default_linear())
-        some_axis_maps[0]['AXIS_INDEX'] = 0
-        
-        some_axis_maps.append(default_linear())
-        some_axis_maps[1]['AXIS_INDEX'] = 1
-        some_axis_maps[1]['AXIS_NAME'] = 'Dimension2'
-        
-        some_axis_maps.append(default_folded())
-        some_axis_maps[2]['AXIS_INDEX'] = 2
-        info_queue.append('Default used, since no input given.')
-    else:
-        axis_values_rows_req_string = unsafe(text)
-        axis_values_rows_req = [row.strip() for row in axis_values_rows_req_string.split(ROW_SEP) if row.strip()]
-        n_axis_rows_req = len(axis_values_rows_req)
-        for n, row_string in enumerate(axis_values_rows_req[:NEEDED_NUMBER_OF_AXIS_MAX]):  # Was: array_slice(axis_values_rows_req, 0, NEEDED_NUMBER_OF_AXIS_MAX)
+    axis_values_rows_req_string: str = unsafe(text)
+    axis_values_rows_req = [row.strip() for row in axis_values_rows_req_string.split(ROW_SEP) if row.strip()]
+    n_axis_rows_req = len(axis_values_rows_req)
+    for n, row_string in enumerate(axis_values_rows_req[:NEEDED_NUMBER_OF_AXIS_MAX]):  # Was: array_slice(axis_values_rows_req, 0, NEEDED_NUMBER_OF_AXIS_MAX)
 
-            axis_values = default_folded_values() if ";FOLDED;" in row_string else default_linear_values()
-            axis_values_cand = row_string.split(REC_SEP)
-            print()
-            print(f'__{"FOLDED" if ";FOLDED;" in row_string else "NO_FOLD"}__')
-            print(f"has axis_values[{len(axis_values)}]({axis_values})")
-            if len(axis_values) >= len(axis_values_cand):
-                kks = default_keys()
-                for i, v in enumerate(axis_values_cand):
-                    if v != '':
-                        be_v = compact_value(v)
-                        print(f"DEBUG:: [{i}]( == {kks[i]}): ({axis_values[i]}) --> ({be_v})")
-                        axis_values[i] = be_v
-                    else:
-                        print(f"DEBUG:: [{i}]( == {kks[i]}): ({axis_values[i]}) kept ({axis_values[i]})")
-            if len(axis_values) > len(axis_values_cand):
-                kks = default_keys()
-                for i, v in enumerate(axis_values[len(axis_values_cand):], start=len(axis_values_cand)):
-                    print(f"DEBUG:: [{i}]( == {kks[i]}): ({axis_values[i]}) untouched ({axis_values[i]})")
-
-            print(f"has axis candidate[{len(axis_values_cand)}]({axis_values_cand})")
-            axis_map = dict(zip(default_keys(), axis_values))
-            print(f"... axis map is ({axis_map})")
-            numeric_axis_types = ('LINEAR', 'FOLDED')
-            if axis_map['AXIS_INDEX'] == '':
-                print()
-                print(f"has index idea({axis_map['AXIS_INDEX']}) is False?")
-                print(f"... axis map is ({axis_map})")
-                axis_map['AXIS_INDEX'] = n
-                i_cfc = axis_map['AXIS_INDEX']
-            else:
-                print()
-                print(f"has index idea({axis_map['AXIS_INDEX']}) is True")
-                index_cand = str(axis_map['AXIS_INDEX'])
-                if is_numeric(index_cand) and float(index_cand) == float(int(float(index_cand))):
-                    print(f"is_numeric({index_cand}) is True")
-                    i_cfc = str(maybe_int(index_cand))
-                    axis_map['AXIS_INDEX'] = int(i_cfc)
-                    if index_cand != i_cfc:  # Was !== in PHP
-                        info_queue.append(f"NOK index ({index_cand}) requested, accepted as ({i_cfc})")
-                    else:
-                        info_queue.append(f" OK index ({index_cand}) requested, accepted as ({i_cfc})")
+        axis_values = default_folded_values() if ";FOLDED;" in row_string else default_linear_values()
+        axis_values_cand = row_string.split(REC_SEP)
+        print()
+        print(f'__{"FOLDED" if ";FOLDED;" in row_string else "NO_FOLD"}__')
+        print(f"has axis_values[{len(axis_values)}]({axis_values})")
+        if len(axis_values) >= len(axis_values_cand):
+            kks = default_keys()
+            for i, v in enumerate(axis_values_cand):
+                if v != '':
+                    be_v = compact_value(v)
+                    print(f"DEBUG:: [{i}]( == {kks[i]}): ({axis_values[i]}) --> ({be_v})")
+                    axis_values[i] = be_v
                 else:
-                    print(f"is_numeric({index_cand}) is False")
-                    i_cfc = str(n)
-                    info_queue.append(f"NOK invalid index ({index_cand}) requested, accepted per parsing order as ({i_cfc})")
-            if axis_map['AXIS_TYPE'] in numeric_axis_types:
-                if axis_map['AXIS_TYPE'] == 'LINEAR':
-                    if is_numeric(axis_map['AXIS_LIMIT']) and is_numeric(axis_map['AXIS_MAX']):
-                        axis_map['AXIS_MIN'] = maybe_int(pr.min_from_limit_max(axis_map['AXIS_LIMIT'], axis_map['AXIS_MAX']))
-                    else:
-                        info_queue.append(f"NOK limit({axis_map['AXIS_LIMIT']}) and max({axis_map['AXIS_MAX']}) not both numeric, ignored {axis_map['AXIS_TYPE'].lower()} axis at index ({i_cfc})")
-                    if axis_map['AXIS_VALUE'] != NULL_STR_REP and not is_numeric(axis_map['AXIS_VALUE']):
-                        axis_map['AXIS_VALUE'] = NULL_STR_REP
-                else:  # axis_map['AXIS_TYPE'] == 'FOLDED':
-                    print()
-                    print(f"... claim of FOLDED is True? Axis map is ({axis_map})")
-                    if is_numeric(axis_map['AXIS_LIMIT']) and is_numeric(axis_map['AXIS_MAX']):
-                        axis_map['AXIS_MIN'] = maybe_int(pr.min_from_limit_max(axis_map['AXIS_LIMIT'], axis_map['AXIS_MAX']))
-                        axis_map['AXIS_LIMIT_FOLDED'] = maybe_int(pr.limit_folded_from_limit_max(axis_map['AXIS_LIMIT'], axis_map['AXIS_MAX']))
-                        axis_map['AXIS_MIN_FOLDED'] = maybe_int(pr.min_folded_from_limit_max(axis_map['AXIS_LIMIT'], axis_map['AXIS_MAX']))
-                    else:
-                        info_queue.append(f"NOK limit({axis_map['AXIS_LIMIT']}) and max({axis_map['AXIS_MAX']}) not both numeric, ignored folded axis at index ({i_cfc})")
+                    print(f"DEBUG:: [{i}]( == {kks[i]}): ({axis_values[i]}) kept ({axis_values[i]})")
+        if len(axis_values) > len(axis_values_cand):
+            kks = default_keys()
+            for i, v in enumerate(axis_values[len(axis_values_cand):], start=len(axis_values_cand)):
+                print(f"DEBUG:: [{i}]( == {kks[i]}): ({axis_values[i]}) untouched ({axis_values[i]})")
 
-            axis_values = list(axis_map.keys())
-            some_axis_maps.append(axis_map)
-
-        n_axis_rows = len(some_axis_maps)
-        if n_axis_rows_req > n_axis_rows:
-            info_queue.append(f'{n_axis_rows_req} dimensions requested, but only {n_axis_rows} accepted. Maximum is {NEEDED_NUMBER_OF_AXIS_MAX}')
-
-        best_effort_re_order_map = {}
-        collect_index_cand_list = []
-        for x, data in enumerate(some_axis_maps):
-            index_cand = data['AXIS_INDEX']
-            if is_numeric(index_cand):
-                i_cfc = int(index_cand)
+        print(f"has axis candidate[{len(axis_values_cand)}]({axis_values_cand})")
+        axis_map = dict(zip(default_keys(), axis_values))
+        print(f"... axis map is ({axis_map})")
+        numeric_axis_types = ('LINEAR', 'FOLDED')
+        if axis_map['AXIS_INDEX'] == '':
+            print()
+            print(f"has index idea({axis_map['AXIS_INDEX']}) is False?")
+            print(f"... axis map is ({axis_map})")
+            axis_map['AXIS_INDEX'] = n
+            i_cfc = axis_map['AXIS_INDEX']
+        else:
+            print()
+            print(f"has index idea({axis_map['AXIS_INDEX']}) is True")
+            index_cand = str(axis_map['AXIS_INDEX'])
+            if is_numeric(index_cand) and float(index_cand) == float(int(float(index_cand))):
+                print(f"is_numeric({index_cand}) is True")
+                i_cfc = str(maybe_int(index_cand))
+                axis_map['AXIS_INDEX'] = int(i_cfc)
+                if index_cand != i_cfc:  # Was !== in PHP
+                    info_queue.append(f"NOK index ({index_cand}) requested, accepted as ({i_cfc})")
+                else:
+                    info_queue.append(f" OK index ({index_cand}) requested, accepted as ({i_cfc})")
             else:
-                i_cfc = x
-            collect_index_cand_list.append(i_cfc)
-            if not is_numeric(index_cand) or i_cfc != index_cand or index_cand < 0 or index_cand >= n_axis_rows:
-                has_index_collision = True
-                conflict_reason = 'NO_INTEGER'
-                if i_cfc != index_cand:
-                    conflict_reason = 'DC_INTEGER'
+                print(f"is_numeric({index_cand}) is False")
+                i_cfc = str(n)
+                info_queue.append(f"NOK invalid index ({index_cand}) requested, accepted per parsing order as ({i_cfc})")
+        if axis_map['AXIS_TYPE'] in numeric_axis_types:
+            if axis_map['AXIS_TYPE'] == 'LINEAR':
+                if is_numeric(axis_map['AXIS_LIMIT']) and is_numeric(axis_map['AXIS_MAX']):
+                    axis_map['AXIS_MIN'] = maybe_int(pr.min_from_limit_max(axis_map['AXIS_LIMIT'], axis_map['AXIS_MAX']))
+                else:
+                    info_queue.append(f"NOK limit({axis_map['AXIS_LIMIT']}) and max({axis_map['AXIS_MAX']}) not both numeric, ignored {axis_map['AXIS_TYPE'].lower()} axis at index ({i_cfc})")
+                if axis_map['AXIS_VALUE'] != NULL_STR_REP and not is_numeric(axis_map['AXIS_VALUE']):
+                    axis_map['AXIS_VALUE'] = NULL_STR_REP
+            else:  # axis_map['AXIS_TYPE'] == 'FOLDED':
+                print()
+                print(f"... claim of FOLDED is True? Axis map is ({axis_map})")
+                if is_numeric(axis_map['AXIS_LIMIT']) and is_numeric(axis_map['AXIS_MAX']):
+                    axis_map['AXIS_MIN'] = maybe_int(pr.min_from_limit_max(axis_map['AXIS_LIMIT'], axis_map['AXIS_MAX']))
+                    axis_map['AXIS_LIMIT_FOLDED'] = maybe_int(pr.limit_folded_from_limit_max(axis_map['AXIS_LIMIT'], axis_map['AXIS_MAX']))
+                    axis_map['AXIS_MIN_FOLDED'] = maybe_int(pr.min_folded_from_limit_max(axis_map['AXIS_LIMIT'], axis_map['AXIS_MAX']))
+                else:
+                    info_queue.append(f"NOK limit({axis_map['AXIS_LIMIT']}) and max({axis_map['AXIS_MAX']}) not both numeric, ignored folded axis at index ({i_cfc})")
 
-                if is_numeric(index_cand) and index_cand < 0:
-                    conflict_reason = 'LT_ZERO'
+        axis_values = list(axis_map.keys())
+        some_axis_maps.append(axis_map)
 
-                elif is_numeric(index_cand) and index_cand >= n_axis_rows:
-                    conflict_reason = 'GT_NROW'
+    n_axis_rows = len(some_axis_maps)
+    if n_axis_rows_req > n_axis_rows:
+        info_queue.append(f'{n_axis_rows_req} dimensions requested, but only {n_axis_rows} accepted. Maximum is {NEEDED_NUMBER_OF_AXIS_MAX}')
 
-                info_queue.append(f'Conflicting index rules. Failing candidate is ({index_cand}), reason is {conflict_reason}')
-                some_axis_maps[x]['AXIS_INDEX'] = x
-
-            if index_cand != x:
-                has_index_order_mismatch = True
-                info_queue.append(f'Index positions not ordered. Misplaced candidate is {index_cand}, found at {x}')
-
-            best_effort_re_order_map[index_cand] = data
-
-        collect_index_cand_set = set(collect_index_cand_list)
-        if len(collect_index_cand_set) != len(collect_index_cand_list):
+    best_effort_re_order_map = {}
+    collect_index_cand_list = []
+    for x, data in enumerate(some_axis_maps):
+        index_cand = data['AXIS_INDEX']
+        if is_numeric(index_cand):
+            i_cfc = int(index_cand)
+        else:
+            i_cfc = x
+        collect_index_cand_list.append(i_cfc)
+        if not is_numeric(index_cand) or i_cfc != index_cand or index_cand < 0 or index_cand >= n_axis_rows:
             has_index_collision = True
-            hist = collections.Counter(collect_index_cand_list)
-            blame_list = []
-            for xx, nn in hist.items():
-                if nn != 1:
-                    blame_list.append(xx)
+            conflict_reason = 'NO_INTEGER'
+            if i_cfc != index_cand:
+                conflict_reason = 'DC_INTEGER'
 
-            blame_list.sort()
-            info_queue.append(f'Conflicting index positions. Failing candidate/s is/are [{", ".join(str(x) for x in blame_list)}], reason is NONUNIQUE_INDEX')
+            if is_numeric(index_cand) and index_cand < 0:
+                conflict_reason = 'LT_ZERO'
 
-        if not has_index_collision and has_index_order_mismatch:
-            some_axis_maps = []
-            for k, data in sorted(best_effort_re_order_map.items()):
-                some_axis_maps.append(data)
+            elif is_numeric(index_cand) and index_cand >= n_axis_rows:
+                conflict_reason = 'GT_NROW'
+
+            info_queue.append(f'Conflicting index rules. Failing candidate is ({index_cand}), reason is {conflict_reason}')
+            some_axis_maps[x]['AXIS_INDEX'] = x
+
+        if index_cand != x:
+            has_index_order_mismatch = True
+            info_queue.append(f'Index positions not ordered. Misplaced candidate is {index_cand}, found at {x}')
+
+        best_effort_re_order_map[index_cand] = data
+
+    collect_index_cand_set = set(collect_index_cand_list)
+    if len(collect_index_cand_set) != len(collect_index_cand_list):
+        has_index_collision = True
+        hist = collections.Counter(collect_index_cand_list)
+        blame_list = []
+        for xx, nn in hist.items():
+            if nn != 1:
+                blame_list.append(xx)
+
+        blame_list.sort()
+        info_queue.append(f'Conflicting index positions. Failing candidate/s is/are [{", ".join(str(x) for x in blame_list)}], reason is NONUNIQUE_INDEX')
+
+    if not has_index_collision and has_index_order_mismatch:
+        some_axis_maps = []
+        for k, data in sorted(best_effort_re_order_map.items()):
+            some_axis_maps.append(data)
 
     """
     $normalizedInputDataRows = array();
