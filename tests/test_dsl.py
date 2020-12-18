@@ -635,13 +635,13 @@ def test_parse_d12l_ok():
 
 @given(a_mi=st.floats(), a_li=st.floats(), a_ma=st.floats(), a_va=st.floats())
 def test_parse_bimonotone_floats_stat(a_mi, a_li, a_ma, a_va):
-    dxl_text = f"""\
+    text = f"""\
     ;DXL;BIMONOTONE;{a_mi};{a_li};{a_ma};;;{a_va};%;SHOW_MIN
     """
 
-    dxl_diag = []
+    diag = []
 
-    ([axis], diagnoses) = dsl.parse(dxl_text)
+    ([axis], diagnoses) = dsl.parse(text)
     assert axis['AXIS_INDEX'] == 0
     assert isinstance(axis['AXIS_LIMIT'], (float, int))
     assert axis['AXIS_LIMIT_FOLDED'] is False
@@ -653,4 +653,4 @@ def test_parse_bimonotone_floats_stat(a_mi, a_li, a_ma, a_va):
     assert axis['AXIS_TYPE'] == 'BIMONOTONE'
     assert axis['AXIS_UNIT'] == '%'
     assert isinstance(axis['AXIS_VALUE'], (float, int))
-    assert diagnoses == dxl_diag
+    assert diagnoses == diag
