@@ -473,6 +473,36 @@ def test_parse_d7b_ok():
     assert dsl.parse(d7b_text) == (d7b_ast, d7b_diag)
 
 
+def test_parse_d7b_wrong_index_type_ok():
+    d7b_wrong_index_type_text = """\
+    WRONG;D7B;BIMONOTONE;0;80;100;;;40;%;SHOW_MIN
+    """
+
+    d7b_ast = [
+        {
+            'AXIS_INDEX': 0,
+            'AXIS_LIMIT': 80,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 100,
+            'AXIS_META': 'SHOW_MIN',
+            'AXIS_MIN': 0,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'D7B',
+            'AXIS_TYPE': 'BIMONOTONE',
+            'AXIS_UNIT': '%',
+            'AXIS_VALUE': 40,
+        },
+    ]
+
+    d7b_wrong_index_type_diag = [
+        'NOK invalid index (WRONG) requested, accepted as (0)',
+        'Conflicting index rules. Failing candidate is (WRONG), reason is DC_INTEGER',
+        'Index positions not ordered. Misplaced IndexCand is WRONG, found at 0',
+    ]
+
+    assert dsl.parse(d7b_wrong_index_type_text) == (d7b_ast, d7b_wrong_index_type_diag)
+
+
 def test_parse_d8l_ok():
     text = """\
     ;D8L;;;1;2;;;0.5;#
@@ -577,34 +607,30 @@ def test_parse_d11l_ok():
     assert dsl.parse(text) == (ast, diag)
 
 
-def test_parse_d7b_wrong_index_type_ok():
-    d7b_wrong_index_type_text = """\
-    WRONG;D7B;BIMONOTONE;0;80;100;;;40;%;SHOW_MIN
+def test_parse_d12l_ok():
+    text = """\
+    ;D12L;;;0.8;1;;;NULL;s
     """
 
-    d7b_ast = [
+    ast = [
         {
             'AXIS_INDEX': 0,
-            'AXIS_LIMIT': 80,
+            'AXIS_LIMIT': 0.8,
             'AXIS_LIMIT_FOLDED': False,
-            'AXIS_MAX': 100,
-            'AXIS_META': 'SHOW_MIN',
-            'AXIS_MIN': 0,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0.4666666666666668,
             'AXIS_MIN_FOLDED': False,
-            'AXIS_NAME': 'D7B',
-            'AXIS_TYPE': 'BIMONOTONE',
-            'AXIS_UNIT': '%',
-            'AXIS_VALUE': 40,
+            'AXIS_NAME': 'D12L',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': 's',
+            'AXIS_VALUE': 'NULL',
         },
     ]
 
-    d7b_wrong_index_type_diag = [
-        'NOK invalid index (WRONG) requested, accepted as (0)',
-        'Conflicting index rules. Failing candidate is (WRONG), reason is DC_INTEGER',
-        'Index positions not ordered. Misplaced IndexCand is WRONG, found at 0',
-    ]
+    diag = []
 
-    assert dsl.parse(d7b_wrong_index_type_text) == (d7b_ast, d7b_wrong_index_type_diag)
+    assert dsl.parse(text) == (ast, diag)
 
 
 @given(a_mi=st.floats(), a_li=st.floats(), a_ma=st.floats(), a_va=st.floats())
