@@ -474,11 +474,11 @@ def test_parse_d7b_ok():
 
 
 def test_parse_d7b_wrong_index_type_ok():
-    d7b_wrong_index_type_text = """\
+    wrong_index_type_text = """\
     WRONG;D7B;BIMONOTONE;0;80;100;;;40;%;SHOW_MIN
     """
 
-    d7b_ast = [
+    ast = [
         {
             'AXIS_INDEX': 0,
             'AXIS_LIMIT': 80,
@@ -494,13 +494,13 @@ def test_parse_d7b_wrong_index_type_ok():
         },
     ]
 
-    d7b_wrong_index_type_diag = [
+    wrong_index_type_diag = [
         'NOK invalid index (WRONG) requested, accepted as (0)',
         'Conflicting index rules. Failing candidate is (WRONG), reason is DC_INTEGER',
         'Index positions not ordered. Misplaced IndexCand is WRONG, found at 0',
     ]
 
-    assert dsl.parse(d7b_wrong_index_type_text) == (d7b_ast, d7b_wrong_index_type_diag)
+    assert dsl.parse(wrong_index_type_text) == (ast, wrong_index_type_diag)
 
 
 def test_parse_d8l_ok():
