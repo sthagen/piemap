@@ -170,9 +170,9 @@ def parse(text):
                 print()
                 print(f"has index idea({axis_map['AXIS_INDEX']}) is True")
                 index_cand = str(axis_map['AXIS_INDEX'])
-                if is_numeric(index_cand):
+                if is_numeric(index_cand) and float(index_cand) == float(int(float(index_cand))):
                     print(f"is_numeric({index_cand}) is True")
-                    i_cfc = str(int(index_cand))
+                    i_cfc = str(maybe_int(index_cand))
                     axis_map['AXIS_INDEX'] = int(i_cfc)
                     if index_cand != i_cfc:  # Was !== in PHP
                         info_queue.append(f"NOK index ({index_cand}) requested, accepted as ({i_cfc})")
@@ -181,7 +181,7 @@ def parse(text):
                 else:
                     print(f"is_numeric({index_cand}) is False")
                     i_cfc = str(n)
-                    info_queue.append(f"NOK invalid index ({index_cand}) requested, accepted as ({i_cfc})")
+                    info_queue.append(f"NOK invalid index ({index_cand}) requested, accepted per parsing order as ({i_cfc})")
             if axis_map['AXIS_TYPE'] in numeric_axis_types:
                 if axis_map['AXIS_TYPE'] == 'LINEAR':
                     if is_numeric(axis_map['AXIS_LIMIT']) and is_numeric(axis_map['AXIS_MAX']):
@@ -233,7 +233,7 @@ def parse(text):
 
             if index_cand != x:
                 has_index_order_mismatch = True
-                info_queue.append(f'Index positions not ordered. Misplaced IndexCand is {index_cand}, found at {x}')
+                info_queue.append(f'Index positions not ordered. Misplaced candidate is {index_cand}, found at {x}')
 
             best_effort_re_order_map[index_cand] = data
 
@@ -247,7 +247,7 @@ def parse(text):
                     blame_list.append(xx)
 
             blame_list.sort()
-            info_queue.append(f'Conflicting index positions. Failing IndexCand/s is/are [{", ".join(str(x) for x in blame_list)}], reason is NONUNIQUE_INDEX')
+            info_queue.append(f'Conflicting index positions. Failing candidate/s is/are [{", ".join(str(x) for x in blame_list)}], reason is NONUNIQUE_INDEX')
 
         if not has_index_collision and has_index_order_mismatch:
             some_axis_maps = []
