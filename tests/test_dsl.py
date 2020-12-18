@@ -285,11 +285,11 @@ def test_parse_dim_two_linear_collision():
 
 
 def test_parse_d1f_ok():
-    d1f_text = """\
+    text = """\
     0;D1FX;FOLDED;;12;15;;;6;dB
     """
 
-    d1f_ast = [
+    ast = [
         {
             'AXIS_INDEX': 0,
             'AXIS_LIMIT': 12,
@@ -305,9 +305,9 @@ def test_parse_d1f_ok():
         },
     ]
 
-    d1f_diag = [' OK index (0) requested, accepted as (0)']
+    diag = [' OK index (0) requested, accepted as (0)']
 
-    assert dsl.parse(d1f_text) == (d1f_ast, d1f_diag)
+    assert dsl.parse(text) == (ast, diag)
 
 
 def test_parse_d2f_ok():
