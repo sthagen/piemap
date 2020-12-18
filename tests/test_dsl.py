@@ -633,6 +633,32 @@ def test_parse_d12l_ok():
     assert dsl.parse(text) == (ast, diag)
 
 
+def test_parse_value_neither_null_nor_numeric_ok():
+    text = """\
+    ;D12L;;;0.8;1;;;wrong_value;s
+    """
+
+    ast = [
+        {
+            'AXIS_INDEX': 0,
+            'AXIS_LIMIT': 0.8,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0.4666666666666668,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'D12L',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': 's',
+            'AXIS_VALUE': 'NULL',
+        },
+    ]
+
+    diag = []
+
+    assert dsl.parse(text) == (ast, diag)
+
+
 @given(a_mi=st.floats(), a_li=st.floats(), a_ma=st.floats(), a_va=st.floats())
 def test_parse_bimonotone_floats_stat(a_mi, a_li, a_ma, a_va):
     text = f"""\
