@@ -339,6 +339,36 @@ def test_parse_d2f_ok():
     assert dsl.parse(d2f_text) == (d2f_ast, d2f_diag)
 
 
+def test_parse_d3f_ok():
+    d3f_text = """\
+    2;D3F;FOLDED;;12;15;NULL;1
+    """
+
+    d3f_ast = [
+        {
+            'AXIS_INDEX': 0,
+            'AXIS_LIMIT': 12,
+            'AXIS_LIMIT_FOLDED': 18,
+            'AXIS_MAX': 15,
+            'AXIS_META': '',
+            'AXIS_MIN': 7,
+            'AXIS_MIN_FOLDED': 23,
+            'AXIS_NAME': 'D3F',
+            'AXIS_TYPE': 'FOLDED',
+            'AXIS_UNIT': 'dB',
+            'AXIS_VALUE': 'NULL',
+        },
+    ]
+
+    d3f_diag = [
+        ' OK index (2) requested, accepted as (2)',
+        'Conflicting index rules. Failing candidate is (2), reason is GT_NROW',
+        'Index positions not ordered. Misplaced IndexCand is 2, found at 0',
+    ]
+
+    assert dsl.parse(d3f_text) == (d3f_ast, d3f_diag)
+
+
 def test_parse_d7b_ok():
     d7b_text = """\
     ;D7B;BIMONOTONE;0;80;100;;;40;%;SHOW_MIN
