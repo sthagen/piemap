@@ -799,6 +799,34 @@ def test_parse_limit_and_max_not_numeric_ok():
     assert dsl.parse(text) == (ast, diag)
 
 
+def test_parse_folded_limit_and_max_not_numeric_ok():
+    text = """\
+    ;D9F;FOLDED;;non_numeric_limit;non_numeric_max;;;12;dB
+    """
+
+    ast = [
+        {
+            'AXIS_INDEX': 0,
+            'AXIS_LIMIT': 'non_numeric_limit',  # This is maybe not what we want ... TODO(sthagen)
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 'non_numeric_max',  # This is maybe not what we want ... TODO(sthagen)
+            'AXIS_META': '',
+            'AXIS_MIN': 0.0,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'D9F',
+            'AXIS_TYPE': 'FOLDED',
+            'AXIS_UNIT': 'dB',
+            'AXIS_VALUE': 12,
+        },
+    ]
+
+    diag = [
+        'NOK limit(non_numeric_limit) and max(non_numeric_max) not both numeric, ignored folded axis at index (0)',
+    ]
+
+    assert dsl.parse(text) == (ast, diag)
+
+
 def test_parse_index_as_float_ok():
     text = """\
     0.333;D12L;;;0.8;1;;;NULL;s
