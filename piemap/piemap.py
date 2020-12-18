@@ -10,6 +10,7 @@ DEBUG = os.getenv(DEBUG_VAR)
 ENCODING = "utf-8"
 ENCODING_ERRORS_POLICY = "ignore"
 
+
 def parse(text):
     """Later we parse the DSL."""
     return NotImplemented
