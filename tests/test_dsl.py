@@ -915,6 +915,245 @@ def test_parse_index_negative_wun_ok():
     assert dsl.parse(text) == (ast, diag)
 
 
+def test_parse_too_many_axes_ok():
+    text = """\
+    ;A1;;;0.8;1;;;NULL;
+    ;A2;;;0.8;1;;;NULL;
+    ;A3;;;0.8;1;;;NULL;
+    ;A4;;;0.8;1;;;NULL;
+    ;A5;;;0.8;1;;;NULL;
+    ;A6;;;0.8;1;;;NULL;
+    ;A7;;;0.8;1;;;NULL;
+    ;A8;;;0.8;1;;;NULL;
+    ;A9;;;0.8;1;;;NULL;
+    ;A10;;;0.8;1;;;NULL;
+    ;A11;;;0.8;1;;;NULL;
+    ;A12;;;0.8;1;;;NULL;
+    ;A13;;;0.8;1;;;NULL;
+    ;A14;;;0.8;1;;;NULL;
+    ;A15;;;0.8;1;;;NULL;
+    ;A16;;;0.8;1;;;NULL;
+    ;A17_is_too_much;;;0.8;1;;;NULL;
+    """
+
+    ast = [
+        {
+            'AXIS_INDEX': 0,
+            'AXIS_LIMIT': 0.8,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0.4666666666666668,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'A1',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': 'NULL',
+        },
+        {
+            'AXIS_INDEX': 1,
+            'AXIS_LIMIT': 0.8,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0.4666666666666668,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'A2',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': 'NULL',
+        },
+        {
+            'AXIS_INDEX': 2,
+            'AXIS_LIMIT': 0.8,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0.4666666666666668,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'A3',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': 'NULL',
+        },
+        {
+            'AXIS_INDEX': 3,
+            'AXIS_LIMIT': 0.8,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0.4666666666666668,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'A4',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': 'NULL',
+        },
+        {
+            'AXIS_INDEX': 4,
+            'AXIS_LIMIT': 0.8,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0.4666666666666668,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'A5',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': 'NULL',
+        },
+        {
+            'AXIS_INDEX': 5,
+            'AXIS_LIMIT': 0.8,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0.4666666666666668,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'A6',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': 'NULL',
+        },
+        {
+            'AXIS_INDEX': 6,
+            'AXIS_LIMIT': 0.8,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0.4666666666666668,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'A7',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': 'NULL',
+        },
+        {
+            'AXIS_INDEX': 7,
+            'AXIS_LIMIT': 0.8,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0.4666666666666668,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'A8',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': 'NULL',
+        },
+        {
+            'AXIS_INDEX': 8,
+            'AXIS_LIMIT': 0.8,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0.4666666666666668,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'A9',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': 'NULL',
+        },
+        {
+            'AXIS_INDEX': 9,
+            'AXIS_LIMIT': 0.8,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0.4666666666666668,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'A10',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': 'NULL',
+        },
+        {
+            'AXIS_INDEX': 10,
+            'AXIS_LIMIT': 0.8,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0.4666666666666668,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'A11',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': 'NULL',
+        },
+        {
+            'AXIS_INDEX': 11,
+            'AXIS_LIMIT': 0.8,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0.4666666666666668,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'A12',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': 'NULL',
+        },
+        {
+            'AXIS_INDEX': 12,
+            'AXIS_LIMIT': 0.8,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0.4666666666666668,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'A13',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': 'NULL',
+        },
+        {
+            'AXIS_INDEX': 13,
+            'AXIS_LIMIT': 0.8,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0.4666666666666668,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'A14',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': 'NULL',
+        },
+        {
+            'AXIS_INDEX': 14,
+            'AXIS_LIMIT': 0.8,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0.4666666666666668,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'A15',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': 'NULL',
+        },
+        {
+            'AXIS_INDEX': 15,
+            'AXIS_LIMIT': 0.8,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0.4666666666666668,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'A16',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': 'NULL',
+        },
+    ]
+
+    diag = [
+        '17 dimensions requested, but only 16 accepted. Maximum is 16',
+    ]
+
+    assert dsl.parse(text) == (ast, diag)
+
+
 @given(a_mi=st.floats(), a_li=st.floats(), a_ma=st.floats(), a_va=st.floats())
 def test_parse_bimonotone_floats_stat(a_mi, a_li, a_ma, a_va):
     text = f"""\
