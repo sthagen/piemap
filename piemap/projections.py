@@ -7,6 +7,11 @@ def min_from_limit_max(limit, maximum):
     return (8.0 * limit - 5.0 * maximum) / 3.0
 
 
+def domain_from_limit_max(limit, maximum):
+    """Prepare the scales paradigm for non-folded axes."""
+    return min_from_limit_max(limit, maximum), maximum
+
+
 def limit_folded_from_limit_max(limit, maximum):
     """
     Testdata: (-6, -1, 2, 5, 10) or (0, 5, 8, 11, 16)
