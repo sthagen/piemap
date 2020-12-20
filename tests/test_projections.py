@@ -19,6 +19,10 @@ def test_min_from_limit_max_sample_d1f_ok():
     assert pr.min_from_limit_max(12, 15) == 7
 
 
+def test_domain_from_limit_max_sample_one_ok():
+    assert pr.domain_from_limit_max(-1, 2) == (-6, 2)
+
+
 def test_limit_folded_from_limit_max_sample_one_ok():
     assert pr.limit_folded_from_limit_max(-1, 2) == 5
 
