@@ -552,12 +552,10 @@ def test_octant_of_angle_float_stat(angle):
     assert geom.octant_of_angle(angle) in ('N', 'S', 'E', 'W', 'NE', 'NW', 'SE', 'SW')
 
 
-@given(angle=st.floats(), font_size_pts=st.floats(), text_angle=st.floats())
+@given(angle=st.floats(allow_nan=False, allow_infinity=False), font_size_pts=st.floats(), text_angle=st.floats())
 def test_axis_name_circle_adjust_floats_stat(angle, font_size_pts, text_angle):
     font_name, axis_name, axis_name_space_sep = "Invisible", "Look", None
     args = (angle, font_size_pts, text_angle, font_name, axis_name, axis_name_space_sep)
-    assume(not math.isnan(angle))
-    assume(not math.isinf(angle))
     dx_pix, dy_pix = geom.axis_name_circle_adjust(*args)
     assert isinstance(dx_pix, (float, int))
     assert isinstance(dy_pix, (float, int))
