@@ -547,10 +547,8 @@ def test_axis_name_circle_adjust_nw_ok():
     assert geom.axis_name_circle_adjust(*args) == (-205, -5)
 
 
-@given(angle=st.floats())
+@given(angle=st.floats(allow_nan=False, allow_infinity=False))
 def test_octant_of_angle_float_stat(angle):
-    assume(not math.isnan(angle))
-    assume(not math.isinf(angle))
     assert geom.octant_of_angle(angle) in ('N', 'S', 'E', 'W', 'NE', 'NW', 'SE', 'SW')
 
 
