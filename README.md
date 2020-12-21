@@ -1,5 +1,5 @@
 # python-piemap
-One-view visualization of grouped characterizations 
+One-view visualization of grouped characterizations (Quality Pie).
 
 ## Status
 Prototyping.
