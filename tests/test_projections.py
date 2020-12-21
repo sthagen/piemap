@@ -47,6 +47,10 @@ def test_domain_folded_from_limit_max_sample_one_ok():
     assert pr.domain_folded_from_limit_max(-1, 2) == (-6, 10)
 
 
+def test_domain_folded_from_limit_max_sample_two_ok():
+    assert pr.domain_folded_from_limit_max(5, 8) == (0, 16)
+
+
 def test_value_folded_from_limit_max_sample_one_ok():
     assert pr.value_folded_from_limit_max(-1, 2) == 5
 
