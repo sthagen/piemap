@@ -43,6 +43,10 @@ def test_min_folded_from_limit_max_sample_d1f_ok():
     assert pr.min_folded_from_limit_max(12, 15) == 23
 
 
+def test_domain_folded_from_limit_max_sample_one_ok():
+    assert pr.domain_folded_from_limit_max(-1, 2) == (-6, 10)
+
+
 def test_value_folded_from_limit_max_sample_one_ok():
     assert pr.value_folded_from_limit_max(-1, 2) == 5
 
