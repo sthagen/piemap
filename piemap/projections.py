@@ -29,6 +29,13 @@ def min_folded_from_limit_max(limit, maximum):
     return (11.0 * maximum - 8.0 * limit) / 3.0
 
 
+def domain_folded_from_limit_max(limit, maximum):
+    """Prepare the scales paradigm for folded axes."""
+    max_domain = min_folded_from_limit_max(limit, maximum)
+    min_domain = maximum + maximum - max_domain  # maximum - (max_domain - maximum)
+    return min_domain, max_domain
+
+
 def value_folded_from_limit_max(value, maximum):
     """
     Testdata: (-6, -1, 2, 5, 10) or (0, 5, 8, 11, 16)  # FIXME COPY
