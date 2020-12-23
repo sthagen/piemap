@@ -106,7 +106,6 @@ Other ordered categorial scales can be defined as needed, but care has to be tak
 
 * "Very Good, Good, Fair, Poor, Bad" can be ordered with sense;
 * "Loud, Good, Noisy, Poor" cannot be ordered because different dimensions are used.
- 
 
 ### Operating the tool
 
