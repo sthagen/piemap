@@ -1,9 +1,1 @@
-black
-coverage
-flake8
-hypothesis
-mypy
-pylint
-pyperf
-pytest
-pytest-flake8
+
