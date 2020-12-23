@@ -46,7 +46,6 @@ This tool provides a novel quality representation methodology which is easy to u
 
 * Quick and easy recognition of expected speech quality problems for selected parameters (limit value violation);
 * Assessment of strengths and weaknesses of signal processing implemented in a terminal or other telecommunication equipment, including end-to-end considerations (quality statement);
-
 * Easy comparison of different equipment or connections based on the corresponding representations;
 * Easy extension of the representation by new parameters relevant to quality in the future.
 
@@ -61,7 +60,6 @@ The representation of individual segment sizes is not interdependent, thus guara
 * Segment sizes are determined by the number of selected parameters and are identical.
 * Segment size (radius) is a measure for the quality regarding this parameter.
 * A concentric circle around the origin is defined (1/√2) which represents a minimum quality measure; falling below this segment size (radius) indicates a non-compliance with this limit value.
-
 * By means of a suitable colour selection results lying within the tolerance or transgressing the limit values can be easily visualized.
 
 This online application of P.505 can help you to produce high quality graphs for your individual set of parameters. It is intended to support the use of this methodology in the field, e.g. for recurring reporting task, but also for benchmarking or for test events.
@@ -130,31 +128,21 @@ AXIS_NO;AXIS_NAME;AXIS_TYPE;MIN;LIMIT;MAX;VALUE;UNIT where usually only LIMIT, M
 
 These data input lines have to be written for each segment that should be created. Below the data input field buttons are placed which assist to create data input lines corresponding to the four different types of axes.
 
- 
-
 #### AXIS_NO
 
 This entry means axis number, which by default is the consecutive number in the order of the segment command lines. Thus switching the segment command lines will result in switching the segments in the quality pie, unless explicitly numbered (starting at 0).
-
- 
 
 #### AXIS_NAME
 
 This entry can be used to display the name of the parameter next to the outer end of the segment, if not switched off by a global setting.
 
- 
-
 #### AXIS_TYPE
 
 This entry can be used to select the type of axis as explained above; the default setting is LINEAR.
 
- 
-
 #### MIN
 
 The minimum value of the axis; for linear and folded scales any entries in this section will be ignored; the categorial scale does also not make direct use of minimum values.
-
- 
 
 #### LIMIT
 
@@ -164,19 +152,13 @@ Limit between result values considered ok and result values considered not ok. I
 
 2.) 2×MAX - LIMIT
 
- 
-
 #### MAX
 
 Maximum or optimum value of the axis that can be reached for this parameter.
 
- 
-
 #### VALUE
 
 Actually achieved result value for each parameter; this determines the actual size of the coloured areas; the display of the value itself next to the outer end of the segment can be enabled by a global setting.
-
- 
 
 #### UNIT
 
@@ -184,13 +166,7 @@ This entry can be used to add a unit to the result value, if not disabled by a g
 
 A pipe symbol, i.e. "|" will cause a line break.
 
- 
-
- 
-
-#### Global data input lines affecting the entire pie chart are:
-
- 
+#### Global data input lines affecting the entire pie chart are
 
 For the picture title and for the segment labelling, a pipe symbol, i.e. "|" will cause a line break.
 
@@ -212,19 +188,13 @@ Of course, such COLORING* settings should be defined before they can be referred
 
 COLORING_Eagle;#FFFFFF;#FF2020;#FFFF20;#77FF20.
 
- 
-
 #### Resulting Pie Chart
 
 By pressing the button “Parse and plot” the resulting pie chart will be displayed in the right hand area(s) if your browser has session cookies enabled.
 
 Depending on your browser settings, display etc., some details may not be displayed as expected; click onto the pie chart to see the original (i.e. larger) picture, which should be ok.
 
- 
-
 The input data lines together with the quality pie can be exported to Excel or the graph can be saved in jpg or png format, respectively.
-
- 
 
 ### Parameters
 
