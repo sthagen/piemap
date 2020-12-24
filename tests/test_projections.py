@@ -7,6 +7,10 @@ import pytest  # type: ignore
 import piemap.projections as pr
 
 
+ORDERED_SAMPLE_ONE = ("3", "2c", "2b", "2a", "1")
+ORDERED_SAMPLE_TWO = ("ORIGIN", "not ok", "LIMIT_VALUE", "ok")
+
+
 def test_min_from_limit_max_sample_one_ok():
     assert pr.min_from_limit_max(-1, 2) == -6
 
