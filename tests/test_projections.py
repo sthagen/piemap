@@ -119,6 +119,10 @@ def test_domain_ordered_from_domain_sample_two_ok():
     assert pr.domain_ordered_from_domain(ORDERED_SAMPLE_TWO) == ORDERED_SAMPLE_TWO
 
 
+def test_domain_ordered_from_domain_empty_ok():
+    assert pr.domain_ordered_from_domain([]) == 'NULL'
+
+
 @given(limit=st.integers(), maximum=st.integers())
 def test_min_from_limit_max_int_int(limit, maximum):
     minimum = pr.min_from_limit_max(limit, maximum)
