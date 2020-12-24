@@ -42,3 +42,36 @@ def value_folded_from_limit_max(value, maximum):
     yield 2 * 2 - (-1) = 5 or 2 * 8 - 5 = 11  # FIXME COPY
     """
     return 2.0 * maximum - value  # explicit maximum - ( value - maximum )
+
+
+def limit_ordered_from_domain(domain):
+    """
+    Testdata: ("3", "2c", "2b", "2a", "1") or ("ORIGIN", "not ok", "LIMIT_VALUE", "ok")
+    yield domain[len(domain) // 2] -> "2b" or "LIMIT_VALUE" in domain -> "LIMIT_VALUE"
+    """
+    if not domain:
+        return "NULL"
+    if "LIMIT_VALUE" in domain:
+        return "LIMIT_VALUE"
+    return domain[len(domain) // 2]
+
+
+def min_ordered_from_domain(domain):
+    """
+    Testdata: ("3", "2c", "2b", "2a", "1") or ("ORIGIN", "not ok", "LIMIT_VALUE", "ok")
+    yield domain[0] -> "3" or domain[0] -> "ORIGIN"
+    """
+    return domain[0] if domain else "NULL"
+
+
+def domain_ordered_from_domain(domain):
+    """Prepare the scales paradigm for ordered axes."""
+    return domain if domain else "NULL"
+
+
+def max_ordered_from_domain(domain):
+    """
+    Testdata: ("3", "2c", "2b", "2a", "1") or ("ORIGIN", "not ok", "LIMIT_VALUE", "ok")
+    yield domain[-1] -> "1" or domain[-1] -> "ok"
+    """
+    return domain[-1] if domain else "NULL"
