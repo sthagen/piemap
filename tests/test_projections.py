@@ -91,6 +91,10 @@ def test_limit_ordered_from_domain_even_ok():
     assert pr.limit_ordered_from_domain([0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]) == 1
 
 
+def test_limit_ordered_from_domain_odd_ok():
+    assert pr.limit_ordered_from_domain([0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]) == 1
+
+
 def test_limit_ordered_from_domain_minimal_odd_ok():
     assert pr.limit_ordered_from_domain([0, 1, 0]) == 1
 
