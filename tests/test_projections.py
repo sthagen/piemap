@@ -87,8 +87,12 @@ def test_limit_ordered_from_domain_empty_ok():
     assert pr.limit_ordered_from_domain([]) == 'NULL'
 
 
-def test_limit_ordered_from_domain_minimal_even_ok():
+def test_limit_ordered_from_domain_even_ok():
     assert pr.limit_ordered_from_domain([0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]) == 1
+
+
+def test_limit_ordered_from_domain_minimal_odd_ok():
+    assert pr.limit_ordered_from_domain([0, 1, 0]) == 1
 
 
 @given(limit=st.integers(), maximum=st.integers())
