@@ -103,6 +103,10 @@ def test_limit_ordered_from_domain_minimal_odd_ok():
     assert pr.limit_ordered_from_domain([0, 1, 0]) == 1
 
 
+def test_min_ordered_from_domain_sample_two_ok():
+    assert pr.min_ordered_from_domain(ORDERED_SAMPLE_TWO) == ORDERED_SAMPLE_TWO[0]
+
+
 @given(limit=st.integers(), maximum=st.integers())
 def test_min_from_limit_max_int_int(limit, maximum):
     minimum = pr.min_from_limit_max(limit, maximum)
