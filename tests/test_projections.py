@@ -67,6 +67,10 @@ def test_value_folded_from_limit_max_sample_two_ok():
     assert pr.value_folded_from_limit_max(5, 8) == 11
 
 
+def test_limit_ordered_from_domain_sample_one_ok():
+    assert pr.limit_ordered_from_domain(ORDERED_SAMPLE_ONE) == '2b'
+
+
 @given(limit=st.integers(), maximum=st.integers())
 def test_min_from_limit_max_int_int(limit, maximum):
     minimum = pr.min_from_limit_max(limit, maximum)
