@@ -54,3 +54,11 @@ def limit_ordered_from_domain(domain):
     if "LIMIT_VALUE" in domain:
         return "LIMIT_VALUE"
     return domain[len(domain) // 2]
+
+
+def min_ordered_from_domain(domain):
+    """
+    Testdata: ("3", "2c", "2b", "2a", "1") or ("ORIGIN", "not ok", "LIMIT_VALUE", "ok")
+    yield domain[0] -> "3" or domain[0] -> "ORIGIN"
+    """
+    return domain[0] if domain else "NULL"
