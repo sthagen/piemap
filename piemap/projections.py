@@ -42,3 +42,15 @@ def value_folded_from_limit_max(value, maximum):
     yield 2 * 2 - (-1) = 5 or 2 * 8 - 5 = 11  # FIXME COPY
     """
     return 2.0 * maximum - value  # explicit maximum - ( value - maximum )
+
+
+def limit_ordered_from_domain(domain):
+    """
+    Testdata: ("3", "2c", "2b", "2a", "1") or ("ORIGIN", "not ok", "LIMIT_VALUE", "ok")
+    yield domain[len(domain) // 2] -> "2b" or "LIMIT_VALUE" in domain -> "LIMIT_VALUE"
+    """
+    if not domain:
+        return "NULL"
+    if "LIMIT_VALUE" in domain:
+        return "LIMIT_VALUE"
+    return domain[len(domain) // 2]
