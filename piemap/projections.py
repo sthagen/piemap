@@ -62,3 +62,8 @@ def min_ordered_from_domain(domain):
     yield domain[0] -> "3" or domain[0] -> "ORIGIN"
     """
     return domain[0] if domain else "NULL"
+
+
+def domain_ordered_from_domain(domain):
+    """Prepare the scales paradigm for ordered axes."""
+    return domain if domain else "NULL"
