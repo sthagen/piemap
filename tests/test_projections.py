@@ -75,6 +75,10 @@ def test_limit_ordered_from_domain_sample_two_ok():
     assert pr.limit_ordered_from_domain(ORDERED_SAMPLE_TWO) == 'LIMIT_VALUE'
 
 
+def test_min_ordered_from_domain_sample_one_ok():
+    assert pr.min_ordered_from_domain(ORDERED_SAMPLE_ONE) == ORDERED_SAMPLE_ONE[0]
+
+
 @given(limit=st.integers(), maximum=st.integers())
 def test_min_from_limit_max_int_int(limit, maximum):
     minimum = pr.min_from_limit_max(limit, maximum)
