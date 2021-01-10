@@ -2,7 +2,7 @@
 One-view visualization of grouped characterizations (Quality Pie).
 
 ## Status
-Prototyping.
+Experimental
 
 ## Short How to Quality Pie
 *(From HowTo of Reference Implementation)*
