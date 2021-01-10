@@ -201,4 +201,4 @@ Examples of speech quality parameters together with typical values are to be fou
 
 However, the application of this tool is not limited to such parameters. In general, any kind of quality related parameters can be used. However, it is recommended to carefully select a set of parameters which is reflecting all aspects of the quality for the topic or device under consideration, e.g.: selecting only parameters with respect to the receiving channel might not be a balanced decision when attempting to benchmark mobile telephone sets.
 
-**Note**: The name of the default branch is `default`.
+**Note**: The default branch is `default`.
