@@ -13,4 +13,4 @@ def main(argv=None):
     """Process ... TODO."""
     argv = sys.argv[1:] if argv is None else argv
     verbose = True if '-v' in argv or '--verbose' in argv else False
-    DEBUG and print(f"Not yet implemented")
+    DEBUG and print(f'Not yet implemented')
