@@ -12,5 +12,5 @@ DEBUG = os.getenv("PIEMAP_DEBUG")
 def main(argv=None):
     """Process ... TODO."""
     argv = sys.argv[1:] if argv is None else argv
-    verbose = True if "-v" in argv or "--verbose" in argv else False
+    verbose = True if '-v' in argv or '--verbose' in argv else False
     DEBUG and print(f"Not yet implemented")
