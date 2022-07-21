@@ -1,10 +1,13 @@
-# python-piemap
+# piemap
+
 One-view visualization of grouped characterizations (Quality Pie).
 
 ## Status
+
 Experimental
 
 ## Short How to Quality Pie
+
 *(From HowTo of Reference Implementation)*
 
 * The tool uses a simple text area (shown below), to accept lines of semicolon-separated entries of data (point or comma are both accepted as floating point separators for all numeric input values).
@@ -37,9 +40,11 @@ Experimental
 * By pressing the button “Parse and plot” you will get the result in the right hand area(s) if your browser has session cookies enabled
 
 ## ... as in ITU-T P.505
+
 *(Informational text of Reference Implementation)*
 
 ### Preface
+
 The numerous complex parameters that determine the quality of telecommunication equipment as well as end-to-end quality can be interpreted by technical experts only.
 
 This tool provides a novel quality representation methodology which is easy to use and also easy to understand for non-experts and which can serve as a basis for commercial decisions on a management or marketing level with
@@ -50,6 +55,7 @@ This tool provides a novel quality representation methodology which is easy to u
 * Easy extension of the representation by new parameters relevant to quality in the future.
 
 ### Introduction
+
 The one-view visualization methodology is based on the allocation of individual circle segments to the selected parameters - the so-called "quality pie"; a maximum number of 16 different segments is considered here for practical reasons.
 
 The total number of parameters represented determines the size of the individual segments in the quality pie. The axes are shown with a common origin. The individual circle segments have the same size (spanned angle 360° divided by number of selected quality parameters).
@@ -65,14 +71,17 @@ The representation of individual segment sizes is not interdependent, thus guara
 This online application of P.505 can help you to produce high quality graphs for your individual set of parameters. It is intended to support the use of this methodology in the field, e.g. for recurring reporting task, but also for benchmarking or for test events.
 
 ### Types of axes
+
 The advantage of this tool is the ability to use different types of axes (scalings) within one quality pie, depending on your needs. There are four different types of axes. It is very important to first of all select the right type of axis for each parameter you want to display. The types itself are explained below, whereas the application of them is explained under ‘operating the tool’.
 
 #### LINEAR
+
 The linear axis type is scaling the area, based on the input values for minimum, limit and maximum.
 
 The minimum value cannot be specified, it will be determined by continuing the scale defined by limit and maximum values. Any entries in the MIN section will be ignored.
 
 #### FOLDED
+
 The folded axis type is scaling the area and (quite similar to the linear axis type) with the important exception that this scale is literally folded.
 
 The maximum value is not a numerical maximum but rather an optimum, for the limit there will be two values, i.e.:
@@ -83,11 +92,13 @@ The maximum value is not a numerical maximum but rather an optimum, for the limi
 The minimum value will be determined in the same way as for the linear scale, i.e. any entries in the MIN section will be ignored and both the scale ends will be calculated as predefined by the limit and maximum values.
 
 #### BI-MONOTONE
+
 The axis type BI-MONOTONE scales linear (in the radius, not the area) from the origin to the limit and from the limit to the maximum.
 
 It therefore requires the input of a minimum value. The scales in both segments of the axis can be as much different as desired.
 
 #### CATEGORIAL
+
 The categorial axis type is scaling the area, equally spaced, and can be used to display results, which are achieved without a scale.
 
 For the data input lines this type is also referred to as ORDER*. The axis type ORDER* may be used to introduce ordered categorical scales (based on a declaration of the set of ordered values), see the following two examples:
