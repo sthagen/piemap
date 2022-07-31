@@ -3,7 +3,6 @@ import json
 
 import piemap.projections as pr
 
-
 NEEDED_NUMBER_OF_AXIS_MAX = 16
 NULL_STR_REP = 'NULL'
 REC_SEP = ';'
@@ -140,35 +139,37 @@ def parse(text: str):
     axis_values_rows_req_string: str = unsafe(text)
     axis_values_rows_req = [row.strip() for row in axis_values_rows_req_string.split(ROW_SEP) if row.strip()]
     n_axis_rows_req = len(axis_values_rows_req)
-    for n, row_string in enumerate(axis_values_rows_req[:NEEDED_NUMBER_OF_AXIS_MAX]):  # Was: array_slice(axis_values_rows_req, 0, NEEDED_NUMBER_OF_AXIS_MAX)
+    for n, row_string in enumerate(
+        axis_values_rows_req[:NEEDED_NUMBER_OF_AXIS_MAX]
+    ):  # Was: array_slice(axis_values_rows_req, 0, NEEDED_NUMBER_OF_AXIS_MAX)
 
-        axis_values = default_folded_values() if ";FOLDED;" in row_string else default_linear_values()
+        axis_values = default_folded_values() if ';FOLDED;' in row_string else default_linear_values()
         axis_values_cand = row_string.split(REC_SEP)
         print()
         print(f'__{"FOLDED" if ";FOLDED;" in row_string else "NO_FOLD"}__')
-        print(f"has axis_values[{len(axis_values)}]({axis_values})")
+        print(f'has axis_values[{len(axis_values)}]({axis_values})')
         if len(axis_values) >= len(axis_values_cand):
             kks = default_keys()
             for i, v in enumerate(axis_values_cand):
                 if v != '':
                     be_v = compact_value(v)
-                    print(f"DEBUG:: [{i}]( == {kks[i]}): ({axis_values[i]}) --> ({be_v})")
+                    print(f'DEBUG:: [{i}]( == {kks[i]}): ({axis_values[i]}) --> ({be_v})')
                     axis_values[i] = be_v
                 else:
-                    print(f"DEBUG:: [{i}]( == {kks[i]}): ({axis_values[i]}) kept ({axis_values[i]})")
+                    print(f'DEBUG:: [{i}]( == {kks[i]}): ({axis_values[i]}) kept ({axis_values[i]})')
         if len(axis_values) > len(axis_values_cand):
             kks = default_keys()
-            for i, v in enumerate(axis_values[len(axis_values_cand):], start=len(axis_values_cand)):
-                print(f"DEBUG:: [{i}]( == {kks[i]}): ({axis_values[i]}) untouched ({axis_values[i]})")
+            for i, v in enumerate(axis_values[len(axis_values_cand) :], start=len(axis_values_cand)):
+                print(f'DEBUG:: [{i}]( == {kks[i]}): ({axis_values[i]}) untouched ({axis_values[i]})')
 
-        print(f"has axis candidate[{len(axis_values_cand)}]({axis_values_cand})")
+        print(f'has axis candidate[{len(axis_values_cand)}]({axis_values_cand})')
         axis_map = dict(zip(default_keys(), axis_values))
-        print(f"... axis map is ({axis_map})")
+        print(f'... axis map is ({axis_map})')
         numeric_axis_types = ('LINEAR', 'FOLDED')
         if axis_map['AXIS_INDEX'] == '':
             print()
             print(f"has index idea({axis_map['AXIS_INDEX']}) is False?")
-            print(f"... axis map is ({axis_map})")
+            print(f'... axis map is ({axis_map})')
             axis_map['AXIS_INDEX'] = n
             i_cfc = axis_map['AXIS_INDEX']
         else:
@@ -176,40 +177,59 @@ def parse(text: str):
             print(f"has index idea({axis_map['AXIS_INDEX']}) is True")
             index_cand = str(axis_map['AXIS_INDEX'])
             if is_numeric(index_cand) and float(index_cand) == float(int(float(index_cand))):
-                print(f"is_numeric({index_cand}) is True")
+                print(f'is_numeric({index_cand}) is True')
                 i_cfc = str(maybe_int(index_cand))
                 axis_map['AXIS_INDEX'] = int(i_cfc)
                 if index_cand != i_cfc:  # Was !== in PHP
-                    info_queue.append(f"NOK index ({index_cand}) requested, accepted as ({i_cfc})")
+                    info_queue.append(f'NOK index ({index_cand}) requested, accepted as ({i_cfc})')
                 else:
-                    info_queue.append(f" OK index ({index_cand}) requested, accepted as ({i_cfc})")
+                    info_queue.append(f' OK index ({index_cand}) requested, accepted as ({i_cfc})')
             else:
-                print(f"is_numeric({index_cand}) is False")
+                print(f'is_numeric({index_cand}) is False')
                 i_cfc = str(n)
-                info_queue.append(f"NOK invalid index ({index_cand}) requested, accepted per parsing order as ({i_cfc})")
+                info_queue.append(
+                    f'NOK invalid index ({index_cand}) requested, accepted per parsing order as ({i_cfc})'
+                )
         if axis_map['AXIS_TYPE'] in numeric_axis_types:
             if axis_map['AXIS_TYPE'] == 'LINEAR':
                 if is_numeric(axis_map['AXIS_LIMIT']) and is_numeric(axis_map['AXIS_MAX']):
-                    axis_map['AXIS_MIN'] = maybe_int(pr.min_from_limit_max(axis_map['AXIS_LIMIT'], axis_map['AXIS_MAX']))
+                    axis_map['AXIS_MIN'] = maybe_int(
+                        pr.min_from_limit_max(axis_map['AXIS_LIMIT'], axis_map['AXIS_MAX'])
+                    )
                 else:
-                    info_queue.append(f"NOK limit({axis_map['AXIS_LIMIT']}) and max({axis_map['AXIS_MAX']}) not both numeric, ignored {axis_map['AXIS_TYPE'].lower()} axis at index ({i_cfc})")
+                    info_queue.append(
+                        f"NOK limit({axis_map['AXIS_LIMIT']}) and max({axis_map['AXIS_MAX']}) not both numeric,"
+                        f" ignored {axis_map['AXIS_TYPE'].lower()} axis at index ({i_cfc})"
+                    )
                 if axis_map['AXIS_VALUE'] != NULL_STR_REP and not is_numeric(axis_map['AXIS_VALUE']):
                     axis_map['AXIS_VALUE'] = NULL_STR_REP
             else:  # axis_map['AXIS_TYPE'] == 'FOLDED':
                 print()
-                print(f"... claim of FOLDED is True? Axis map is ({axis_map})")
+                print(f'... claim of FOLDED is True? Axis map is ({axis_map})')
                 if is_numeric(axis_map['AXIS_LIMIT']) and is_numeric(axis_map['AXIS_MAX']):
-                    axis_map['AXIS_MIN'] = maybe_int(pr.min_from_limit_max(axis_map['AXIS_LIMIT'], axis_map['AXIS_MAX']))
-                    axis_map['AXIS_LIMIT_FOLDED'] = maybe_int(pr.limit_folded_from_limit_max(axis_map['AXIS_LIMIT'], axis_map['AXIS_MAX']))
-                    axis_map['AXIS_MIN_FOLDED'] = maybe_int(pr.min_folded_from_limit_max(axis_map['AXIS_LIMIT'], axis_map['AXIS_MAX']))
+                    axis_map['AXIS_MIN'] = maybe_int(
+                        pr.min_from_limit_max(axis_map['AXIS_LIMIT'], axis_map['AXIS_MAX'])
+                    )
+                    axis_map['AXIS_LIMIT_FOLDED'] = maybe_int(
+                        pr.limit_folded_from_limit_max(axis_map['AXIS_LIMIT'], axis_map['AXIS_MAX'])
+                    )
+                    axis_map['AXIS_MIN_FOLDED'] = maybe_int(
+                        pr.min_folded_from_limit_max(axis_map['AXIS_LIMIT'], axis_map['AXIS_MAX'])
+                    )
                 else:
-                    info_queue.append(f"NOK limit({axis_map['AXIS_LIMIT']}) and max({axis_map['AXIS_MAX']}) not both numeric, ignored folded axis at index ({i_cfc})")
+                    info_queue.append(
+                        f"NOK limit({axis_map['AXIS_LIMIT']}) and max({axis_map['AXIS_MAX']}) not both numeric,"
+                        f' ignored folded axis at index ({i_cfc})'
+                    )
 
         some_axis_maps.append(axis_map)
 
     n_axis_rows = len(some_axis_maps)
     if n_axis_rows_req > n_axis_rows:
-        info_queue.append(f'{n_axis_rows_req} dimensions requested, but only {n_axis_rows} accepted. Maximum is {NEEDED_NUMBER_OF_AXIS_MAX}')
+        info_queue.append(
+            f'{n_axis_rows_req} dimensions requested, but only {n_axis_rows} accepted.'
+            f' Maximum is {NEEDED_NUMBER_OF_AXIS_MAX}'
+        )
 
     best_effort_re_order_map = {}
     collect_index_cand_list = []
@@ -232,7 +252,9 @@ def parse(text: str):
             elif is_numeric(index_cand) and index_cand >= n_axis_rows:
                 conflict_reason = 'GT_NROW'
 
-            info_queue.append(f'Conflicting index rules. Failing candidate is ({index_cand}), reason is {conflict_reason}')
+            info_queue.append(
+                f'Conflicting index rules. Failing candidate is ({index_cand}), reason is {conflict_reason}'
+            )
             some_axis_maps[x]['AXIS_INDEX'] = x
 
         if index_cand != x:
@@ -251,7 +273,10 @@ def parse(text: str):
                 blame_list.append(xx)
 
         blame_list.sort()
-        info_queue.append(f'Conflicting index positions. Failing candidate/s is/are [{", ".join(str(x) for x in blame_list)}], reason is NONUNIQUE_INDEX')
+        info_queue.append(
+            f'Conflicting index positions. Failing candidate/s is/are [{", ".join(str(x) for x in blame_list)}],'
+            ' reason is NONUNIQUE_INDEX'
+        )
 
     if not has_index_collision and has_index_order_mismatch:
         some_axis_maps = []
@@ -269,7 +294,8 @@ def parse(text: str):
     //DEBUG echo '<pre>ReAssembledNormalizedInput:'."\n".print_r($normalizedInputDataString,True).'</pre>';
     echo 'AxisSpecTest: '."\n";
     echo '<form style="display:inline;" method="post" action="'.$_SERVER['PHP_SELF'].'">'."\n";
-    echo '<textarea style="font-sice:small;" cols="80" rows="16" name="AXIS_SPEC_ROWS">'.$normalizedInputDataString.'</textarea>'."\n";
+    echo '<textarea style="font-sice:small;" cols="80" rows="16" name="AXIS_SPEC_ROWS">'.$normalizedInputDataString. \
+      </textarea>'."\n";
     echo '<input type="submit" name="Subme" value="parse" />'."\n";
     echo '</form>'.'<br />'."\n";
     echo '[<a href="'.$_SERVER['PHP_SELF'].'">RESET</a>] to some default to get started.<br />'."\n";
@@ -281,7 +307,8 @@ def parse(text: str):
     echo '$someAxisMaps='."\n";
     //DEBUG echo print_r($someAxisMaps,True);
     echo '</pre>';
-    echo '<table style="width:75%;"><tr><th>Laufd.Nr.</th><th>Name</th><th>Type</th><th>Min</th><th>Limit</th><th>Max</th><th>LimitFolded</th><th>MinFolded</th><th>Value</th><th>Unit</th></tr>'."\n";
+    echo '<table style="width:75%;"><tr><th>Laufd.Nr.</th><th>Name</th><th>Type</th><th>Min</th><th>Limit</th>\
+      <th>Max</th><th>LimitFolded</th><th>MinFolded</th><th>Value</th><th>Unit</th></tr>'."\n";
     foreach($someAxisMaps as $i => $data) {
         $displayRow = array_values($data);
         echo '<tr><td>';

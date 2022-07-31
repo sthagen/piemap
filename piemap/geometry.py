@@ -60,7 +60,7 @@ def octant_of_angle(angle):
     elif left_top_of_center(angle):
         return 'W' if angle == 180 else 'NW'
     elif left_bottom_of_center(angle):
-        return 'SW'        
+        return 'SW'
     elif right_top_of_center(angle):
         return 'NE'
 
@@ -75,15 +75,15 @@ def axis_name_circle_adjust(angle, font_size_pts, text_angle, font_name, axis_na
         TODO(sthagen): PHP::imagettfbbox(font_size_pts, text_angle, font_name, axis_name)
         6,7	upper left corners X,Y-Pos and 4,5	upper right corners X,Y-Pos
         0,1	lower left corners X,Y-Pos and 2,3	lower right corners X,Y-Pos
-        
-        Returns tuple with: 
+
+        Returns tuple with:
              0,         1,         2,          3,          4,          5,          6,         7
              lo_left_x, lo_left_y, lo_right_x, lo_right_y, hi_right_x, hi_right_y, hi_left_x, hi_left_y
         """
         return 100, 200, 300, None, None, None, None, 400  # TODO(sthagen) implement real functionality
 
     axis_name_space_sep = True if axis_name_space_sep is None else axis_name_space_sep
-    
+
     bbox = bounding_box_from_font(font_size_pts, text_angle, font_name, axis_name)
     text_width = abs(bbox[2] - bbox[0])
     text_height = abs(bbox[7] - bbox[1])
@@ -131,7 +131,7 @@ def xy_point_from_radius_angle(radius, angle, c_x=0, c_y=0):
     """
     return point as tuple in (x,y) = (radius,angle/[deg]) possibly shifted (c_x, c_y)
     """
-    
+
     def deg2rad(deg):
         """TODO(sthagen) refactor later."""
         return deg * math.pi / 180.0
