@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=missing-docstring,unused-import,reimported
-import math
-from hypothesis import assume, given
 import hypothesis.strategies as st
 import pytest  # type: ignore
+from hypothesis import given
 
 import piemap.geometry as geom
 
@@ -181,11 +180,7 @@ def test_segment_angle_map_three_ok():
 
 
 def test_segment_angle_map_four_ok():
-    assert geom.segment_angle_map(4) == [
-        (315, 45, 360),
-        (45, 135, 90),
-        (135, 225, 180),
-        (225, 315, 270)]
+    assert geom.segment_angle_map(4) == [(315, 45, 360), (45, 135, 90), (135, 225, 180), (225, 315, 270)]
 
 
 def test_segment_angle_map_five_ok():
@@ -194,7 +189,8 @@ def test_segment_angle_map_five_ok():
         (36, 108, 72),
         (108, 180, 144),
         (180, 252, 216),
-        (252, 324, 288)]
+        (252, 324, 288),
+    ]
 
 
 def test_segment_angle_map_six_ok():
@@ -204,7 +200,8 @@ def test_segment_angle_map_six_ok():
         (90, 150, 120),
         (150, 210, 180),
         (210, 270, 240),
-        (270, 330, 300)] 
+        (270, 330, 300),
+    ]
 
 
 def test_segment_angle_map_seven_ok():
@@ -215,7 +212,8 @@ def test_segment_angle_map_seven_ok():
         (pytest.approx(128.5714), 180, pytest.approx(154.2857)),
         (180, pytest.approx(231.4286), pytest.approx(205.7143)),
         (pytest.approx(231.4286), pytest.approx(282.8571), pytest.approx(257.1429)),
-        (pytest.approx(282.8571), pytest.approx(334.2857), pytest.approx(308.5714))]
+        (pytest.approx(282.8571), pytest.approx(334.2857), pytest.approx(308.5714)),
+    ]
 
 
 def test_segment_angle_map_eight_ok():
@@ -227,7 +225,8 @@ def test_segment_angle_map_eight_ok():
         (157.5, 202.5, 180),
         (202.5, 247.5, 225),
         (247.5, 292.5, 270),
-        (292.5, 337.5, 315)]
+        (292.5, 337.5, 315),
+    ]
 
 
 def test_segment_angle_map_nine_ok():
@@ -240,7 +239,8 @@ def test_segment_angle_map_nine_ok():
         (180, 220, 200),
         (220, 260, 240),
         (260, 300, 280),
-        (300, 340, 320)]
+        (300, 340, 320),
+    ]
 
 
 def test_segment_angle_map_ten_ok():
@@ -254,7 +254,8 @@ def test_segment_angle_map_ten_ok():
         (198, 234, 216),
         (234, 270, 252),
         (270, 306, 288),
-        (306, 342, 324)]
+        (306, 342, 324),
+    ]
 
 
 def test_segment_angle_map_eleven_ok():
@@ -269,7 +270,8 @@ def test_segment_angle_map_eleven_ok():
         (212.72727272727275, 245.4545454545455, 229.09090909090912),
         (245.4545454545455, 278.18181818181824, 261.81818181818187),
         (278.18181818181824, 310.909090909091, 294.5454545454546),
-        (310.9090909090909, 343.6363636363636, 327.27272727272725)]
+        (310.9090909090909, 343.6363636363636, 327.27272727272725),
+    ]
 
 
 def test_segment_angle_map_twelve_ok():
@@ -285,7 +287,8 @@ def test_segment_angle_map_twelve_ok():
         (225, 255, 240),
         (255, 285, 270),
         (285, 315, 300),
-        (315, 345, 330)]
+        (315, 345, 330),
+    ]
 
 
 def test_segment_angle_map_thirteen_ok():
@@ -303,7 +306,8 @@ def test_segment_angle_map_thirteen_ok():
         (pytest.approx(235.3846, abs=tol), pytest.approx(263.0769, abs=tol), pytest.approx(249.2308, abs=tol)),
         (pytest.approx(263.0769, abs=tol), pytest.approx(290.7692, abs=tol), pytest.approx(276.9231, abs=tol)),
         (pytest.approx(290.7692, abs=tol), pytest.approx(318.4615, abs=tol), pytest.approx(304.6154, abs=tol)),
-        (pytest.approx(318.4615, abs=tol), pytest.approx(346.1538, abs=tol), pytest.approx(332.3077, abs=tol))]
+        (pytest.approx(318.4615, abs=tol), pytest.approx(346.1538, abs=tol), pytest.approx(332.3077, abs=tol)),
+    ]
 
 
 def test_segment_angle_map_fourteen_ok():
@@ -321,7 +325,8 @@ def test_segment_angle_map_fourteen_ok():
         (244.28571428571433, 270, 257.14285714285717),
         (270, 295.7142857142858, 282.8571428571429),
         (295.7142857142858, 321.42857142857156, 308.57142857142867),
-        (321.42857142857144, 347.1428571428571, 334.2857142857143)]
+        (321.42857142857144, 347.1428571428571, 334.2857142857143),
+    ]
 
 
 def test_segment_angle_map_fifteen_ok():
@@ -340,7 +345,8 @@ def test_segment_angle_map_fifteen_ok():
         (252, 276, 264),
         (276, 300, 288),
         (300, 324, 312),
-        (324, 348, 336)]
+        (324, 348, 336),
+    ]
 
 
 def test_segment_angle_map_sixteen_ok():
@@ -360,7 +366,8 @@ def test_segment_angle_map_sixteen_ok():
         (258.75, 281.25, 270),
         (281.25, 303.75, 292.5),
         (303.75, 326.25, 315),
-        (326.25, 348.75, 337.5)]
+        (326.25, 348.75, 337.5),
+    ]
 
 
 def test_transform_angle_map_ncw_icw_minimal_ok():
@@ -388,15 +395,27 @@ def test_transform_angle_map_ncw_icw_two_rotate_thrice_ok():
 
 
 def test_transform_angle_map_ncw_icw_three_ok():
-    assert geom.transform_angle_map_ncw_icw([(300, 60, 360), (60, 180, 120), (180, 300, 240)]) == [(210, 330, 270), (330, 90, 390), (90, 210, 150)]
+    assert geom.transform_angle_map_ncw_icw([(300, 60, 360), (60, 180, 120), (180, 300, 240)]) == [
+        (210, 330, 270),
+        (330, 90, 390),
+        (90, 210, 150),
+    ]
 
 
 def test_transform_angle_map_ncw_icw_three_rotate_once_ok():
-    assert geom.transform_angle_map_ncw_icw([(210, 330, 270), (330, 90, 390), (90, 210, 150)]) == [(120, 240, 180), (240, 360, 300), (0, 120, 60)]
+    assert geom.transform_angle_map_ncw_icw([(210, 330, 270), (330, 90, 390), (90, 210, 150)]) == [
+        (120, 240, 180),
+        (240, 360, 300),
+        (0, 120, 60),
+    ]
 
 
 def test_transform_angle_map_ncw_icw_three_rotate_twice_ok():
-    assert geom.transform_angle_map_ncw_icw([(120, 240, 180), (240, 360, 300), (0, 120, 60)]) == [(30, 150, 90), (150, 270, 210), (270, 30, 330)]
+    assert geom.transform_angle_map_ncw_icw([(120, 240, 180), (240, 360, 300), (0, 120, 60)]) == [
+        (30, 150, 90),
+        (150, 270, 210),
+        (270, 30, 330),
+    ]
 
 
 def test_transform_angle_map_ncw_icw_four_ok():
@@ -443,7 +462,7 @@ def test_transform_angle_map_ncw_icw_five_rotate_twice_ok():
 
 def test_transform_angle_map_ncw_icw_five_rotate_thrice_ok():
     ingoing = [(54, 126, 90), (126, 198, 162), (198, 270, 234), (270, 342, 306), (342, 54, 378)]
-    outgoing = [(324, 36, 360), (36, 108, 72), (108, 180, 144), (180, 252, 216), (252, 324, 288)] 
+    outgoing = [(324, 36, 360), (36, 108, 72), (108, 180, 144), (180, 252, 216), (252, 324, 288)]
     assert geom.transform_angle_map_ncw_icw(ingoing) == outgoing
 
 
@@ -455,7 +474,7 @@ def test_transform_angle_map_ncw_icw_six_ok():
 
 def test_transform_angle_map_ncw_icw_six_rotate_once_ok():
     ingoing = [(240, 300, 270), (300, 360, 330), (0, 60, 30), (60, 120, 90), (120, 180, 150), (180, 240, 210)]
-    outgoing = [(150, 210, 180), (210, 270, 240), (270, 330, 300), (330, 30, 360), (30, 90, 60), (90, 150, 120)] 
+    outgoing = [(150, 210, 180), (210, 270, 240), (270, 330, 300), (330, 30, 360), (30, 90, 60), (90, 150, 120)]
     assert geom.transform_angle_map_ncw_icw(ingoing) == outgoing
 
 
@@ -485,7 +504,7 @@ def test_transform_angle_map_icw_ncw_two_ok():
 
 def test_axis_name_circle_adjust_n_ok():
     angle, font_size_pts, text_angle = 270, 1, 0
-    font_name, axis_name, axis_name_space_sep = "Invisible", "Look", None
+    font_name, axis_name, axis_name_space_sep = 'Invisible', 'Look', None
     args = (angle, font_size_pts, text_angle, font_name, axis_name, axis_name_space_sep)
     assert geom.octant_of_angle(angle) == 'N'
     assert geom.axis_name_circle_adjust(*args) == (-100, -10)
@@ -493,7 +512,7 @@ def test_axis_name_circle_adjust_n_ok():
 
 def test_axis_name_circle_adjust_s_ok():
     angle, font_size_pts, text_angle = 90, 1, 0
-    font_name, axis_name, axis_name_space_sep = "Invisible", "Look", None
+    font_name, axis_name, axis_name_space_sep = 'Invisible', 'Look', None
     args = (angle, font_size_pts, text_angle, font_name, axis_name, axis_name_space_sep)
     assert geom.octant_of_angle(angle) == 'S'
     assert geom.axis_name_circle_adjust(*args) == (-100, 210)
@@ -501,7 +520,7 @@ def test_axis_name_circle_adjust_s_ok():
 
 def test_axis_name_circle_adjust_se_ok():
     angle, font_size_pts, text_angle = 90 - 1, 1, 0
-    font_name, axis_name, axis_name_space_sep = "Invisible", "Look", None
+    font_name, axis_name, axis_name_space_sep = 'Invisible', 'Look', None
     args = (angle, font_size_pts, text_angle, font_name, axis_name, axis_name_space_sep)
     assert geom.octant_of_angle(angle) == 'SE'
     assert geom.axis_name_circle_adjust(*args) == (5, 205)
@@ -509,7 +528,7 @@ def test_axis_name_circle_adjust_se_ok():
 
 def test_axis_name_circle_adjust_ne_ok():
     angle, font_size_pts, text_angle = 270 + 1, 1, 0
-    font_name, axis_name, axis_name_space_sep = "Invisible", "Look", None
+    font_name, axis_name, axis_name_space_sep = 'Invisible', 'Look', None
     args = (angle, font_size_pts, text_angle, font_name, axis_name, axis_name_space_sep)
     assert geom.octant_of_angle(angle) == 'NE'
     assert geom.axis_name_circle_adjust(*args) == (5, -5)
@@ -517,7 +536,7 @@ def test_axis_name_circle_adjust_ne_ok():
 
 def test_axis_name_circle_adjust_e_ok():
     angle, font_size_pts, text_angle = 0, 1, 0
-    font_name, axis_name, axis_name_space_sep = "Invisible", "Look", None
+    font_name, axis_name, axis_name_space_sep = 'Invisible', 'Look', None
     args = (angle, font_size_pts, text_angle, font_name, axis_name, axis_name_space_sep)
     assert geom.octant_of_angle(angle) == 'E'
     assert geom.axis_name_circle_adjust(*args) == (205, 100)
@@ -525,7 +544,7 @@ def test_axis_name_circle_adjust_e_ok():
 
 def test_axis_name_circle_adjust_w_ok():
     angle, font_size_pts, text_angle = 180, 1, 0
-    font_name, axis_name, axis_name_space_sep = "Invisible", "Look", None
+    font_name, axis_name, axis_name_space_sep = 'Invisible', 'Look', None
     args = (angle, font_size_pts, text_angle, font_name, axis_name, axis_name_space_sep)
     assert geom.octant_of_angle(angle) == 'W'
     assert geom.axis_name_circle_adjust(*args) == (-205, 100)
@@ -533,7 +552,7 @@ def test_axis_name_circle_adjust_w_ok():
 
 def test_axis_name_circle_adjust_sw_ok():
     angle, font_size_pts, text_angle = 90 + 1, 1, 0
-    font_name, axis_name, axis_name_space_sep = "Invisible", "Look", None
+    font_name, axis_name, axis_name_space_sep = 'Invisible', 'Look', None
     args = (angle, font_size_pts, text_angle, font_name, axis_name, axis_name_space_sep)
     assert geom.octant_of_angle(angle) == 'SW'
     assert geom.axis_name_circle_adjust(*args) == (-205, 205)
@@ -541,7 +560,7 @@ def test_axis_name_circle_adjust_sw_ok():
 
 def test_axis_name_circle_adjust_nw_ok():
     angle, font_size_pts, text_angle = 270 - 1, 1, 0
-    font_name, axis_name, axis_name_space_sep = "Invisible", "Look", None
+    font_name, axis_name, axis_name_space_sep = 'Invisible', 'Look', None
     args = (angle, font_size_pts, text_angle, font_name, axis_name, axis_name_space_sep)
     assert geom.octant_of_angle(angle) == 'NW'
     assert geom.axis_name_circle_adjust(*args) == (-205, -5)
@@ -554,7 +573,7 @@ def test_octant_of_angle_float_stat(angle):
 
 @given(angle=st.floats(allow_nan=False, allow_infinity=False), font_size_pts=st.floats(), text_angle=st.floats())
 def test_axis_name_circle_adjust_floats_stat(angle, font_size_pts, text_angle):
-    font_name, axis_name, axis_name_space_sep = "Invisible", "Look", None
+    font_name, axis_name, axis_name_space_sep = 'Invisible', 'Look', None
     args = (angle, font_size_pts, text_angle, font_name, axis_name, axis_name_space_sep)
     dx_pix, dy_pix = geom.axis_name_circle_adjust(*args)
     assert isinstance(dx_pix, (float, int))

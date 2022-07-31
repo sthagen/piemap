@@ -1,19 +1,17 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=missing-docstring,unused-import,reimported
-import math
-from hypothesis import assume, given
 import hypothesis.strategies as st
-import pytest  # type: ignore
+from hypothesis import given
 
 import piemap.dsl as dsl
 
 
 def test_dumps_stub_ok():
-    assert dsl.dumps({}) == "{}"
+    assert dsl.dumps({}) == '{}'
 
 
 def test_loads_stub_ok():
-    assert dsl.loads("") is NotImplemented
+    assert dsl.loads('') is NotImplemented
 
 
 def test_is_numeric_true_ok():
@@ -28,18 +26,19 @@ def test_parse_empty():
     default_text_0 = ''
 
     default_generated_0 = [
-        {'AXIS_INDEX': 0,
-         'AXIS_LIMIT': 0.8,
-         'AXIS_LIMIT_FOLDED': False,
-         'AXIS_MAX': 1,
-         'AXIS_META': '',
-         'AXIS_MIN': 0,
-         'AXIS_MIN_FOLDED': False,
-         'AXIS_NAME': 'Dimension',
-         'AXIS_TYPE': 'LINEAR',
-         'AXIS_UNIT': '1',
-         'AXIS_VALUE': 'NULL',
-         },
+        {
+            'AXIS_INDEX': 0,
+            'AXIS_LIMIT': 0.8,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 1,
+            'AXIS_META': '',
+            'AXIS_MIN': 0,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'Dimension',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': 'NULL',
+        },
         {
             'AXIS_INDEX': 1,
             'AXIS_LIMIT': 0.8,
@@ -185,7 +184,8 @@ def test_parse_dim_three_folded():
             'AXIS_TYPE': 'FOLDED',
             'AXIS_UNIT': 'dB',
             'AXIS_VALUE': 0.25,
-        }, ]
+        },
+    ]
 
     default_diagnostics_3 = []
 
@@ -212,18 +212,19 @@ def test_parse_dim_two_linear_unordered():
             'AXIS_UNIT': '1',
             'AXIS_VALUE': -0.1,
         },
-        {'AXIS_INDEX': 1,
-         'AXIS_LIMIT': 1,
-         'AXIS_LIMIT_FOLDED': False,
-         'AXIS_MAX': 2,
-         'AXIS_META': '',
-         'AXIS_MIN': -0.6666666666666666,
-         'AXIS_MIN_FOLDED': False,
-         'AXIS_NAME': 'L 0',
-         'AXIS_TYPE': 'LINEAR',
-         'AXIS_UNIT': '1',
-         'AXIS_VALUE': 'NULL',
-         },
+        {
+            'AXIS_INDEX': 1,
+            'AXIS_LIMIT': 1,
+            'AXIS_LIMIT_FOLDED': False,
+            'AXIS_MAX': 2,
+            'AXIS_META': '',
+            'AXIS_MIN': -0.6666666666666666,
+            'AXIS_MIN_FOLDED': False,
+            'AXIS_NAME': 'L 0',
+            'AXIS_TYPE': 'LINEAR',
+            'AXIS_UNIT': '1',
+            'AXIS_VALUE': 'NULL',
+        },
     ]
 
     default_diagnostics_2_unordered = [
@@ -328,7 +329,8 @@ def test_parse_d2f_ok():
             'AXIS_TYPE': 'FOLDED',
             'AXIS_UNIT': 'V',
             'AXIS_VALUE': 12,
-        }, ]
+        },
+    ]
 
     diag = [
         ' OK index (1) requested, accepted as (1)',
