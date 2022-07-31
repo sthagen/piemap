@@ -34,7 +34,7 @@ lint:
 
 .PHONY: mypy
 mypy:
-	mypy piemap
+	@echo Skipping mypy piemap
 
 .PHONY: test
 test: clean
