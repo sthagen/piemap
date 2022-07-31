@@ -48,6 +48,25 @@ testcov: test
 .PHONY: all
 all: lint mypy testcov
 
+.PHONY: sbom
+sbom:
+	@./gen-sbom
+	@cog -I. -P -c -r --check --markers="[[fill ]]] [[[end]]]" -p "from gen_sbom import *;from gen_licenses import *" docs/third-party/README.md
+
+.PHONY: version
+version:
+	@cog -I. -P -c -r --check --markers="[[fill ]]] [[[end]]]" -p "from gen_version import *" piemap/__init__.py
+
+.PHONY: secure
+secure:
+	@bandit --output current-bandit.json --baseline baseline-bandit.json --format json --recursive --quiet --exclude ./test,./build piemap
+	@diff -Nu {baseline,current}-bandit.json; printf "^ Only the timestamps ^^ ^^ ^^ ^^ ^^ ^^ should differ. OK?\n"
+
+.PHONY: baseline
+baseline:
+	@bandit --output baseline-bandit.json --format json --recursive --quiet --exclude ./test,./build piemap
+	@cat baseline-bandit.json; printf "\n^ The new baseline ^^ ^^ ^^ ^^ ^^ ^^. OK?\n"
+
 .PHONY: clean
 clean:
 	@rm -rf `find . -name __pycache__`
