@@ -12,7 +12,7 @@ One-view visualization of grouped characterizations (Quality Pie).
 
 ## Bug Tracker
 
-Feature requests and bug reports are bested entered in the [todos of piemap](https://todo.sr.ht/~sthagen/piemap).
+Feature requests and bug reports are best entered in the [todos of piemap](https://todo.sr.ht/~sthagen/piemap).
 
 ## Primary Source repository
 
