@@ -13,17 +13,23 @@ __version_info__ = tuple(
 )
 __all__: list[str] = []
 
-APP_NAME = 'One-view visualization of grouped characterizations (Quality Pie).'
 APP_ALIAS = 'piemap'
 APP_ENV = 'PIEMAP'
+APP_NAME = 'One-view visualization of grouped characterizations (Quality Pie).'
+COLON = ':'
+COMMA = ','
 DEBUG = bool(os.getenv(f'{APP_ENV}_DEBUG', ''))
-VERBOSE = bool(os.getenv(f'{APP_ENV}_VERBOSE', ''))
-QUIET = False
-STRICT = bool(os.getenv(f'{APP_ENV}_STRICT', ''))
-ENCODING = 'utf-8'
-ENCODING_ERRORS_POLICY = 'ignore'
 DEFAULT_CONFIG_NAME = '.piemap.json'
 DEFAULT_LF_ONLY = 'YES'
+DOT = '.'
+ENCODING = 'utf-8'
+ENCODING_ERRORS_POLICY = 'ignore'
+KNOWN_FORMATS = ('jpeg', 'png', 'svg')
+PIPE = '|'
+QUIET = False
+SEMI = ';'
+VERBOSE = bool(os.getenv(f'{APP_ENV}_VERBOSE', ''))
+STRICT = bool(os.getenv(f'{APP_ENV}_STRICT', ''))
 log = logging.getLogger()  # Module level logger is sufficient
 LOG_FOLDER = pathlib.Path('logs')
 LOG_FILE = f'{APP_ALIAS}.log'
@@ -32,6 +38,11 @@ LOG_LEVEL = logging.INFO
 
 TS_FORMAT_LOG = '%Y-%m-%dT%H:%M:%S'
 TS_FORMAT_PAYLOADS = '%Y-%m-%d %H:%M:%S.%f UTC'
+
+
+def parse_csl(csl: str) -> list[str]:
+    """DRY."""
+    return [fmt.strip().lower() for fmt in csl.split(COMMA) if fmt.strip()]
 
 
 @no_type_check
