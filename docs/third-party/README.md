@@ -1,8 +1,8 @@
 # Third Party Dependencies
 
 <!--[[[fill sbom_sha256()]]]-->
-The [SBOM in CycloneDX v1.4 JSON format](https://github.com/sthagen/pilli/blob/default/sbom.json) with SHA256 checksum ([e125ceee ...](https://raw.githubusercontent.com/sthagen/pilli/default/sbom.json.sha256 "sha256:e125ceee6bbc307ac10868f848d61be05f156f9388473c6be4601e2dc18c47b7")).
-<!--[[[end]]] (checksum: cf88f4045b300b962e13e1aa5464452d)-->
+The [SBOM in CycloneDX v1.4 JSON format](https://github.com/sthagen/pilli/blob/default/sbom.json) with SHA256 checksum ([23408c1f ...](https://raw.githubusercontent.com/sthagen/pilli/default/sbom.json.sha256 "sha256:23408c1f223892547b966c9391ab9fdc138b18cfaf341fcd697ebbf1ed94163a")).
+<!--[[[end]]] (checksum: 3fd83163be050564f11d1d0fded5bd5b)-->
 ## Licenses 
 
 JSON files with complete license info of: [direct dependencies](direct-dependency-licenses.json) | [all dependencies](all-dependency-licenses.json)
@@ -12,8 +12,8 @@ JSON files with complete license info of: [direct dependencies](direct-dependenc
 <!--[[[fill direct_dependencies_table()]]]-->
 | Name                                       | Version                                        | License     | Author            | Description (from packaging data)                                  |
 |:-------------------------------------------|:-----------------------------------------------|:------------|:------------------|:-------------------------------------------------------------------|
-| [typer](https://github.com/tiangolo/typer) | [0.4.2](https://pypi.org/project/typer/0.4.2/) | MIT License | Sebastián Ramírez | Typer, build great CLIs. Easy to code. Based on Python type hints. |
-<!--[[[end]]] (checksum: 5ac75a28e0476b9a0208aa71188fb159)-->
+| [typer](https://github.com/tiangolo/typer) | [0.6.1](https://pypi.org/project/typer/0.6.1/) | MIT License | Sebastián Ramírez | Typer, build great CLIs. Easy to code. Based on Python type hints. |
+<!--[[[end]]] (checksum: c2be0428a1d266caf9c75abba361d512)-->
 
 ### Indirect Dependencies
 
@@ -37,7 +37,7 @@ Base graphviz file in dot format: [Trees of the direct dependencies](package-dep
 
 <!--[[[fill dependency_tree_console_text()]]]-->
 ````console
-typer==0.4.2
+typer==0.6.1
   - click [required: >=7.1.1,<9.0.0, installed: 8.1.3]
 ````
-<!--[[[end]]] (checksum: 8d01c79cc883a6902d63bfd83f452885)-->
+<!--[[[end]]] (checksum: b2656df30f9cb30882884a23a14b0b10)-->
