@@ -34,7 +34,7 @@ Source-Code = "https://git.sr.ht/~sthagen/piemap"
 Test-Coverage = "https://codes.dilettant.life/coverage/piemap"
 
 [project.scripts]
-piemap = "piemap.cli:app"
+piemap = "piemap.cli:main"
 
 [tool.setuptools.packages.find]
 include = ["piemap"]
