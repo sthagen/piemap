@@ -1,9 +1,9 @@
-SHELL = /bin/bash
-package = shagen/piemap
-
 .DEFAULT_GOAL := all
-isort = isort piemap test
 black = black -S -l 120 --target-version py310 piemap test
+flake8 = flake8 piemap test
+isort = isort piemap test
+pytest = pytest --asyncio-mode=strict --cov=piemap --cov-report term-missing:skip-covered --cov-branch --log-format="%(levelname)s %(message)s"
+types = mypy piemap
 
 .PHONY: install
 install:
@@ -20,25 +20,20 @@ format:
 	$(isort)
 	$(black)
 
-.PHONY: init
-init:
-	pip install -r test/requirements.txt
-	pip install -r test/requirements-dev.txt
-
 .PHONY: lint
 lint:
 	python setup.py check -ms
-	flake8 piemap/ test/
+	$(flake8)
 	$(isort) --check-only --df
 	$(black) --check --diff
 
-.PHONY: mypy
-mypy:
-	@echo Skipping mypy piemap
+.PHONY: types
+types:
+	$(mypy)
 
 .PHONY: test
 test: clean
-	pytest --asyncio-mode=strict --cov=piemap --cov-report term-missing:skip-covered --cov-branch --log-format="%(levelname)s %(message)s"
+	$(pytest)
 
 .PHONY: testcov
 testcov: test
