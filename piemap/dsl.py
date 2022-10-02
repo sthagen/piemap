@@ -2,7 +2,7 @@ import collections
 import json
 
 import piemap.projections as pr
-from piemap import log
+from piemap import PIPE, SEMI, log
 
 NEEDED_NUMBER_OF_AXIS_MAX = 16
 NULL_STR_REP = 'NULL'
@@ -324,3 +324,25 @@ def parse(text: str):
     echo '</html>'."\n";
     """
     return some_axis_maps, info_queue
+
+
+def table(axis_maps, info_queue) -> str:
+    """Display axis maps as markdown table."""
+    normalized_input_data_rows = [SEMI.join(str(v) for v in axis.values()) for axis in axis_maps]
+    log.debug('ReAssembledRows:')
+    for row in normalized_input_data_rows:
+        log.debug(row)
+    normalized_input_data_string = '\n'.join(normalized_input_data_rows)
+    log.debug('ReAssembledNormalizedInput:')
+    log.debug(normalized_input_data_string)
+    table_headers = ('ListNo.', 'Name', 'Type', 'Min', 'Limit', 'Max', 'LimitFolded', 'MinFolded', 'Value', 'Unit')
+    table_header_str_row = PIPE.join(table_headers)
+    table_body_str_rows = []
+    for i, data in enumerate(axis_maps, start=1):
+        display_row = PIPE.join(str(d) for d in data.values())
+        table_body_str_rows.append(display_row)
+    if info_queue:
+        log.warning('InfoQueue:')
+        for diagnostic in info_queue:
+            log.warning(f'- {diagnostic}')
+    return '\n'.join([table_header_str_row] + table_body_str_rows)
