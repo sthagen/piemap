@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := all
 black = black -S -l 120 --target-version py310 piemap test
-flake8 = flake8 piemap test
+flake8 = flake8 --ignore E203,W503 piemap test
 isort = isort piemap test
 pytest = pytest --asyncio-mode=strict --cov=piemap --cov-report term-missing:skip-covered --cov-branch --log-format="%(levelname)s %(message)s"
 types = mypy piemap
@@ -41,7 +41,7 @@ testcov: test
 	@coverage html
 
 .PHONY: all
-all: lint mypy testcov
+all: lint types testcov
 
 .PHONY: sbom
 sbom:
