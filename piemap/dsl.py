@@ -2,6 +2,7 @@ import collections
 import json
 
 import piemap.projections as pr
+from piemap import log
 
 NEEDED_NUMBER_OF_AXIS_MAX = 16
 NULL_STR_REP = 'NULL'
@@ -145,39 +146,37 @@ def parse(text: str):
 
         axis_values = default_folded_values() if ';FOLDED;' in row_string else default_linear_values()
         axis_values_cand = row_string.split(REC_SEP)
-        print()
-        print(f'__{"FOLDED" if ";FOLDED;" in row_string else "NO_FOLD"}__')
-        print(f'has axis_values[{len(axis_values)}]({axis_values})')
+        log.info(f'__{"FOLDED" if ";FOLDED;" in row_string else "NO_FOLD"}__')
+        log.info(f'has axis_values[{len(axis_values)}]({axis_values})')
         if len(axis_values) >= len(axis_values_cand):
             kks = default_keys()
             for i, v in enumerate(axis_values_cand):
                 if v != '':
                     be_v = compact_value(v)
-                    print(f'DEBUG:: [{i}]( == {kks[i]}): ({axis_values[i]}) --> ({be_v})')
+                    log.debug(f'[{i}]( == {kks[i]}): ({axis_values[i]}) --> ({be_v})')
                     axis_values[i] = be_v
                 else:
-                    print(f'DEBUG:: [{i}]( == {kks[i]}): ({axis_values[i]}) kept ({axis_values[i]})')
+                    log.debug(f'[{i}]( == {kks[i]}): ({axis_values[i]}) kept ({axis_values[i]})')
         if len(axis_values) > len(axis_values_cand):
             kks = default_keys()
             for i, v in enumerate(axis_values[len(axis_values_cand) :], start=len(axis_values_cand)):
-                print(f'DEBUG:: [{i}]( == {kks[i]}): ({axis_values[i]}) untouched ({axis_values[i]})')
+                log.debug(f'[{i}]( == {kks[i]}): ({axis_values[i]}) untouched ({axis_values[i]})')
 
-        print(f'has axis candidate[{len(axis_values_cand)}]({axis_values_cand})')
+        log.info(f'has axis candidate[{len(axis_values_cand)}]({axis_values_cand})')
         axis_map = dict(zip(default_keys(), axis_values))
-        print(f'... axis map is ({axis_map})')
+        log.info(f'... axis map is ({axis_map})')
         numeric_axis_types = ('LINEAR', 'FOLDED')
         if axis_map['AXIS_INDEX'] == '':
-            print()
-            print(f"has index idea({axis_map['AXIS_INDEX']}) is False?")
-            print(f'... axis map is ({axis_map})')
+            log.info(f"has index idea({axis_map['AXIS_INDEX']}) is False?")
+            log.info(f'... axis map is ({axis_map})')
             axis_map['AXIS_INDEX'] = n
             i_cfc = axis_map['AXIS_INDEX']
         else:
             print()
-            print(f"has index idea({axis_map['AXIS_INDEX']}) is True")
+            log.info(f"has index idea({axis_map['AXIS_INDEX']}) is True")
             index_cand = str(axis_map['AXIS_INDEX'])
             if is_numeric(index_cand) and float(index_cand) == float(int(float(index_cand))):
-                print(f'is_numeric({index_cand}) is True')
+                log.info(f'is_numeric({index_cand}) is True')
                 i_cfc = str(maybe_int(index_cand))
                 axis_map['AXIS_INDEX'] = int(i_cfc)
                 if index_cand != i_cfc:  # Was !== in PHP
@@ -185,7 +184,7 @@ def parse(text: str):
                 else:
                     info_queue.append(f' OK index ({index_cand}) requested, accepted as ({i_cfc})')
             else:
-                print(f'is_numeric({index_cand}) is False')
+                log.info(f'is_numeric({index_cand}) is False')
                 i_cfc = str(n)
                 info_queue.append(
                     f'NOK invalid index ({index_cand}) requested, accepted per parsing order as ({i_cfc})'
@@ -204,8 +203,7 @@ def parse(text: str):
                 if axis_map['AXIS_VALUE'] != NULL_STR_REP and not is_numeric(axis_map['AXIS_VALUE']):
                     axis_map['AXIS_VALUE'] = NULL_STR_REP
             else:  # axis_map['AXIS_TYPE'] == 'FOLDED':
-                print()
-                print(f'... claim of FOLDED is True? Axis map is ({axis_map})')
+                log.info(f'... claim of FOLDED is True? Axis map is ({axis_map})')
                 if is_numeric(axis_map['AXIS_LIMIT']) and is_numeric(axis_map['AXIS_MAX']):
                     axis_map['AXIS_MIN'] = maybe_int(
                         pr.min_from_limit_max(axis_map['AXIS_LIMIT'], axis_map['AXIS_MAX'])
