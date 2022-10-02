@@ -1,15 +1,15 @@
-# -*- coding: utf-8 -*-
-# pylint: disable=expression-not-assigned,line-too-long
 """Create single view visualization mapping parameter values to an area scale resembling a (quality) pie."""
+import argparse
 import os
 
-DEBUG_VAR = 'PIEMAP_DEBUG'
-DEBUG = os.getenv(DEBUG_VAR)
 
-ENCODING = 'utf-8'
-ENCODING_ERRORS_POLICY = 'ignore'
+from piemap import DEBUG, ENCODING, ENCODING_ERRORS_POLICY, log
 
 
-def parse(text):
+def parse(text):  # noqa
     """Later we parse the DSL."""
     return NotImplemented
+
+
+def main(options: argparse.Namespace) -> int:
+    return 0
