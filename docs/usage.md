@@ -144,27 +144,27 @@ AXIS_NO;AXIS_NAME;AXIS_TYPE;MIN;LIMIT;MAX;VALUE;UNIT where usually only LIMIT, M
 These data input lines have to be written for each segment that should be created.
 Below the data input field buttons are placed which assist to create data input lines corresponding to the four different types of axes.
 
-AXIS_NO:
+AXIS_NO
 :    This entry means axis number, which by default is the consecutive number in the order of the segment command lines.
 Thus switching the segment command lines will result in switching the segments in the quality pie, unless explicitly numbered (starting at 0).
 
-AXIS_NAME:
+AXIS_NAME
 :    This entry can be used to display the name of the parameter next to the outer end of the segment, if not switched off by a global setting.
 
-AXIS_TYPE:
+AXIS_TYPE
 :    This entry can be used to select the type of axis as explained above; the default setting is LINEAR.
 
-MIN:
+MIN
 :    The minimum value of the axis; for linear and folded scales any entries in this section will be ignored; the categorial scale does also not make direct use of minimum values.
 
-LIMIT:
+LIMIT
 :    Limit between result values considered ok and result values considered not ok. In the case of the FOLDED axis type, there will be two values displayed:
 
-1.) LIMIT
+    1.) LIMIT
 
-2.) 2×MAX - LIMIT
+    2.) 2×MAX - LIMIT
 
-MAX:
+MAX
 :    Maximum or optimum value of the axis that can be reached for this parameter.
 
 VALUE:
