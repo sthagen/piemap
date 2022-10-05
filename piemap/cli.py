@@ -29,7 +29,7 @@ def parse_request(argv: list[str]) -> int | argparse.Namespace:
         '--out-path',
         '-o',
         dest='out_path',
-        default='piemap.png',
+        default='piemap',
         help='output file path for graphic (default: piemap.png)',
     )
     parser.add_argument(
@@ -81,7 +81,7 @@ def parse_request(argv: list[str]) -> int | argparse.Namespace:
         if options.input_path_pos:
             options.input_path = options.input_path_pos
         else:
-            options.input_path = 'piemap.png'
+            options.input_path = 'piemap.dsl'
 
     return options
 
