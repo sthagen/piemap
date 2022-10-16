@@ -76,8 +76,9 @@ def fake_line(angle: float) -> Coord:
 
 
 @no_type_check
-def render() -> None:
+def render(values: tuple[float | None, ...]) -> None:
     """Make importable to support tests."""
+    n_dim = len(values)
 
     # create an image for prototyping
     im = Image.new(mode='RGBA', size=(WIDTH, HEIGHT), color=WHITE)
@@ -85,37 +86,36 @@ def render() -> None:
     # create prototyping draw context
     draw = ImageDraw.Draw(im)
 
-    N = 9
-    R = RADIUS
-    r = (R, R * 0.90, R * 0.80, R * 0.70, R * 0.65, R * 0.60, R * 0.55, 0, None)
-
     # All good if above disc at 80% all sectors below receive proportional red coloring adding to the yellow
-    draw.pieslice(bbox_from_radii(R, R * 0.80), *fake_full_circle(ANGLE_OFF), fill=RED)
+    draw.pieslice(bbox_from_radii(RADIUS, RADIUS * 0.80), *fake_full_circle(ANGLE_OFF), fill=RED)
 
     # Inner disc to hide singularity noise at center
-    draw.pieslice(bbox_from_radii(R, R * 0.10), *fake_full_circle(ANGLE_OFF), fill=GRAY)
+    draw.pieslice(bbox_from_radii(RADIUS, RADIUS * 0.10), *fake_full_circle(ANGLE_OFF), fill=GRAY)
 
     # The sectors
-    for n in range(N):
-        val = r[n]
+    for n, val in enumerate(values):
         if val is None:
-            draw.pieslice(bbox_from_radii(R, R), start_of(n, N), end_of(n, N), fill=WHITE)
+            draw.pieslice(bbox_from_radii(RADIUS, RADIUS), start_of(n, n_dim), end_of(n, n_dim), fill=WHITE)
             continue
 
-        color = YELLOW if val < R * 0.80 else GREEN
-        draw.pieslice(bbox_from_radii(R, val), start_of(n, N), end_of(n, N), fill=color)
+        color = YELLOW if val < RADIUS * 0.80 else GREEN
+        draw.pieslice(bbox_from_radii(RADIUS, val), start_of(n, n_dim), end_of(n, n_dim), fill=color)
 
     # The axes
-    for n in range(N):
+    for n in range(n_dim):
         draw.pieslice(
-            extrude_bbox_by(PIE_BOX, 15), *fake_line(middle_of(n, N)), fill=GRAY, outline=GRAY, width=LINE_WIDTH
+            extrude_bbox_by(PIE_BOX, 15), *fake_line(middle_of(n, n_dim)), fill=GRAY, outline=GRAY, width=LINE_WIDTH
         )
 
     # outer circle (axis marker joining all dimensions)
-    draw.pieslice(bbox_from_radii(R, R * 1.00), *fake_full_circle(ANGLE_OFF), fill=None, outline=GRAY, width=LINE_WIDTH)
+    draw.pieslice(
+        bbox_from_radii(RADIUS, RADIUS * 1.00), *fake_full_circle(ANGLE_OFF), fill=None, outline=GRAY, width=LINE_WIDTH
+    )
 
     # All good if above disc at 80% circle only as marker
-    draw.pieslice(bbox_from_radii(R, R * 0.80), *fake_full_circle(ANGLE_OFF), fill=None, outline=GRAY, width=1)
+    draw.pieslice(
+        bbox_from_radii(RADIUS, RADIUS * 0.80), *fake_full_circle(ANGLE_OFF), fill=None, outline=GRAY, width=1
+    )
 
     # title and sub title
     t_fnt = ImageFont.truetype(FONT_PATH, TITLE_SIZE)
@@ -137,4 +137,6 @@ def render() -> None:
 
 
 if __name__ == '__main__':
-    render()
+    R = RADIUS
+    r = (R, R * 0.90, R * 0.80, R * 0.70, R * 0.65, R * 0.60, R * 0.55, 0, None)
+    render(r)
