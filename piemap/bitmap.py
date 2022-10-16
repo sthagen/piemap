@@ -30,7 +30,7 @@ gray = '#c0c0c0'
 yellow = '#ffff20'
 white = '#ffffff'
 
-# All good if above disc at 80%
+# All good if above disc at 80% all sectors below receive proportional red coloring adding to the yellow
 fill = red
 start = 270
 end = 269.95
@@ -101,9 +101,19 @@ left_upper = (center_x + shift, center_y + shift)
 right_lower = (center_x + rd, center_y + rd)
 draw.pieslice((left_upper, right_lower), start, end, fill=fill, outline=gray, width=1)
 
+# All good if above disc at 80% circle only as marker
+fill = None
+start = 270
+end = 269.95
+rd = R * 0.80
+shift = R - rd
+left_upper = (center_x + shift, center_y + shift)
+right_lower = (center_x + rd, center_y + rd)
+draw.pieslice((left_upper, right_lower), start, end, fill=fill, outline=gray, width=1)
+
 # title and sub title
-t_fnt = ImageFont.truetype("FreeMono.ttf", t_size)
-st_fnt = ImageFont.truetype("FreeMono.ttf", st_size)
+t_fnt = ImageFont.truetype('../FreeMono.ttf', t_size)
+st_fnt = ImageFont.truetype('../FreeMono.ttf', st_size)
 t_text = 'Hällo'
 st_text = "Wörldß"
 t_len = draw.textlength(t_text, font=t_fnt)
@@ -113,6 +123,6 @@ draw.multiline_text((W / 2 - int(st_len / 2), hoff + t_size), st_text, font=st_f
 del draw
 
 # im.resize((640, 640), resample=Image.Resampling.LANCZOS)
-im.save('show.png', "PNG")
+im.save('../bitmap.png', "PNG")
 
 im.show()
