@@ -17,11 +17,11 @@ def test_end_of():
 
 
 def test_bbox_from_radii_extreme_zero():
-    assert bitm.bbox_from_radii(1, 0) == ((91.0, 141.0), (90.0, 140.0))
+    assert bitm.bbox_from_radii(1, 0) == ((91.0, 141.0), (91.0, 141.0))
 
 
 def test_bbox_from_radii_boring_same():
-    assert bitm.bbox_from_radii(1, 1) == ((90.0, 140.0), (91.0, 141.0))
+    assert bitm.bbox_from_radii(1, 1) == ((90.0, 140.0), (92.0, 142.0))
 
 
 @given(n=st.integers(min_value=0, max_value=100))
