@@ -46,6 +46,13 @@ def end_of(n: int, n_max: int) -> float:
 
 
 @no_type_check
+def bbox_from_radii(ref_r: int, r: float) -> tuple[tuple[float, float], tuple[float, float]]:
+    """Return bbox as left upper and right lower x,y tuples from radius within reference radius"""
+    shift = ref_r - r
+    return (CENTER_X + shift, CENTER_Y + shift), (CENTER_X + r, CENTER_Y + r)
+
+
+@no_type_check
 def render() -> None:
     """Make importable to support tests."""
 
@@ -61,24 +68,15 @@ def render() -> None:
 
     # All good if above disc at 80% all sectors below receive proportional red coloring adding to the yellow
     rd = R * 0.80
-    shift = R - rd
-    left_upper = (CENTER_X + shift, CENTER_Y + shift)
-    right_lower = (CENTER_X + rd, CENTER_Y + rd)
-    draw.pieslice((left_upper, right_lower), ANGLE_OFF, ANGLE_OFF - 0.05, fill=RED)
+    draw.pieslice(bbox_from_radii(R, rd), ANGLE_OFF, ANGLE_OFF - 0.05, fill=RED)
 
     # Very bad if visible disc at 60%
     rd = R * 0.6
-    shift = R - rd
-    left_upper = (CENTER_X + shift, CENTER_Y + shift)
-    right_lower = (CENTER_X + rd, CENTER_Y + rd)
-    draw.pieslice((left_upper, right_lower), ANGLE_OFF, ANGLE_OFF - 0.05, fill=None, outline=GRAY, width=LINE_WIDTH)
+    draw.pieslice(bbox_from_radii(R, rd), ANGLE_OFF, ANGLE_OFF - 0.05, fill=None, outline=GRAY, width=LINE_WIDTH)
 
     # Inner disc to hide singularity noise at center
     rd = R * 0.10
-    shift = R - rd
-    left_upper = (CENTER_X + shift, CENTER_Y + shift)
-    right_lower = (CENTER_X + rd, CENTER_Y + rd)
-    draw.pieslice((left_upper, right_lower), ANGLE_OFF, ANGLE_OFF - 0.05, fill=GRAY)
+    draw.pieslice(bbox_from_radii(R, rd), ANGLE_OFF, ANGLE_OFF - 0.05, fill=GRAY)
 
     # The sectors
     for n in range(N):
@@ -86,17 +84,11 @@ def render() -> None:
         end = end_of(n, N)
         val = r[n]
         if val is None:
-            shift = R - R
-            left_upper = (CENTER_X + shift, CENTER_Y + shift)
-            right_lower = (CENTER_X + R, CENTER_Y + R)
-            draw.pieslice((left_upper, right_lower), start, end, fill=WHITE)
+            draw.pieslice(bbox_from_radii(R, R), start, end, fill=WHITE)
             continue
 
         color = YELLOW if val < R * 0.80 else GREEN
-        shift = R - val
-        left_upper = (CENTER_X + shift, CENTER_Y + shift)
-        right_lower = (CENTER_X + val, CENTER_Y + val)
-        draw.pieslice((left_upper, right_lower), start, end, fill=color)
+        draw.pieslice(bbox_from_radii(R, val), start, end, fill=color)
 
     # The axes
     for n in range(N):
@@ -109,17 +101,11 @@ def render() -> None:
 
     # outer circle (axis marker joining all dimensions)
     rd = R * 1.00
-    shift = R - rd
-    left_upper = (CENTER_X + shift, CENTER_Y + shift)
-    right_lower = (CENTER_X + rd, CENTER_Y + rd)
-    draw.pieslice((left_upper, right_lower), ANGLE_OFF, ANGLE_OFF - 0.05, fill=None, outline=GRAY, width=LINE_WIDTH)
+    draw.pieslice(bbox_from_radii(R, rd), ANGLE_OFF, ANGLE_OFF - 0.05, fill=None, outline=GRAY, width=LINE_WIDTH)
 
     # All good if above disc at 80% circle only as marker
     rd = R * 0.80
-    shift = R - rd
-    left_upper = (CENTER_X + shift, CENTER_Y + shift)
-    right_lower = (CENTER_X + rd, CENTER_Y + rd)
-    draw.pieslice((left_upper, right_lower), ANGLE_OFF, ANGLE_OFF - 0.05, fill=None, outline=GRAY, width=1)
+    draw.pieslice(bbox_from_radii(R, rd), ANGLE_OFF, ANGLE_OFF - 0.05, fill=None, outline=GRAY, width=1)
 
     # title and sub title
     t_fnt = ImageFont.truetype(FONT_PATH, TITLE_SIZE)
