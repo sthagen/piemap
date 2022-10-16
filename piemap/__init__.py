@@ -14,8 +14,8 @@ __version_info__ = tuple(
 __all__: list[str] = [
     'ANGLE_MAX',
     'ANGLE_OFF',
-    'CENTER_X',
-    'CENTER_Y',
+    'TOP_LEFT_X',
+    'TOP_LEFT_Y',
     'DARKRED',
     'DEBUG',
     'ENCODING',
@@ -27,6 +27,7 @@ __all__: list[str] = [
     'HEIGHT_OFF',
     'LABEL_SIZE',
     'LINE_WIDTH',
+    'PIE_BOX',
     'RADIUS',
     'RADIUS_HALF',
     'RED',
@@ -77,8 +78,9 @@ HEIGHT_HALF = HEIGHT / 2
 RADIUS_HALF = RADIUS / 2
 WIDTH_OFF = 0
 HEIGHT_OFF = 50
-CENTER_X = WIDTH_HALF - RADIUS_HALF
-CENTER_Y = HEIGHT_HALF - RADIUS_HALF + HEIGHT_OFF
+TOP_LEFT_X = WIDTH_HALF - RADIUS_HALF
+TOP_LEFT_Y = HEIGHT_HALF - RADIUS_HALF + HEIGHT_OFF
+PIE_BOX = ((TOP_LEFT_X, TOP_LEFT_Y), (TOP_LEFT_X + RADIUS, TOP_LEFT_Y + RADIUS))
 
 ANGLE_OFF = 270
 ANGLE_MAX = 360

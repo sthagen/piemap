@@ -5,17 +5,18 @@ from PIL import Image, ImageDraw, ImageFont  # type: ignore
 from piemap import (
     ANGLE_MAX,
     ANGLE_OFF,
-    CENTER_X,
-    CENTER_Y,
     GRAY,
     GREEN,
     HEIGHT,
     HEIGHT_OFF,
     LINE_WIDTH,
+    PIE_BOX,
     RADIUS,
     RED,
     SUBTITLE_SIZE,
     TITLE_SIZE,
+    TOP_LEFT_X,
+    TOP_LEFT_Y,
     WHITE,
     WIDTH,
     WIDTH_HALF,
@@ -53,7 +54,7 @@ def end_of(n: int, n_max: int) -> float:
 def bbox_from_radii(ref_r: int, r: float) -> BBox:
     """Return bbox as left upper and right lower x,y tuples from radius within reference radius"""
     shift = ref_r - r
-    return (CENTER_X + shift, CENTER_Y + shift), (CENTER_X + r, CENTER_Y + r)
+    return (TOP_LEFT_X + shift, TOP_LEFT_Y + shift), (TOP_LEFT_X + r, TOP_LEFT_Y + r)
 
 
 @no_type_check
@@ -91,9 +92,6 @@ def render() -> None:
     # All good if above disc at 80% all sectors below receive proportional red coloring adding to the yellow
     draw.pieslice(bbox_from_radii(R, R * 0.80), *fake_full_circle(ANGLE_OFF), fill=RED)
 
-    # Very bad if visible disc at 60%
-    draw.pieslice(bbox_from_radii(R, R * 0.6), *fake_full_circle(ANGLE_OFF), fill=None, outline=GRAY, width=LINE_WIDTH)
-
     # Inner disc to hide singularity noise at center
     draw.pieslice(bbox_from_radii(R, R * 0.10), *fake_full_circle(ANGLE_OFF), fill=GRAY)
 
@@ -109,10 +107,9 @@ def render() -> None:
 
     # The axes
     for n in range(N):
-        left_upper = (CENTER_X, CENTER_Y)
-        right_lower = (CENTER_X + R, CENTER_Y + R)
-        bbox = extrude_bbox_by((left_upper, right_lower), 15)
-        draw.pieslice(bbox, *fake_line(middle_of(n, N)), fill=GRAY, outline=GRAY, width=LINE_WIDTH)
+        draw.pieslice(
+            extrude_bbox_by(PIE_BOX, 15), *fake_line(middle_of(n, N)), fill=GRAY, outline=GRAY, width=LINE_WIDTH
+        )
 
     # outer circle (axis marker joining all dimensions)
     draw.pieslice(bbox_from_radii(R, R * 1.00), *fake_full_circle(ANGLE_OFF), fill=None, outline=GRAY, width=LINE_WIDTH)
