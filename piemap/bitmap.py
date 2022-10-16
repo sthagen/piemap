@@ -76,6 +76,19 @@ def fake_line(angle: float) -> Coord:
 
 
 @no_type_check
+def draw_titles(engine, title: str, subtitle: str) -> None:
+    """Draw the title and subtitle centered on top of the pie and adjust placement for text length."""
+    t_fnt = ImageFont.truetype(FONT_PATH, TITLE_SIZE)
+    st_fnt = ImageFont.truetype(FONT_PATH, SUBTITLE_SIZE)
+    t_len = engine.textlength(title, font=t_fnt)
+    st_len = engine.textlength(subtitle, font=st_fnt)
+    engine.multiline_text((WIDTH_HALF - int(t_len / 2), HEIGHT_OFF), title, font=t_fnt, fill=(0, 0, 0), align='center')
+    engine.multiline_text(
+        (WIDTH_HALF - int(st_len / 2), HEIGHT_OFF + TITLE_SIZE), subtitle, font=st_fnt, fill=(0, 0, 0), align='center'
+    )
+
+
+@no_type_check
 def render(values: tuple[float | None, ...]) -> None:
     """Make importable to support tests."""
     n_dim = len(values)
@@ -118,16 +131,7 @@ def render(values: tuple[float | None, ...]) -> None:
     )
 
     # title and sub title
-    t_fnt = ImageFont.truetype(FONT_PATH, TITLE_SIZE)
-    st_fnt = ImageFont.truetype(FONT_PATH, SUBTITLE_SIZE)
-    t_text = 'Hällo'
-    st_text = 'Wörldß'
-    t_len = draw.textlength(t_text, font=t_fnt)
-    st_len = draw.textlength(st_text, font=st_fnt)
-    draw.multiline_text((WIDTH_HALF - int(t_len / 2), HEIGHT_OFF), t_text, font=t_fnt, fill=(0, 0, 0), align='center')
-    draw.multiline_text(
-        (WIDTH_HALF - int(st_len / 2), HEIGHT_OFF + TITLE_SIZE), st_text, font=st_fnt, fill=(0, 0, 0), align='center'
-    )
+    draw_titles(draw, title='Hällo', subtitle='Wörldß')
     del draw
 
     # im.resize((640, 640), resample=Image.Resampling.LANCZOS)
