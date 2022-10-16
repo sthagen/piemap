@@ -24,6 +24,10 @@ from piemap import (
 
 FONT_PATH = '../FreeMono.ttf'
 OUT_PNG_PATH = '../bitmap.png'
+FAKE_EPS_DEGREES = 0.05
+
+Coord = tuple[float, float]
+BBox = tuple[Coord, Coord]
 
 
 @no_type_check
@@ -46,10 +50,28 @@ def end_of(n: int, n_max: int) -> float:
 
 
 @no_type_check
-def bbox_from_radii(ref_r: int, r: float) -> tuple[tuple[float, float], tuple[float, float]]:
+def bbox_from_radii(ref_r: int, r: float) -> BBox:
     """Return bbox as left upper and right lower x,y tuples from radius within reference radius"""
     shift = ref_r - r
     return (CENTER_X + shift, CENTER_Y + shift), (CENTER_X + r, CENTER_Y + r)
+
+
+@no_type_check
+def extrude_bbox_by(bbox: BBox, extrusion: int) -> BBox:
+    """Extrude bounding box symmetrically by extrusion amount."""
+    return (bbox[0][0] - extrusion, bbox[0][1] - extrusion), (bbox[1][0] + extrusion, bbox[1][1] + extrusion)
+
+
+@no_type_check
+def fake_full_circle(angle: float) -> Coord:
+    """Fake a full circle to reduce the number of functions used."""
+    return angle, angle - FAKE_EPS_DEGREES
+
+
+@no_type_check
+def fake_line(angle: float) -> Coord:
+    """Fake a line to reduce the number of functions used."""
+    return angle, angle + FAKE_EPS_DEGREES
 
 
 @no_type_check
@@ -67,45 +89,36 @@ def render() -> None:
     r = (R, R * 0.90, R * 0.80, R * 0.70, R * 0.65, R * 0.60, R * 0.55, 0, None)
 
     # All good if above disc at 80% all sectors below receive proportional red coloring adding to the yellow
-    rd = R * 0.80
-    draw.pieslice(bbox_from_radii(R, rd), ANGLE_OFF, ANGLE_OFF - 0.05, fill=RED)
+    draw.pieslice(bbox_from_radii(R, R * 0.80), *fake_full_circle(ANGLE_OFF), fill=RED)
 
     # Very bad if visible disc at 60%
-    rd = R * 0.6
-    draw.pieslice(bbox_from_radii(R, rd), ANGLE_OFF, ANGLE_OFF - 0.05, fill=None, outline=GRAY, width=LINE_WIDTH)
+    draw.pieslice(bbox_from_radii(R, R * 0.6), *fake_full_circle(ANGLE_OFF), fill=None, outline=GRAY, width=LINE_WIDTH)
 
     # Inner disc to hide singularity noise at center
-    rd = R * 0.10
-    draw.pieslice(bbox_from_radii(R, rd), ANGLE_OFF, ANGLE_OFF - 0.05, fill=GRAY)
+    draw.pieslice(bbox_from_radii(R, R * 0.10), *fake_full_circle(ANGLE_OFF), fill=GRAY)
 
     # The sectors
     for n in range(N):
-        start = start_of(n, N)
-        end = end_of(n, N)
         val = r[n]
         if val is None:
-            draw.pieslice(bbox_from_radii(R, R), start, end, fill=WHITE)
+            draw.pieslice(bbox_from_radii(R, R), start_of(n, N), end_of(n, N), fill=WHITE)
             continue
 
         color = YELLOW if val < R * 0.80 else GREEN
-        draw.pieslice(bbox_from_radii(R, val), start, end, fill=color)
+        draw.pieslice(bbox_from_radii(R, val), start_of(n, N), end_of(n, N), fill=color)
 
     # The axes
     for n in range(N):
-        start = middle_of(n, N)
-        end = start + 0.05
-        extrusion = 15
-        left_upper = (CENTER_X - extrusion, CENTER_Y - extrusion)
-        right_lower = (CENTER_X + R + extrusion, CENTER_Y + R + extrusion)
-        draw.pieslice((left_upper, right_lower), start, end, fill=GRAY, outline=GRAY, width=LINE_WIDTH)
+        left_upper = (CENTER_X, CENTER_Y)
+        right_lower = (CENTER_X + R, CENTER_Y + R)
+        bbox = extrude_bbox_by((left_upper, right_lower), 15)
+        draw.pieslice(bbox, *fake_line(middle_of(n, N)), fill=GRAY, outline=GRAY, width=LINE_WIDTH)
 
     # outer circle (axis marker joining all dimensions)
-    rd = R * 1.00
-    draw.pieslice(bbox_from_radii(R, rd), ANGLE_OFF, ANGLE_OFF - 0.05, fill=None, outline=GRAY, width=LINE_WIDTH)
+    draw.pieslice(bbox_from_radii(R, R * 1.00), *fake_full_circle(ANGLE_OFF), fill=None, outline=GRAY, width=LINE_WIDTH)
 
     # All good if above disc at 80% circle only as marker
-    rd = R * 0.80
-    draw.pieslice(bbox_from_radii(R, rd), ANGLE_OFF, ANGLE_OFF - 0.05, fill=None, outline=GRAY, width=1)
+    draw.pieslice(bbox_from_radii(R, R * 0.80), *fake_full_circle(ANGLE_OFF), fill=None, outline=GRAY, width=1)
 
     # title and sub title
     t_fnt = ImageFont.truetype(FONT_PATH, TITLE_SIZE)
