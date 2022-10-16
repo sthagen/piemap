@@ -21,6 +21,22 @@ st_size = 24
 center_x = W / 2 - R / 2
 center_y = H / 2 - R / 2 + hoff
 
+
+def start_of(n: int) -> float:
+    """Start angle in values [0, MAX] first ref is 12 o'clock (OFF) with the of sector n of [1, N]."""
+    return n * MAX / N + OFF - MAX / N / 2
+
+
+def middle_of(n: int) -> float:
+    """Middle angle (axis) in values [0, MAX] first ref is 12 o'clock (OFF) with the of sector n of [1, N]."""
+    return n * MAX / N + OFF
+
+
+def end_of(n: int) -> float:
+    """End angle in values [0, MAX] first ref is 12 o'clock (OFF) with the of sector n of [1, N]."""
+    return start_of(n) + MAX / N
+
+
 # colors
 green = '#008800'
 yellowgreen = '#77ff20'
@@ -63,8 +79,8 @@ draw.pieslice((left_upper, right_lower), start, end, fill=fill)
 # The sectors
 for n in range(N):
     width = 1
-    start = n * MAX / N + OFF
-    end = start + MAX / N
+    start = start_of(n)  # n * MAX / N + OFF
+    end = end_of(n)  # start + MAX / N
     if r[n] > 0:
         fill = colors[n]
         shift = R - r[n]
@@ -84,7 +100,7 @@ for n in range(N):
 # The axes
 for n in range(N):
     width = 1
-    start = n * MAX / N + OFF
+    start = middle_of(n)  # n * MAX / N + OFF
     end = start + 0.05
     extrusion = 15
     left_upper = (center_x - extrusion, center_y - extrusion)
