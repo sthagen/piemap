@@ -1,3 +1,7 @@
+from typing import no_type_check
+
+
+@no_type_check
 def min_from_limit_max(limit, maximum):
     """
     Testdata: (-6, -1, 2, 5, 10) or (0, 5, 8, 11, 16)
@@ -7,11 +11,13 @@ def min_from_limit_max(limit, maximum):
     return (8.0 * limit - 5.0 * maximum) / 3.0
 
 
+@no_type_check
 def domain_from_limit_max(limit, maximum):
     """Prepare the scales paradigm for non-folded axes."""
     return min_from_limit_max(limit, maximum), maximum
 
 
+@no_type_check
 def limit_folded_from_limit_max(limit, maximum):
     """
     Testdata: (-6, -1, 2, 5, 10) or (0, 5, 8, 11, 16)
@@ -20,6 +26,7 @@ def limit_folded_from_limit_max(limit, maximum):
     return 2.0 * maximum - limit  # explicit maximum + ( maximum - limit )
 
 
+@no_type_check
 def min_folded_from_limit_max(limit, maximum):
     """
     Testdata: (-6, -1, 2, 5, 10) or (0, 5, 8, 11, 16)
@@ -29,6 +36,7 @@ def min_folded_from_limit_max(limit, maximum):
     return (11.0 * maximum - 8.0 * limit) / 3.0
 
 
+@no_type_check
 def domain_folded_from_limit_max(limit, maximum):
     """Prepare the scales paradigm for folded axes."""
     max_domain = min_folded_from_limit_max(limit, maximum)
@@ -36,6 +44,7 @@ def domain_folded_from_limit_max(limit, maximum):
     return min_domain, max_domain
 
 
+@no_type_check
 def value_folded_from_limit_max(value, maximum):
     """
     Testdata: (-6, -1, 2, 5, 10) or (0, 5, 8, 11, 16)  # FIXME COPY
@@ -44,6 +53,7 @@ def value_folded_from_limit_max(value, maximum):
     return 2.0 * maximum - value  # explicit maximum - ( value - maximum )
 
 
+@no_type_check
 def limit_ordered_from_domain(domain):
     """
     Testdata: ("3", "2c", "2b", "2a", "1") or ("ORIGIN", "not ok", "LIMIT_VALUE", "ok")
@@ -56,6 +66,7 @@ def limit_ordered_from_domain(domain):
     return domain[len(domain) // 2]
 
 
+@no_type_check
 def min_ordered_from_domain(domain):
     """
     Testdata: ("3", "2c", "2b", "2a", "1") or ("ORIGIN", "not ok", "LIMIT_VALUE", "ok")
@@ -64,11 +75,13 @@ def min_ordered_from_domain(domain):
     return domain[0] if domain else 'NULL'
 
 
+@no_type_check
 def domain_ordered_from_domain(domain):
     """Prepare the scales paradigm for ordered axes."""
     return domain if domain else 'NULL'
 
 
+@no_type_check
 def max_ordered_from_domain(domain):
     """
     Testdata: ("3", "2c", "2b", "2a", "1") or ("ORIGIN", "not ok", "LIMIT_VALUE", "ok")

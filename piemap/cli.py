@@ -2,7 +2,7 @@
 import argparse
 import sys
 
-import piemap.piemap as api
+import piemap.api as api
 from piemap import APP_ALIAS, APP_NAME, KNOWN_FORMATS, parse_csl
 
 

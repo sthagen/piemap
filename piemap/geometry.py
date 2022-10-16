@@ -1,6 +1,8 @@
 import math
+from typing import no_type_check
 
 
+@no_type_check
 def exact_top_of_center(angle):
     """
     True, if angle leads to point exactly top of center
@@ -8,6 +10,7 @@ def exact_top_of_center(angle):
     return True if angle == 270 else False
 
 
+@no_type_check
 def exact_bottom_of_center(angle):
     """
     True, if angle leads to point exactly bottom of center
@@ -15,6 +18,7 @@ def exact_bottom_of_center(angle):
     return True if angle == 90 else False
 
 
+@no_type_check
 def right_bottom_of_center(angle):
     """
     True, if angle leads to point right bottom of center
@@ -22,6 +26,7 @@ def right_bottom_of_center(angle):
     return True if angle < 90 else False
 
 
+@no_type_check
 def right_top_of_center(angle):
     """
     True, if angle leads to point right top of center
@@ -29,6 +34,7 @@ def right_top_of_center(angle):
     return True if angle > 270 else False
 
 
+@no_type_check
 def left_bottom_of_center(angle):
     """
     True, if angle leads to point left bottom of center
@@ -36,6 +42,7 @@ def left_bottom_of_center(angle):
     return True if 90 < angle < 180 else False
 
 
+@no_type_check
 def left_top_of_center(angle):
     """
     True, if angle leads to point left top of center
@@ -43,6 +50,7 @@ def left_top_of_center(angle):
     return True if 180 <= angle < 270 else False
 
 
+@no_type_check
 def octant_of_angle(angle):
     """
     derive octant in (N,NW,W,SW,S,SE,E,NE) counterclockwise from angle
@@ -65,6 +73,7 @@ def octant_of_angle(angle):
         return 'NE'
 
 
+@no_type_check
 def axis_name_circle_adjust(angle, font_size_pts, text_angle, font_name, axis_name, axis_name_space_sep=None):
     """
     calculate axis name placements from bounding box and angle
@@ -127,6 +136,7 @@ def axis_name_circle_adjust(angle, font_size_pts, text_angle, font_name, axis_na
     return dx_pixel, dy_pixel
 
 
+@no_type_check
 def xy_point_from_radius_angle(radius, angle, c_x=0, c_y=0):
     """
     return point as tuple in (x,y) = (radius,angle/[deg]) possibly shifted (c_x, c_y)
@@ -145,6 +155,7 @@ def xy_point_from_radius_angle(radius, angle, c_x=0, c_y=0):
         return math.nan, math.nan
 
 
+@no_type_check
 def segment_angle_map(needed_number_of_axis):
     """
     return map of clockwise allocated angles for the needed axis segments
@@ -177,6 +188,7 @@ def segment_angle_map(needed_number_of_axis):
     return triplets
 
 
+@no_type_check
 def transform_angle_map_ncw_icw(segment_angle_map_ncw):
     """
     return map of adjusted angles for imagefilledarcClockWise from nativeCW
@@ -197,6 +209,7 @@ def transform_angle_map_ncw_icw(segment_angle_map_ncw):
     return rotate(closure_guard, norm, segment_angle_map_ncw, signed_shift_degrees)
 
 
+@no_type_check
 def transform_angle_map_icw_ncw(segment_angle_map_icw):
     """
     return map of canonicalized angles for nativeClockWise from imagefilledarcCW
@@ -217,6 +230,7 @@ def transform_angle_map_icw_ncw(segment_angle_map_icw):
     return rotate(closure_guard, norm, segment_angle_map_icw, signed_shift_degrees)
 
 
+@no_type_check
 def rotate(closure_guard, norm, segment_angle_map_icw, signed_shift_degrees):
     """Derive triplet mappings for segments."""
     triplets = []
@@ -234,6 +248,7 @@ def rotate(closure_guard, norm, segment_angle_map_icw, signed_shift_degrees):
     return triplets
 
 
+@no_type_check
 def derive_stop(angle_start, closure_guard, delta, norm):
     """Derive stop angle respecting closure via norm."""
     angle = math.fmod(delta + norm, norm)
@@ -242,6 +257,7 @@ def derive_stop(angle_start, closure_guard, delta, norm):
     return angle
 
 
+@no_type_check
 def derive_mid(angle_start, angle_stop, norm):
     """Derive mid angle respectng closure via norm."""
     angle = (angle_stop + angle_start) / 2.0

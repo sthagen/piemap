@@ -1,5 +1,6 @@
 import collections
 import json
+from typing import no_type_check
 
 import piemap.projections as pr
 from piemap import PIPE, SEMI, log
@@ -10,26 +11,31 @@ REC_SEP = ';'
 ROW_SEP = '\n'
 
 
+@no_type_check
 def dumps(config):
     """Dump configuration into string."""
     return json.dumps(config)
 
 
+@no_type_check
 def dump(config, handle):
     """Dump configuration into JSON file via handle."""
     return json.dump(config, handle)
 
 
+@no_type_check
 def loads(text):
     """Load configuration from string."""
     return NotImplemented
 
 
+@no_type_check
 def load(handle):
     """Load configuration from JSON file handle."""
     return json.load(handle)
 
 
+@no_type_check
 def default_linear():
     """DRY."""
     return {
@@ -47,16 +53,19 @@ def default_linear():
     }
 
 
+@no_type_check
 def default_keys():
     """DRY."""
     return list(default_linear().keys())
 
 
+@no_type_check
 def default_linear_values():
     """DRY."""
     return list(default_linear().values())
 
 
+@no_type_check
 def default_folded():
     """DRY."""
     return {
@@ -74,16 +83,19 @@ def default_folded():
     }
 
 
+@no_type_check
 def default_folded_values():
     """DRY."""
     return list(default_folded().values())
 
 
+@no_type_check
 def unsafe(text):
     """TODO(sthagen) keep/drop list applies here."""
     return text
 
 
+@no_type_check
 def is_numeric(text):
     """Migration artifact."""
     try:
@@ -93,6 +105,7 @@ def is_numeric(text):
         return False
 
 
+@no_type_check
 def maybe_int(value):
     """Rococo."""
     if float(value) == float(int(float(value))):
@@ -101,6 +114,7 @@ def maybe_int(value):
     return value
 
 
+@no_type_check
 def compact_value(text):
     """HACK A DID ACK ..."""
     if not is_numeric(text):
@@ -113,6 +127,7 @@ def compact_value(text):
         return float(text)
 
 
+@no_type_check
 def example_default():
     """Maybe not wanted but matches reference behavior."""
     some_axis_maps = [default_linear()]
@@ -128,6 +143,7 @@ def example_default():
     return some_axis_maps, ['Default used, since no input given.']
 
 
+@no_type_check
 def parse(text: str):
     """Parse the DSL contained in text."""
     if not text.strip():
@@ -326,6 +342,7 @@ def parse(text: str):
     return some_axis_maps, info_queue
 
 
+@no_type_check
 def table(axis_maps, info_queue) -> str:
     """Display axis maps as markdown table."""
     normalized_input_data_rows = [SEMI.join(str(v) for v in axis.values()) for axis in axis_maps]

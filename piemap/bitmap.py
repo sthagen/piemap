@@ -1,144 +1,134 @@
-from PIL import Image, ImageDraw, ImageFont
-# get an image
-W = 1080
-H = W
-im = Image.new(mode="RGBA", size=(W, H), color='white')
+from typing import no_type_check
 
-# create draw context and draw arc
-draw = ImageDraw.Draw(im)
-N = 16
-# colors = ('limegreen', 'seagreen', 'yellow', 'yellowgreen', 'crimson', 'silver') * 4
-colors = ('darkgreen', 'yellow', 'yellow', 'yellow', 'yellow', 'white', 'yellow', 'darkgreen') * 4
-OFF = 270
-MAX = 360
-R = 900
-r = (R * 0.80, R * 0.60, R * 0.30, R * 0.15, R * 0.10, 0, 20, R) * 4
-# r = (R, R, R, R, R) * 4
-woff = 0
-hoff = 50
-t_size = 40
-st_size = 24
-center_x = W / 2 - R / 2
-center_y = H / 2 - R / 2 + hoff
+from PIL import Image, ImageDraw, ImageFont  # type: ignore
+
+from piemap import (
+    ANGLE_MAX,
+    ANGLE_OFF,
+    CENTER_X,
+    CENTER_Y,
+    GRAY,
+    GREEN,
+    HEIGHT,
+    HEIGHT_OFF,
+    LINE_WIDTH,
+    RADIUS,
+    RED,
+    SUBTITLE_SIZE,
+    TITLE_SIZE,
+    WHITE,
+    WIDTH,
+    WIDTH_HALF,
+    YELLOW,
+)
 
 
-def start_of(n: int) -> float:
+@no_type_check
+def start_of(n: int, n_max: int) -> float:
     """Start angle in values [0, MAX] first ref is 12 o'clock (OFF) with the of sector n of [1, N]."""
-    return n * MAX / N + OFF - MAX / N / 2
+    fractional_angle = ANGLE_MAX / n_max
+    return n * fractional_angle + ANGLE_OFF - fractional_angle / 2
 
 
-def middle_of(n: int) -> float:
+@no_type_check
+def middle_of(n: int, n_max: int) -> float:
     """Middle angle (axis) in values [0, MAX] first ref is 12 o'clock (OFF) with the of sector n of [1, N]."""
-    return n * MAX / N + OFF
+    return n * ANGLE_MAX / n_max + ANGLE_OFF
 
 
-def end_of(n: int) -> float:
+@no_type_check
+def end_of(n: int, n_max: int) -> float:
     """End angle in values [0, MAX] first ref is 12 o'clock (OFF) with the of sector n of [1, N]."""
-    return start_of(n) + MAX / N
+    return start_of(n, n_max) + ANGLE_MAX / n_max
 
 
-# colors
-green = '#008800'
-yellowgreen = '#77ff20'
-red = '#dd0000'
-darkred = '#900000'
-gray = '#c0c0c0'
-yellow = '#ffff20'
-white = '#ffffff'
+# create an image for prototyping
+im = Image.new(mode='RGBA', size=(WIDTH, HEIGHT), color=WHITE)
+
+# create prototyping draw context
+draw = ImageDraw.Draw(im)
+
+N = 9
+R = RADIUS
+r = (R, R * 0.90, R * 0.80, R * 0.70, R * 0.65, R * 0.60, R * 0.55, 0, None)
 
 # All good if above disc at 80% all sectors below receive proportional red coloring adding to the yellow
-fill = red
-start = 270
-end = 269.95
 rd = R * 0.80
 shift = R - rd
-left_upper = (center_x + shift, center_y + shift)
-right_lower = (center_x + rd, center_y + rd)
-draw.pieslice((left_upper, right_lower), start, end, fill=fill)
+left_upper = (CENTER_X + shift, CENTER_Y + shift)
+right_lower = (CENTER_X + rd, CENTER_Y + rd)
+draw.pieslice((left_upper, right_lower), ANGLE_OFF, ANGLE_OFF - 0.05, fill=RED)
 
 # Very bad if visible disc at 60%
-start = 270
-end = 269.95
 rd = R * 0.6
 shift = R - rd
-left_upper = (center_x + shift, center_y + shift)
-right_lower = (center_x + rd, center_y + rd)
-draw.pieslice((left_upper, right_lower), start, end, fill=None, outline=gray, width=1)
+left_upper = (CENTER_X + shift, CENTER_Y + shift)
+right_lower = (CENTER_X + rd, CENTER_Y + rd)
+draw.pieslice((left_upper, right_lower), ANGLE_OFF, ANGLE_OFF - 0.05, fill=None, outline=GRAY, width=LINE_WIDTH)
 
 
 # Inner disc to hide singularity noise at center
-fill = gray
-start = 270
-end = 269.95
 rd = R * 0.10
 shift = R - rd
-left_upper = (center_x + shift, center_y + shift)
-right_lower = (center_x + rd, center_y + rd)
-draw.pieslice((left_upper, right_lower), start, end, fill=fill)
+left_upper = (CENTER_X + shift, CENTER_Y + shift)
+right_lower = (CENTER_X + rd, CENTER_Y + rd)
+draw.pieslice((left_upper, right_lower), ANGLE_OFF, ANGLE_OFF - 0.05, fill=GRAY)
 
 # The sectors
 for n in range(N):
-    width = 1
-    start = start_of(n)  # n * MAX / N + OFF
-    end = end_of(n)  # start + MAX / N
-    if r[n] > 0:
-        fill = colors[n]
-        shift = R - r[n]
-        left_upper = (center_x + shift, center_y + shift)
-        right_lower = (center_x + r[n], center_y + r[n])
-        draw.pieslice((left_upper, right_lower), start, end, fill=fill)  # , outline='black', width=width)
-        # draw.rectangle((left_upper, right_lower), fill=None, outline=fill, width=width)
-    else:
-        fill = white
+    start = start_of(n, N)
+    end = end_of(n, N)
+    val = r[n]
+    if val is None:
         shift = R - R
-        left_upper = (center_x + shift, center_y + shift)
-        right_lower = (center_x + R, center_y + R)
-        draw.pieslice((left_upper, right_lower), start, end, fill=fill)  # , outline='black', width=width)
-        # draw.rectangle((left_upper, right_lower), fill=None, outline=fill, width=width)
-    # im.show()
+        left_upper = (CENTER_X + shift, CENTER_Y + shift)
+        right_lower = (CENTER_X + R, CENTER_Y + R)
+        draw.pieslice((left_upper, right_lower), start, end, fill=WHITE)
+        continue
+
+    color = YELLOW if val < R * 0.80 else GREEN
+    shift = R - val
+    left_upper = (CENTER_X + shift, CENTER_Y + shift)
+    right_lower = (CENTER_X + val, CENTER_Y + val)
+    draw.pieslice((left_upper, right_lower), start, end, fill=color)
 
 # The axes
 for n in range(N):
-    width = 1
-    start = middle_of(n)  # n * MAX / N + OFF
+    start = middle_of(n, N)
     end = start + 0.05
     extrusion = 15
-    left_upper = (center_x - extrusion, center_y - extrusion)
-    right_lower = (center_x + R + extrusion, center_y + R + extrusion)
-    draw.pieslice((left_upper, right_lower), start, end, fill=gray, outline=gray, width=width)
+    left_upper = (CENTER_X - extrusion, CENTER_Y - extrusion)
+    right_lower = (CENTER_X + R + extrusion, CENTER_Y + R + extrusion)
+    draw.pieslice((left_upper, right_lower), start, end, fill=GRAY, outline=GRAY, width=LINE_WIDTH)
 
 # outer circle (axis marker joining all dimensions)
-fill = None
-start = 270
-end = 269.95
 rd = R * 1.00
 shift = R - rd
-left_upper = (center_x + shift, center_y + shift)
-right_lower = (center_x + rd, center_y + rd)
-draw.pieslice((left_upper, right_lower), start, end, fill=fill, outline=gray, width=1)
+left_upper = (CENTER_X + shift, CENTER_Y + shift)
+right_lower = (CENTER_X + rd, CENTER_Y + rd)
+draw.pieslice((left_upper, right_lower), ANGLE_OFF, ANGLE_OFF - 0.05, fill=None, outline=GRAY, width=LINE_WIDTH)
 
 # All good if above disc at 80% circle only as marker
-fill = None
-start = 270
-end = 269.95
 rd = R * 0.80
 shift = R - rd
-left_upper = (center_x + shift, center_y + shift)
-right_lower = (center_x + rd, center_y + rd)
-draw.pieslice((left_upper, right_lower), start, end, fill=fill, outline=gray, width=1)
+left_upper = (CENTER_X + shift, CENTER_Y + shift)
+right_lower = (CENTER_X + rd, CENTER_Y + rd)
+draw.pieslice((left_upper, right_lower), ANGLE_OFF, ANGLE_OFF - 0.05, fill=None, outline=GRAY, width=1)
 
 # title and sub title
-t_fnt = ImageFont.truetype('../FreeMono.ttf', t_size)
-st_fnt = ImageFont.truetype('../FreeMono.ttf', st_size)
+t_fnt = ImageFont.truetype('../FreeMono.ttf', TITLE_SIZE)
+st_fnt = ImageFont.truetype('../FreeMono.ttf', SUBTITLE_SIZE)
 t_text = 'Hällo'
-st_text = "Wörldß"
+st_text = 'Wörldß'
 t_len = draw.textlength(t_text, font=t_fnt)
 st_len = draw.textlength(st_text, font=st_fnt)
-draw.multiline_text((W / 2 - int(t_len / 2), hoff), t_text, font=t_fnt, fill=(0, 0, 0), align='center')
-draw.multiline_text((W / 2 - int(st_len / 2), hoff + t_size), st_text, font=st_fnt, fill=(0, 0, 0), align='center')
+draw.multiline_text((WIDTH_HALF - int(t_len / 2), HEIGHT_OFF), t_text, font=t_fnt, fill=(0, 0, 0), align='center')
+draw.multiline_text(
+    (WIDTH_HALF - int(st_len / 2), HEIGHT_OFF + TITLE_SIZE), st_text, font=st_fnt, fill=(0, 0, 0), align='center'
+)
 del draw
 
 # im.resize((640, 640), resample=Image.Resampling.LANCZOS)
-im.save('../bitmap.png', "PNG")
+im.save('../bitmap.png', 'PNG')
 
 im.show()

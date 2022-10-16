@@ -11,14 +11,41 @@ __version__ = '2022.10.2+parent.e8735f64'
 __version_info__ = tuple(
     e if '-' not in e else e.split('-')[0] for part in __version__.split('+') for e in part.split('.') if e != 'parent'
 )
-__all__: list[str] = []
+__all__: list[str] = [
+    'ANGLE_MAX',
+    'ANGLE_OFF',
+    'CENTER_X',
+    'CENTER_Y',
+    'DARKRED',
+    'DEBUG',
+    'ENCODING',
+    'ENCODING_ERRORS_POLICY',
+    'GRAY',
+    'GREEN',
+    'HEIGHT',
+    'HEIGHT_HALF',
+    'HEIGHT_OFF',
+    'LABEL_SIZE',
+    'LINE_WIDTH',
+    'RADIUS',
+    'RADIUS_HALF',
+    'RED',
+    'SUBTITLE_SIZE',
+    'TITLE_SIZE',
+    'WHITE',
+    'WIDTH',
+    'WIDTH_HALF',
+    'WIDTH_OFF',
+    'YELLOW',
+    'YELLOWGREEN',
+    'log',
+]
 
 APP_ALIAS = 'piemap'
 APP_ENV = 'PIEMAP'
 APP_NAME = 'One-view visualization of grouped characterizations (Quality Pie).'
 COLON = ':'
 COMMA = ','
-DEBUG = bool(os.getenv(f'{APP_ENV}_DEBUG', ''))
 DEFAULT_CONFIG_NAME = '.piemap.json'
 DEFAULT_LF_ONLY = 'YES'
 DOT = '.'
@@ -28,8 +55,11 @@ KNOWN_FORMATS = ('jpeg', 'png', 'svg')
 PIPE = '|'
 QUIET = False
 SEMI = ';'
+
+DEBUG = bool(os.getenv(f'{APP_ENV}_DEBUG', ''))
 VERBOSE = bool(os.getenv(f'{APP_ENV}_VERBOSE', ''))
 STRICT = bool(os.getenv(f'{APP_ENV}_STRICT', ''))
+
 log = logging.getLogger()  # Module level logger is sufficient
 LOG_FOLDER = pathlib.Path('logs')
 LOG_FILE = f'{APP_ALIAS}.log'
@@ -38,6 +68,35 @@ LOG_LEVEL = logging.INFO
 
 TS_FORMAT_LOG = '%Y-%m-%dT%H:%M:%S'
 TS_FORMAT_PAYLOADS = '%Y-%m-%d %H:%M:%S.%f UTC'
+
+WIDTH = 1080
+HEIGHT = WIDTH
+RADIUS = 900
+WIDTH_HALF = WIDTH / 2
+HEIGHT_HALF = HEIGHT / 2
+RADIUS_HALF = RADIUS / 2
+WIDTH_OFF = 0
+HEIGHT_OFF = 50
+CENTER_X = WIDTH_HALF - RADIUS_HALF
+CENTER_Y = HEIGHT_HALF - RADIUS_HALF + HEIGHT_OFF
+
+ANGLE_OFF = 270
+ANGLE_MAX = 360
+
+# font sizes and line width
+TITLE_SIZE = 40
+SUBTITLE_SIZE = 24
+LABEL_SIZE = 16
+LINE_WIDTH = 1
+
+# colors
+DARKRED = '#900000'
+GRAY = '#c0c0c0'
+GREEN = '#008800'
+RED = '#dd0000'
+WHITE = '#ffffff'
+YELLOW = '#ffff20'
+YELLOWGREEN = '#77ff20'
 
 
 def parse_csl(csl: str) -> list[str]:
