@@ -8,7 +8,7 @@ im = Image.new(mode="RGBA", size=(W, H), color='white')
 draw = ImageDraw.Draw(im)
 N = 16
 # colors = ('limegreen', 'seagreen', 'yellow', 'yellowgreen', 'crimson', 'silver') * 4
-colors = ('limegreen', 'limegreen', 'limegreen', 'limegreen', 'limegreen', 'limegreen') * 4
+colors = ('darkgreen', 'yellow', 'yellow', 'yellow', 'yellow', 'white', 'yellow', 'darkgreen') * 4
 OFF = 270
 MAX = 360
 R = 900
@@ -21,18 +21,17 @@ st_size = 24
 center_x = W / 2 - R / 2
 center_y = H / 2 - R / 2 + hoff
 
-# outer circle (axis marker joining all dimensions)
-fill = None
-start = 270
-end = 269.95
-rd = R * 1.00
-shift = R - rd
-left_upper = (center_x + shift, center_y + shift)
-right_lower = (center_x + rd, center_y + rd)
-draw.pieslice((left_upper, right_lower), start, end, fill=fill, outline='silver', width=1)
+# colors
+green = '#008800'
+yellowgreen = '#77ff20'
+red = '#dd0000'
+darkred = '#900000'
+gray = '#c0c0c0'
+yellow = '#ffff20'
+white = '#ffffff'
 
 # All good if above disc at 80%
-fill = 'yellow'
+fill = red
 start = 270
 end = 269.95
 rd = R * 0.80
@@ -48,11 +47,11 @@ rd = R * 0.6
 shift = R - rd
 left_upper = (center_x + shift, center_y + shift)
 right_lower = (center_x + rd, center_y + rd)
-draw.pieslice((left_upper, right_lower), start, end, fill='red')
+draw.pieslice((left_upper, right_lower), start, end, fill=None, outline=gray, width=1)
 
 
 # Inner disc to hide singularity noise at center
-fill = 'silver'
+fill = gray
 start = 270
 end = 269.95
 rd = R * 0.10
@@ -74,7 +73,7 @@ for n in range(N):
         draw.pieslice((left_upper, right_lower), start, end, fill=fill)  # , outline='black', width=width)
         # draw.rectangle((left_upper, right_lower), fill=None, outline=fill, width=width)
     else:
-        fill = 'lightgray'
+        fill = white
         shift = R - R
         left_upper = (center_x + shift, center_y + shift)
         right_lower = (center_x + R, center_y + R)
@@ -90,7 +89,17 @@ for n in range(N):
     extrusion = 15
     left_upper = (center_x - extrusion, center_y - extrusion)
     right_lower = (center_x + R + extrusion, center_y + R + extrusion)
-    draw.pieslice((left_upper, right_lower), start, end, fill='silver', outline='silver', width=width)
+    draw.pieslice((left_upper, right_lower), start, end, fill=gray, outline=gray, width=width)
+
+# outer circle (axis marker joining all dimensions)
+fill = None
+start = 270
+end = 269.95
+rd = R * 1.00
+shift = R - rd
+left_upper = (center_x + shift, center_y + shift)
+right_lower = (center_x + rd, center_y + rd)
+draw.pieslice((left_upper, right_lower), start, end, fill=fill, outline=gray, width=1)
 
 # title and sub title
 t_fnt = ImageFont.truetype("FreeMono.ttf", t_size)
