@@ -28,3 +28,13 @@ def test_bbox_from_radii_boring_same():
 def test_start_of_data_driven(n):
     n_max = n + 1
     assert 0 <= bitm.start_of(n, n_max) <= 360
+
+
+@given(angle=st.integers(min_value=0, max_value=100))
+def test_fake_full_circle(angle):
+    assert bitm.fake_full_circle(angle) == (angle, angle - bitm.FAKE_EPS_DEGREES)
+
+
+@given(angle=st.integers(min_value=0, max_value=100))
+def test_fake_line(angle):
+    assert bitm.fake_line(angle) == (angle, angle + bitm.FAKE_EPS_DEGREES)
