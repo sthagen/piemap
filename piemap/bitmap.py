@@ -136,7 +136,7 @@ def render(values: tuple[float | None, ...]) -> None:
     im.show()
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     R = RADIUS
     r = (R, R * 0.90, R * 0.80, R * 0.70, R * 0.65, R * 0.60, R * 0.55, 0, None)
     render(r)
