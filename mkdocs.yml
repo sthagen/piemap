@@ -3,6 +3,8 @@ site_description: "One-view visualization of grouped characterizations (Quality 
 
 theme:
   name: 'material'
+  logo: assets/logo.png
+  favicon: images/favicon.ico
   features:
     - navigation.expand
     - toc.integrate
