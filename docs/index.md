@@ -4,6 +4,8 @@ One-view visualization of grouped characterizations (Quality Pie).
 
 [License: MIT](https://git.sr.ht/~sthagen/piemap/tree/default/item/LICENSE)
 
+Third party dependencies are documented in the folder [third-party](third-party/README.md).
+
 [![version](https://img.shields.io/pypi/v/piemap.svg?style=flat)](https://pypi.python.org/pypi/piemap/)
 [![downloads](https://pepy.tech/badge/piemap/month)](https://pepy.tech/project/piemap)
 [![wheel](https://img.shields.io/pypi/wheel/piemap.svg?style=flat)](https://pypi.python.org/pypi/piemap/)
