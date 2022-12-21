@@ -100,6 +100,12 @@ def draw_label_at(engine, label: str, at: Coord) -> None:
 
 
 @no_type_check
+def to_plot(xy: Coord) -> Coord:
+    """Map [0, 1] x [0, 1] onto the plot area that goes east, south."""
+    return NotImplemented
+
+
+@no_type_check
 def render(values: tuple[float | None, ...]) -> None:
     """Make importable to support tests."""
     n_dim = len(values)
