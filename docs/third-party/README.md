@@ -1,8 +1,8 @@
 # Third Party Dependencies
 
 <!--[[[fill sbom_sha256()]]]-->
-The [SBOM in CycloneDX v1.4 JSON format](https://github.com/sthagen/pilli/blob/default/sbom.json) with SHA256 checksum ([e23ca8e5 ...](https://raw.githubusercontent.com/sthagen/pilli/default/sbom.json.sha256 "sha256:e23ca8e52d33081c167ae6565b94d83df41b83864ed59d5a064320ccdde9e8e4")).
-<!--[[[end]]] (checksum: 61869251dc9c0eb87e851548603a4912)-->
+The [SBOM in CycloneDX v1.4 JSON format](https://git.sr.ht/~sthagen/piemap/blob/default/sbom.json) with SHA256 checksum ([132e8714 ...](https://git.sr.ht/~sthagen/piemap/blob/default/sbom.json.sha256 "sha256:132e87146535996857a8c2e3e5be26be16c769ece206bae20ecaa188ecddcf1b")).
+<!--[[[end]]] (checksum: 9e873a3516175358c3a54808b62616cf)-->
 ## Licenses 
 
 JSON files with complete license info of: [direct dependencies](direct-dependency-licenses.json) | [all dependencies](all-dependency-licenses.json)
@@ -12,9 +12,9 @@ JSON files with complete license info of: [direct dependencies](direct-dependenc
 <!--[[[fill direct_dependencies_table()]]]-->
 | Name                                       | Version                                         | License                                            | Author                       | Description (from packaging data)                                  |
 |:-------------------------------------------|:------------------------------------------------|:---------------------------------------------------|:-----------------------------|:-------------------------------------------------------------------|
-| [Pillow](https://python-pillow.org)        | [9.2.0](https://pypi.org/project/Pillow/9.2.0/) | Historical Permission Notice and Disclaimer (HPND) | Alex Clark (PIL Fork Author) | Python Imaging Library (Fork)                                      |
-| [typer](https://github.com/tiangolo/typer) | [0.6.1](https://pypi.org/project/typer/0.6.1/)  | MIT License                                        | Sebastián Ramírez            | Typer, build great CLIs. Easy to code. Based on Python type hints. |
-<!--[[[end]]] (checksum: 3e6daabac2a2b175e391d67eed090aa8)-->
+| [Pillow](https://python-pillow.org)        | [9.3.0](https://pypi.org/project/Pillow/9.3.0/) | Historical Permission Notice and Disclaimer (HPND) | Alex Clark (PIL Fork Author) | Python Imaging Library (Fork)                                      |
+| [typer](https://github.com/tiangolo/typer) | [0.7.0](https://pypi.org/project/typer/0.7.0/)  | MIT License                                        | Sebastián Ramírez            | Typer, build great CLIs. Easy to code. Based on Python type hints. |
+<!--[[[end]]] (checksum: 8ab7b6be4e89689e746866df58cd10dd)-->
 
 ### Indirect Dependencies
 
@@ -38,8 +38,8 @@ Base graphviz file in dot format: [Trees of the direct dependencies](package-dep
 
 <!--[[[fill dependency_tree_console_text()]]]-->
 ````console
-Pillow==9.2.0
-typer==0.6.1
+Pillow==9.3.0
+typer==0.7.0
   - click [required: >=7.1.1,<9.0.0, installed: 8.1.3]
 ````
-<!--[[[end]]] (checksum: 5bd388568579f08816e04d72b9dec214)-->
+<!--[[[end]]] (checksum: 6e3238f53f3eccd38fc22f50384abd5c)-->
