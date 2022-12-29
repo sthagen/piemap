@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.4.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.4",
-  "serialNumber": "urn:uuid:c46064f6-4bfc-4951-b167-19945e365880",
+  "serialNumber": "urn:uuid:d9ab7f29-a76e-4364-949e-92a377d19840",
   "version": 1,
   "metadata": {
-    "timestamp": "2022-12-28T16:32:51.685440+00:00",
+    "timestamp": "2022-12-29T17:16:00.597272+00:00",
     "tools": [
       {
         "vendor": "CycloneDX",
@@ -56,14 +56,14 @@
   "components": [
     {
       "type": "library",
-      "bom-ref": "77cd1ecc-f009-46b5-84d9-1f73f61ba071",
+      "bom-ref": "ca1d645d-51eb-4d6c-bab9-806136d0cde3",
       "name": "Pillow",
       "version": "9.3.0",
       "purl": "pkg:pypi/pillow@9.3.0"
     },
     {
       "type": "library",
-      "bom-ref": "7c9ea533-eaf1-4602-9571-ddcb1200cdc0",
+      "bom-ref": "0c69268c-aff2-420d-ab03-6321709dd17b",
       "name": "typer",
       "version": "0.7.0",
       "purl": "pkg:pypi/typer@0.7.0"
@@ -71,11 +71,11 @@
   ],
   "dependencies": [
     {
-      "ref": "77cd1ecc-f009-46b5-84d9-1f73f61ba071",
+      "ref": "ca1d645d-51eb-4d6c-bab9-806136d0cde3",
       "dependsOn": []
     },
     {
-      "ref": "7c9ea533-eaf1-4602-9571-ddcb1200cdc0",
+      "ref": "0c69268c-aff2-420d-ab03-6321709dd17b",
       "dependsOn": []
     }
   ]
