@@ -43,24 +43,24 @@ __all__: list[str] = [
     'log',
 ]
 
-APP_ALIAS = 'piemap'
-APP_ENV = 'PIEMAP'
-APP_NAME = 'One-view visualization of grouped characterizations (Quality Pie).'
-COLON = ':'
-COMMA = ','
-DEFAULT_CONFIG_NAME = '.piemap.json'
-DEFAULT_LF_ONLY = 'YES'
-DOT = '.'
-ENCODING = 'utf-8'
-ENCODING_ERRORS_POLICY = 'ignore'
-KNOWN_FORMATS = ('jpeg', 'png', 'svg')
-PIPE = '|'
-QUIET = False
-SEMI = ';'
-
+APP_ALIAS = str(pathlib.Path(__file__).parent.name)
+APP_ENV = APP_ALIAS.upper()
+APP_NAME = locals()['__doc__']
 DEBUG = bool(os.getenv(f'{APP_ENV}_DEBUG', ''))
 VERBOSE = bool(os.getenv(f'{APP_ENV}_VERBOSE', ''))
+QUIET = False
 STRICT = bool(os.getenv(f'{APP_ENV}_STRICT', ''))
+ENCODING = 'utf-8'
+ENCODING_ERRORS_POLICY = 'ignore'
+DEFAULT_CONFIG_NAME = f'.{APP_ALIAS}.json'
+
+COLON = ':'
+COMMA = ','
+DEFAULT_LF_ONLY = 'YES'
+DOT = '.'
+KNOWN_FORMATS = ('jpeg', 'png', 'svg')
+PIPE = '|'
+SEMI = ';'
 
 log = logging.getLogger()  # Module level logger is sufficient
 LOG_FOLDER = pathlib.Path('logs')
