@@ -159,7 +159,6 @@ def parse(text: str):
     for n, row_string in enumerate(
         axis_values_rows_req[:NEEDED_NUMBER_OF_AXIS_MAX]
     ):  # Was: array_slice(axis_values_rows_req, 0, NEEDED_NUMBER_OF_AXIS_MAX)
-
         axis_values = default_folded_values() if ';FOLDED;' in row_string else default_linear_values()
         axis_values_cand = row_string.split(REC_SEP)
         log.info(f'__{"FOLDED" if ";FOLDED;" in row_string else "NO_FOLD"}__')
