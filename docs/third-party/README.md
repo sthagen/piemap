@@ -1,8 +1,8 @@
 # Third Party Dependencies
 
 <!--[[[fill sbom_sha256()]]]-->
-The [SBOM in CycloneDX v1.4 JSON format](https://git.sr.ht/~sthagen/piemap/blob/default/sbom/cdx.json) with SHA256 checksum ([0a2a8135 ...](https://git.sr.ht/~sthagen/piemap/blob/default/sbom/cdx.json.sha256 "sha256:0a2a813525893a24c17bc93aad3d426caa6278acd7fc20aefba848dd1814378a")).
-<!--[[[end]]] (checksum: f4c87f455b064c69b1e20152ff9971f5)-->
+The [SBOM in CycloneDX v1.4 JSON format](https://git.sr.ht/~sthagen/piemap/blob/default/sbom/cdx.json) with SHA256 checksum ([0e8d0066 ...](https://git.sr.ht/~sthagen/piemap/blob/default/sbom/cdx.json.sha256 "sha256:0e8d0066e781bbc868a503623975ba3201cd77700c1c9c1a927fa01b2f66b975")).
+<!--[[[end]]] (checksum: a64d4c0cbe23f710ebc33f3ce4ecaf66)-->
 ## Licenses 
 
 JSON files with complete license info of: [direct dependencies](direct-dependency-licenses.json) | [all dependencies](all-dependency-licenses.json)
@@ -10,19 +10,19 @@ JSON files with complete license info of: [direct dependencies](direct-dependenc
 ### Direct Dependencies
 
 <!--[[[fill direct_dependencies_table()]]]-->
-| Name                                       | Version                                         | License                                            | Author                  | Description (from packaging data)                                  |
-|:-------------------------------------------|:------------------------------------------------|:---------------------------------------------------|:------------------------|:-------------------------------------------------------------------|
-| [Pillow](https://python-pillow.org)        | [9.5.0](https://pypi.org/project/Pillow/9.5.0/) | Historical Permission Notice and Disclaimer (HPND) | Jeffrey A. Clark (Alex) | Python Imaging Library (Fork)                                      |
-| [typer](https://github.com/tiangolo/typer) | [0.7.0](https://pypi.org/project/typer/0.7.0/)  | MIT License                                        | Sebastián Ramírez       | Typer, build great CLIs. Easy to code. Based on Python type hints. |
-<!--[[[end]]] (checksum: 0e4623198c6b655bf60ba100b72259e2)-->
+| Name                                       | Version                                           | License                                            | Author                  | Description (from packaging data)                                  |
+|:-------------------------------------------|:--------------------------------------------------|:---------------------------------------------------|:------------------------|:-------------------------------------------------------------------|
+| [Pillow](https://python-pillow.org)        | [10.0.0](https://pypi.org/project/Pillow/10.0.0/) | Historical Permission Notice and Disclaimer (HPND) | Jeffrey A. Clark (Alex) | Python Imaging Library (Fork)                                      |
+| [typer](https://github.com/tiangolo/typer) | [0.9.0](https://pypi.org/project/typer/0.9.0/)    | MIT License                                        | Sebastián Ramírez       | Typer, build great CLIs. Easy to code. Based on Python type hints. |
+<!--[[[end]]] (checksum: c3a659d5a1fe4deae143928163e533ac)-->
 
 ### Indirect Dependencies
 
 <!--[[[fill indirect_dependencies_table()]]]-->
-| Name                                          | Version                                        | License     | Author         | Description (from packaging data)         |
-|:----------------------------------------------|:-----------------------------------------------|:------------|:---------------|:------------------------------------------|
-| [click](https://palletsprojects.com/p/click/) | [8.1.3](https://pypi.org/project/click/8.1.3/) | BSD License | Armin Ronacher | Composable command line interface toolkit |
-<!--[[[end]]] (checksum: dc3a866a7aa3332404bde3da87727cb9)-->
+| Name                                          | Version                                        | License     | Author  | Description (from packaging data)         |
+|:----------------------------------------------|:-----------------------------------------------|:------------|:--------|:------------------------------------------|
+| [click](https://palletsprojects.com/p/click/) | [8.1.6](https://pypi.org/project/click/8.1.6/) | BSD License | UNKNOWN | Composable command line interface toolkit |
+<!--[[[end]]] (checksum: ec405dc73a3ccb02ae4ac4f6b5c7739e)-->
 
 ## Dependency Tree(s)
 
@@ -38,8 +38,9 @@ Base graphviz file in dot format: [Trees of the direct dependencies](package-dep
 
 <!--[[[fill dependency_tree_console_text()]]]-->
 ````console
-Pillow==9.5.0
-typer==0.7.0
-└── click [required: >=7.1.1,<9.0.0, installed: 8.1.3]
+Pillow==10.0.0
+typer==0.9.0
+├── click [required: >=7.1.1,<9.0.0, installed: 8.1.6]
+└── typing-extensions [required: >=3.7.4.3, installed: 4.7.1]
 ````
-<!--[[[end]]] (checksum: 47920f595786f4bf6ff4705883c63a2b)-->
+<!--[[[end]]] (checksum: 412050f02f0cb82a536e6474186c09cf)-->
