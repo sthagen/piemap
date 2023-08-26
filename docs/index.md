@@ -7,7 +7,7 @@ One-view visualization of grouped characterizations (Quality Pie).
 Third party dependencies are documented in the folder [third-party](third-party/README.md).
 
 [![version](https://img.shields.io/pypi/v/piemap.svg?style=flat)](https://pypi.python.org/pypi/piemap/)
-[![downloads](https://pepy.tech/badge/piemap/month)](https://pepy.tech/project/piemap)
+[![downloads](https://static.pepy.tech/badge/piemap/month)](https://pepy.tech/project/piemap)
 [![wheel](https://img.shields.io/pypi/wheel/piemap.svg?style=flat)](https://pypi.python.org/pypi/piemap/)
 [![supported-versions](https://img.shields.io/pypi/pyversions/piemap.svg?style=flat)](https://pypi.python.org/pypi/piemap/)
 [![supported-implementations](https://img.shields.io/pypi/implementation/piemap.svg?style=flat)](https://pypi.python.org/pypi/piemap/)
