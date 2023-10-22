@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "piemap"
-version = "2022.10.2"
+version = "2023.10.22"
 description = "One-view visualization of grouped characterizations (Quality Pie)."
 readme = "README.md"
 authors = [{ name = "Stefan Hagen", email = "stefan@hagen.link" }]
