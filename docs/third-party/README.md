@@ -1,8 +1,8 @@
 # Third Party Dependencies
 
 <!--[[[fill sbom_sha256()]]]-->
-The [SBOM in CycloneDX v1.4 JSON format](https://git.sr.ht/~sthagen/piemap/blob/default/sbom/cdx.json) with SHA256 checksum ([df24e5fc ...](https://git.sr.ht/~sthagen/piemap/blob/default/sbom/cdx.json.sha256 "sha256:df24e5fc645ddf3eb1db68b442b5d7d38e64159ed62e44920a849faba3156b2b")).
-<!--[[[end]]] (checksum: e360010b25956615c8f66fa4e2f61e70)-->
+The [SBOM in CycloneDX v1.4 JSON format](https://git.sr.ht/~sthagen/piemap/blob/default/sbom/cdx.json) with SHA256 checksum ([8327d42e ...](https://git.sr.ht/~sthagen/piemap/blob/default/sbom/cdx.json.sha256 "sha256:8327d42ec1a8c8bdb990643172182eb0839e3c6b38f4ce038ab7c73216222f11")).
+<!--[[[end]]] (checksum: 73837e5f1efe453a1272d1ff400b4dfa)-->
 ## Licenses 
 
 JSON files with complete license info of: [direct dependencies](direct-dependency-licenses.json) | [all dependencies](all-dependency-licenses.json)
@@ -12,17 +12,17 @@ JSON files with complete license info of: [direct dependencies](direct-dependenc
 <!--[[[fill direct_dependencies_table()]]]-->
 | Name                                       | Version                                           | License                                            | Author                  | Description (from packaging data)                                  |
 |:-------------------------------------------|:--------------------------------------------------|:---------------------------------------------------|:------------------------|:-------------------------------------------------------------------|
-| [Pillow](https://python-pillow.org)        | [10.0.1](https://pypi.org/project/Pillow/10.0.1/) | Historical Permission Notice and Disclaimer (HPND) | Jeffrey A. Clark (Alex) | Python Imaging Library (Fork)                                      |
+| [Pillow](https://python-pillow.org)        | [10.1.0](https://pypi.org/project/Pillow/10.1.0/) | Historical Permission Notice and Disclaimer (HPND) | Jeffrey A. Clark (Alex) | Python Imaging Library (Fork)                                      |
 | [typer](https://github.com/tiangolo/typer) | [0.9.0](https://pypi.org/project/typer/0.9.0/)    | MIT License                                        | Sebastián Ramírez       | Typer, build great CLIs. Easy to code. Based on Python type hints. |
-<!--[[[end]]] (checksum: 317d279725387385d5492c68c5a82674)-->
+<!--[[[end]]] (checksum: c89c6e6e30509348a4b21dca72f06f3c)-->
 
 ### Indirect Dependencies
 
 <!--[[[fill indirect_dependencies_table()]]]-->
-| Name                                          | Version                                        | License     | Author  | Description (from packaging data)         |
-|:----------------------------------------------|:-----------------------------------------------|:------------|:--------|:------------------------------------------|
-| [click](https://palletsprojects.com/p/click/) | [8.1.6](https://pypi.org/project/click/8.1.6/) | BSD License | UNKNOWN | Composable command line interface toolkit |
-<!--[[[end]]] (checksum: ec405dc73a3ccb02ae4ac4f6b5c7739e)-->
+| Name                                          | Version                                        | License     | Author                                | Description (from packaging data)         |
+|:----------------------------------------------|:-----------------------------------------------|:------------|:--------------------------------------|:------------------------------------------|
+| [click](https://palletsprojects.com/p/click/) | [8.1.6](https://pypi.org/project/click/8.1.6/) | BSD License | Pallets <contact@palletsprojects.com> | Composable command line interface toolkit |
+<!--[[[end]]] (checksum: 7b69d9be7fa227d2db394dcd865606d8)-->
 
 ## Dependency Tree(s)
 
@@ -38,9 +38,9 @@ Base graphviz file in dot format: [Trees of the direct dependencies](package-dep
 
 <!--[[[fill dependency_tree_console_text()]]]-->
 ````console
-Pillow==10.0.1
+Pillow==10.1.0
 typer==0.9.0
 ├── click [required: >=7.1.1,<9.0.0, installed: 8.1.6]
 └── typing-extensions [required: >=3.7.4.3, installed: 4.7.1]
 ````
-<!--[[[end]]] (checksum: cc4f3f71b405a2bdc0d351fc7b705440)-->
+<!--[[[end]]] (checksum: 3afc955f3c8575f3fd85f144f602b971)-->
