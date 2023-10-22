@@ -1,5 +1,7 @@
 site_name: Pie Map
 site_description: "One-view visualization of grouped characterizations (Quality Pie)."
+docs_dir: ../docs
+site_dir: ../site
 
 theme:
   name: 'material'
