@@ -9,7 +9,7 @@ One-view visualization of grouped characterizations (Quality Pie).
 
 [![Version](docs/badges/latest-release.svg)](https://pypi.python.org/pypi/piemap/)
 [![Downloads](docs/badges/downloads-per-month.svg)](https://pepy.tech/project/piemap)
-[![Supported Versions](https://img.shields.io/pypi/pyversions/piemap.svg?style=flat)](https://pypi.python.org/pypi/piemap/)
+[![Python](docs/badges/python-versions.svg)](https://pypi.python.org/pypi/piemap/)
 [![Maintenance Status](docs/badges/commits-per-year.svg)](https://git.sr.ht/~sthagen/piemap/log)
 
 ## Documentation
