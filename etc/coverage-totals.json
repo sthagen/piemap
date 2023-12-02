@@ -1,0 +1,18 @@
+{
+  "piemap": {
+    "version": "7.3.2",
+    "timestamp": "2023-12-02T15:29:55.857639",
+    "branch_coverage": true,
+    "show_contexts": true,
+    "covered_lines": 504,
+    "num_statements": 562,
+    "percent_covered": 88.23529411764706,
+    "percent_covered_display": "88.24",
+    "missing_lines": 58,
+    "excluded_lines": 5,
+    "num_branches": 152,
+    "num_partial_branches": 6,
+    "covered_branches": 126,
+    "missing_branches": 26
+  }
+}
