@@ -1,7 +1,7 @@
 {
   "piemap": {
-    "version": "7.3.2",
-    "timestamp": "2023-12-02T15:29:55.857639",
+    "coverage_tool_version": "7.3.2",
+    "timestamp": "2023-12-02 16:27:32 +00:00",
     "branch_coverage": true,
     "show_contexts": true,
     "covered_lines": 504,
@@ -13,6 +13,26 @@
     "num_branches": 152,
     "num_partial_branches": 6,
     "covered_branches": 126,
-    "missing_branches": 26
+    "missing_branches": 26,
+    "node_id": "c79891e5-aabf-3a83-95b9-588edcd8327f",
+    "nfiles": 7,
+    "files": [
+      "piemap/__init__.py",
+      "piemap/api.py",
+      "piemap/bitmap.py",
+      "piemap/cli.py",
+      "piemap/dsl.py",
+      "piemap/geometry.py",
+      "piemap/projections.py"
+    ],
+    "blake3": "96d20ac7c503b161bf40fc21ac34d894a8e5a87d5eb758abb6c435065f961da8",
+    "blake2": "025b06f1276004e102e80a7b79ba87f9ab21a9f320a8c05a341fba9f909ccedf5743e2215c0141210fcd263ff7e28427a934c8e8fd9ba0e97b489119bed50146",
+    "sha512": "4b5f536d11fdb2348959c20f18736b129d4f8beb4965dcf6c84810f360247fb12a96bc5bbfef70a315c600d59552fe9091efadef89b36266e987480855b1573a",
+    "sha384": "122e12a5594aec45ac9eed978365fa65cc7abed858e73cd515cab34465a94fd3cda4fe4488e9f77dd8fd49d1c1db314a",
+    "sha256": "21c16269b1fc950fc70a56f05c4adac25701bc380d2e871697b862569c0d741f",
+    "sha1": "2552133d49885cb51468744ec8ee6afa03f422d2",
+    "md5": "16fd114288bf79891fd1d9d172bd1356",
+    "python_version": "3.10.12",
+    "entropy": 5.111421
   }
 }
