@@ -7,6 +7,7 @@ name = "piemap"
 version = "2023.10.22"
 description = "One-view visualization of grouped characterizations (Quality Pie)."
 readme = "README.md"
+license = {file = "LICENSE"}
 authors = [{ name = "Stefan Hagen", email = "stefan@hagen.link" }]
 maintainers = [{ name = "Stefan Hagen", email = "stefan@hagen.link" }]
 classifiers = [
