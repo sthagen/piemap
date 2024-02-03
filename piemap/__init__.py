@@ -1,4 +1,5 @@
 """One-view visualization of grouped characterizations (Quality Pie)."""
+
 import datetime as dti
 import logging
 import os

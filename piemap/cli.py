@@ -1,4 +1,5 @@
 """CLI interface for single view visualization mapping parameter values to an area scale resembling a (quality) pie."""
+
 import argparse
 import sys
 

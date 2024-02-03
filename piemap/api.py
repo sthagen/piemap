@@ -1,4 +1,5 @@
 """Create single view visualization mapping parameter values to an area scale resembling a (quality) pie."""
+
 import argparse
 from typing import no_type_check
 
