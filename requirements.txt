@@ -1,2 +1,2 @@
-Pillow==12.0.0
-typer==0.20.0
+Pillow==12.1.1
+typer==0.24.1

@@ -1,6 +1,6 @@
 from typing import no_type_check
 
-from PIL import Image, ImageDraw, ImageFont  # type: ignore
+from PIL import Image, ImageDraw, ImageFont
 
 import piemap.geometry as geom
 from piemap import (

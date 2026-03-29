@@ -1164,7 +1164,7 @@ def test_parse_bimonotone_floats_stat(a_mi, a_li, a_ma, a_va):
 
     diag = []
 
-    ([axis], diagnoses) = dsl.parse(text)
+    [axis], diagnoses = dsl.parse(text)
     assert axis['AXIS_INDEX'] == 0
     assert isinstance(axis['AXIS_LIMIT'], (float, int))
     assert axis['AXIS_LIMIT_FOLDED'] is False
